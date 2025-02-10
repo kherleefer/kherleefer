@@ -1,6 +1,5 @@
 # Hi there, 
 ### I'm Kherleefer, Ceo & Co Founder kk Glister Technology
-**Bn: 8171020**
 
 ## About Me
 - 🔧 IT Technician specializing in Software Engineering, Cybersecurity, and Data Science as well as Blockchain Technology & Smart Contracts.
