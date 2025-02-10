@@ -8,9 +8,6 @@
 - 🔒 Passionate about securing systems and building robust applications.
 - 📊 Enthusiastic about leveraging data to drive insights and solutions.
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-  ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-
 ## Skills
 - **Programming Languages:** Python, Kotlin, JavaScript, SQL, Php,FunC & Tact.
 - **Cybersecurity Tools:** Wireshark, Metasploit, Burp Suite
