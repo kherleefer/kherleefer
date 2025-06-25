@@ -1,5 +1,5 @@
 # Hi there, 
-### I'm Kherleefer, Ceo & Co Founder kk Glister Technology
+### I'm Kherleefer, Software Engineer with high adolescent personality.
 
 ## About Me
 - 🔧 IT Technician specializing in Software Engineering, Cybersecurity, and Data Science as well as Blockchain Technology & Smart Contracts.
@@ -9,9 +9,9 @@
 
 ## Skills
 - **Programming Languages:** Python, Kotlin, JavaScript, SQL, Php,FunC & Tact.
-- **Cybersecurity Tools:** Wireshark, Metasploit, Burp Suite
+- **Cybersecurity Tools:** Wireshark, Metasploit, Burp Suite, penetration testing.
 - **Data Science Tools:** Pandas, NumPy, TensorFlow, Tableau
-- **DevOps Tools:** Docker, Kubernetes, Jenkins
+- **DevOps Tools:** Docker, Kubernetes
 
 ## Projects
 - [Emergency Report system](https://ERP.com): A secure Emergency report application that enable Emergency report to a nearest authority or Hospitals.
