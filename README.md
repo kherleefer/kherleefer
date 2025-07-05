@@ -1,5 +1,7 @@
 # Hi there, 
 ### I'm Kherleefer, Software Engineer with high adolescent personality.
+This is my portfolio Branch,
+you are in liberty to use it under MIT License.
 
 ## About Me
 - 🔧 IT Technician specializing in Software Engineering, Cybersecurity, and Data Science as well as Blockchain Technology & Smart Contracts.
