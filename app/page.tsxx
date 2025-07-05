@@ -1,0 +1,37 @@
+
+import Image from "next/image";
+import Link from "next/link";
+
+export default function Home() {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-purple-100 dark:from-gray-900 dark:to-gray-800 p-8">
+      <main className="flex flex-col items-center gap-8 max-w-2xl w-full">
+        <Image
+          src="/avatar.png"
+          alt="Kherleefer's Avatar"
+          width={120}
+          height={120}
+          className="rounded-full border-4 border-blue-400 shadow-lg mb-2"
+        />
+        <h1 className="text-4xl sm:text-5xl font-bold text-center text-gradient bg-gradient-to-r from-blue-500 to-purple-500 inline-block">Hi, I’m Alex 👋</h1>
+        <h2 className="text-xl sm:text-2xl text-center font-semibold text-gray-700 dark:text-gray-200 max-w-xl">
+          Adolescent Software Engineer & Blockchain Enthusiast
+        </h2>
+      
+        <p className="text-center text-lg text-gray-600 dark:text-gray-300 max-w-lg">
+          I build fun, secure, and creative web3 projects. I love open source, hackathons, and making tech accessible for everyone. Let’s shape the future together!
+        </p>
+        <nav className="flex flex-wrap gap-4 justify-center mt-4">
+          <Link href="/about" className="bg-blue-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:bg-blue-600 transition">About</Link>
+          <Link href="/project" className="bg-purple-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:bg-purple-600 transition">Projects</Link>
+          <Link href="/blog" className="bg-pink-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:bg-pink-600 transition">Blog</Link>
+          <Link href="/resume" className="bg-green-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:bg-green-600 transition">Resume</Link>
+          <Link href="/contact" className="bg-yellow-500 text-white px-6 py-2 rounded-full font-semibold shadow hover:bg-yellow-600 transition">Contact</Link>
+        </nav>
+      </main>
+      <footer className="mt-16 text-gray-500 text-sm text-center">
+        <span>© {new Date().getFullYear()} Kherleefer | Built with Next.js & blockchain vibes 🛠️</span>
+      </footer>
+    </div>
+  );
+}
