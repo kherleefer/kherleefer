@@ -34,16 +34,16 @@ export default function Home() {
           </h1>
           <p className="text-lg text-blue-200">Software Engineer</p>
           <div className="flex justify-center gap-4 mt-4">
-            <a href="#">
+            <a href="https://github.com/kherleefer">
               <Github className="h-6 w-6 hover:text-white" />
             </a>
-            <a href="#">
+            <a href="https://x.com/kherleefer_kk">
               <Twitter className="h-6 w-6 hover:text-white" />
             </a>
-            <a href="#">
+            <a href="https://t.me/Encryptoknight">
               <Send className="h-6 w-6 hover:text-white" />
             </a>
-            <a href="#">
+            <a mailto:"mahmudkalifa6@gmail.com">
               <Mail className="h-6 w-6 hover:text-white" />
             </a>
           </div>
