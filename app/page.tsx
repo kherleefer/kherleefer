@@ -43,7 +43,7 @@ export default function Home() {
             <a href="https://t.me/Encryptoknight">
               <Send className="h-6 w-6 hover:text-white" />
             </a>
-            <a mailto:"mahmudkalifa6@gmail.com">
+            <a href="mailto:mahmudkalifa6@gmail.com">
               <Mail className="h-6 w-6 hover:text-white" />
             </a>
           </div>
@@ -73,7 +73,12 @@ export default function Home() {
           className="mb-12"
         >
           <h2 className="text-2xl font-semibold mb-6">Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          >
             {[
               {
                 title: "Gloxx Chain",
@@ -111,7 +116,7 @@ export default function Home() {
                 </a>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -121,7 +126,12 @@ export default function Home() {
           className="mb-12"
         >
           <h2 className="text-2xl font-semibold mb-4">Skills</h2>
-          <div className="flex flex-wrap gap-3">
+          <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap gap-3"
+          >
             {["Ionic", "Vue.js", "TypeScript", "React"].map((skill) => (
               <span
                 key={skill}
@@ -130,7 +140,7 @@ export default function Home() {
                 {skill}
               </span>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -143,17 +153,17 @@ export default function Home() {
             <input
               type="text"
               placeholder="Name"
-              className="w-full p-2 mb-4 rounded-md text-black"
+              className="w-full p-2 mb-4 rounded-md text-white"
             />
             <input
               type="email"
               placeholder="Email"
-              className="w-full p-2 mb-4 rounded-md text-black"
+              className="w-full p-2 mb-4 rounded-md text-white"
             />
             <textarea
               placeholder="Message"
               rows={4}
-              className="w-full p-2 mb-4 rounded-md text-black"
+              className="w-full p-2 mb-4 rounded-md text-white"
             ></textarea>
             <button
               type="submit"
