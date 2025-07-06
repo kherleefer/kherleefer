@@ -60,11 +60,11 @@ export default function Home() {
               />
             </div>
             {/* Text and Socials on the right */}
-            <div className="flex flex-col items-end text-right w-full">
+            <div className="flex flex-col items-end text-center w-full">
               <h3 className="text-4xl font-bold">
                 Kherleefer
-                <p>
-                  <small className="text-muted">(Encryptoknight)</small>
+                <p className="text-blue-200">
+                  (Encryptoknight)
                 </p>
               </h3>
               <p className="text-lg text-blue-200 mt-2">Software Engineer</p>
