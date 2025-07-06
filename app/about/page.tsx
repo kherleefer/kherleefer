@@ -16,7 +16,7 @@ export default function About() {
         <div className="bg-blue-800/60 rounded-2xl p-8 mb-6">
           <h1 className="text-4xl font-bold mb-4">About Me</h1>
           <div className="flex flex-col sm:flex-row gap-6 items-center">
-            <Image src="/ProfileAvatar.png" alt="My Avatar" width={120} height={120} className="rounded-full border-4 border-blue-400 shadow-lg" />
+            <Image src="/img/ProfileAvatar.png" alt="My Avatar" width={120} height={120} className="rounded-full border-4 border-blue-400 shadow-lg" />
             <div>
               <p className="text-lg font-semibold">Hey! I’m Alex, a passionate adolescent software engineer who’s obsessed with blockchain, open source, and building cool stuff for the future 🚀</p>
               <p className="mt-2 text-base text-blue-100">I love learning, sharing, and collaborating with other devs. I believe tech should be fun, creative, and make the world better for everyone!</p>
