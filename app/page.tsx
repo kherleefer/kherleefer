@@ -67,7 +67,6 @@ export default function Home() {
                   (Encryptoknight)
                 </span>
                 </h3>
-</h3>
               <p className="text-lg text-blue-200 mt-2">Software Engineer</p>
               <div className="flex gap-4 mt-4 justify-center md:justify-start">
                 <a href="https://github.com/kherleefer">
