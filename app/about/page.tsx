@@ -105,16 +105,6 @@ className="hover:underline text-blue-200 font-semibold"
 
   </main>
 
-  <footer className="mt-12 text-center text-sm text-blue-300">
-    <motion.p
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1, duration: 0.8 }}
-    >
-      © 2025 Alex's Portfolio. Built with ❤️ and Next.js.
-    </motion.p>
-  </footer>
-
 </motion.div>
 
 ); }
