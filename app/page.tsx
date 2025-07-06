@@ -219,7 +219,7 @@ export default function Home() {
               {
                 title: "Rose Adam",
                 description:
-                  "Working with Trump on the Spam and Phishing Email Detection app was a great experience. His ability to combine HTML, PHP, and machine learning with Python to tackle real-world problems is truly commendable. Professional, innovative, and highly motivated..",
+                  "Working with Kherleefer on the Spam and Phishing Email Detection app was a great experience. His ability to combine HTML, PHP, and machine learning with Python to tackle real-world problems is truly commendable. Professional, innovative, and highly motivated..",
                 link: "https://thinkdoit.infy.uk",
               },
             ].map((project, index) => (
