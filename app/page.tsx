@@ -62,11 +62,12 @@ export default function Home() {
             {/* Text and Socials on the right */}
             <div className="flex flex-col items-end text-center w-full">
               <h3 className="text-4xl font-bold">
-                Kherleefer
-                <p className="text-blue-200">
+                Kherleefer 
+                <span className="text-blue-200 text-lg">
                   (Encryptoknight)
-                </p>
-              </h3>
+                </span>
+                </h3>
+</h3>
               <p className="text-lg text-blue-200 mt-2">Software Engineer</p>
               <div className="flex gap-4 mt-4 justify-center md:justify-start">
                 <a href="https://github.com/kherleefer">
