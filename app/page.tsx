@@ -48,9 +48,9 @@ export default function Home() {
       </nav>
       <div className="max-w-4xl mx-auto">
         <header className="mb-12">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 rounded-2xl p-4 md:p-6">
+          <div className="flex flex-row items-center justify-between gap-6 rounded-2xl p-4 md:p-6">
             {/* Profile Image on the left */}
-            <div className="flex-shrink-0 mb-4 md:mb-0">
+            <div className="flex-shrink-0 ">
               <Image
                 src="/img/profileImage.png"
                 alt="Profile Picture"
@@ -60,7 +60,7 @@ export default function Home() {
               />
             </div>
             {/* Text and Socials on the right */}
-            <div className="text-center md:text-left w-full">
+            <div className="flex flex-col items-end text-right w-full">
               <h1 className="text-4xl font-bold">
                 Kherleefer
                 <p>
