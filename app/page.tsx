@@ -14,7 +14,7 @@ export default function Home() {
       className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800/60 text-white p-8"
     >
       {/* Navigation Bar */}
-      <nav className="flex justify-center gap-6 mb-10  bg-blue-800/60">
+      <nav className="flex justify-center gap-6 mb-10 ">
         <Link
           href="/about"
           className="hover:underline text-blue-200 font-semibold"
@@ -56,7 +56,7 @@ export default function Home() {
                 alt="Profile Picture"
                 width={120}
                 height={120}
-                className="rounded-full"
+                className="rounded-full border-4 border-blue-700 shadow-lg"
               />
             </div>
             {/* Text and Socials on the right */}
