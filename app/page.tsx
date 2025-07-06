@@ -11,10 +11,10 @@ export default function Home() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white p-8"
+      className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800/60 text-white p-8"
     >
       {/* Navigation Bar */}
-      <nav className="flex justify-center gap-6 mb-10">
+      <nav className="flex justify-center gap-6 mb-10  bg-blue-800/60">
         <Link
           href="/about"
           className="hover:underline text-blue-200 font-semibold"
@@ -48,7 +48,7 @@ export default function Home() {
       </nav>
       <div className="max-w-4xl mx-auto">
         <header className="mb-12">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 bg-blue-800/60 rounded-2xl p-4 md:p-6">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 rounded-2xl p-4 md:p-6">
             {/* Profile Image on the left */}
             <div className="flex-shrink-0 mb-4 md:mb-0">
               <Image
@@ -86,13 +86,13 @@ export default function Home() {
           </div>
         </header>
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0.6, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-blue-700 rounded-2xl p-6 mb-12"
+          className="bg-blue-800/60 rounded-2xl p-6 mb-12"
         >
-          <h2 className="text-2xl font-semibold mb-4">About Me</h2>
+         
           <p className="text-blue-100">
             I am a software engineer specializing in Rust, Tact,
             Javascript/Typescript and frameworks like nextJs, VueJs i build
