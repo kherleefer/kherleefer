@@ -1,9 +1,35 @@
-import Image from "next/image"; import Link from "next/link"; import { motion } from "framer-motion";
+import Image from "next/image"; 
+import Link from "next/link"; 
+import { motion } from "framer-motion";
 
-export default function About() { return ( <motion.div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white p-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} > {/* Navigation Bar */} <nav className="flex justify-center gap-6 mb-10"> {[ { href: "/", label: "Home" }, { href: "/blog", label: "Blog" }, { href: "/project", label: "Projects" }, { href: "/resume", label: "Resume" }, { href: "/contact", label: "Contact" }, ].map((link, index) => ( <motion.div key={index} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} > <Link
-href={link.href}
-className="hover:underline text-blue-200 font-semibold"
-> {link.label} </Link> </motion.div> ))} </nav>
+export default function About() { 
+    return ( 
+        <motion.div 
+            className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white p-8" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 0.8 }} > 
+            {/* Navigation Bar */} 
+            <nav 
+                className="flex justify-center gap-6 mb-10"> 
+                {[ 
+                    { href: "/", label: "Home" }, 
+                    { href: "/blog", label: "Blog" }, 
+                    { href: "/project", label: "Projects" }, 
+                    { href: "/resume", label: "Resume" }, 
+                    { href: "/contact", label: "Contact" }, 
+                ].map((link, index) => ( 
+                    <motion.div 
+                        key={index} 
+                        whileHover={{ scale: 1.1 }} 
+                        whileTap={{ scale: 0.95 }} > 
+                        <Link 
+                            href={link.href} 
+                            className="hover:underline text-blue-200 font-semibold"
+                            > 
+                            {link.label} 
+                        </Link> 
+        </motion.div> ))} </nav>
 
 <main className="max-w-2xl mx-auto flex flex-col gap-8">
 
