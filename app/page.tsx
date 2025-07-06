@@ -13,41 +13,42 @@ export default function Home() {
       className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white p-8"
     >
       <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-12">
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="flex justify-center"
-          >
-            <Image
-              src="/img/profileImage.png"
-              alt="Profile Picture"
-              width={120}
-              height={120}
-              className="rounded-full"
-            />
-          </motion.div>
-          <h1 className="text-4xl font-bold mt-4">
-            Kherleefer
-            <p>
-              <small>(Encryptoknight)</small>
-            </p>
-          </h1>
-          <p className="text-lg text-blue-200">Software Engineer</p>
-          <div className="flex justify-center gap-4 mt-4">
-            <a href="https://github.com/kherleefer">
-              <Github className="h-6 w-6 hover:text-white" />
-            </a>
-            <a href="https://x.com/kherleefer_kk">
-              <Twitter className="h-6 w-6 hover:text-white" />
-            </a>
-            <a href="https://t.me/Encryptoknight">
-              <Send className="h-6 w-6 hover:text-white" />
-            </a>
-            <a href="mailto:mahmudkalifa6@gmail.com">
-              <Mail className="h-6 w-6 hover:text-white" />
-            </a>
+        <header className="mb-12">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 bg-blue-800/60 rounded-2xl p-4 md:p-6">
+            {/* Profile Image on the left */}
+            <div className="flex-shrink-0 mb-4 md:mb-0">
+              <Image
+                src="/img/profileImage.png"
+                alt="Profile Picture"
+                width={120}
+                height={120}
+                className="rounded-full"
+              />
+            </div>
+            {/* Text and Socials on the right */}
+            <div className="text-center md:text-left w-full">
+              <h1 className="text-4xl font-bold">
+                Kherleefer
+                <p>
+                  <small>(Encryptoknight)</small>
+                </p>
+              </h1>
+              <p className="text-lg text-blue-200 mt-2">Software Engineer</p>
+              <div className="flex gap-4 mt-4 justify-center md:justify-start">
+                <a href="https://github.com/kherleefer">
+                  <Github className="h-6 w-6 hover:text-white" />
+                </a>
+                <a href="https://x.com/kherleefer_kk">
+                  <Twitter className="h-6 w-6 hover:text-white" />
+                </a>
+                <a href="https://t.me/Encryptoknight">
+                  <Send className="h-6 w-6 hover:text-white" />
+                </a>
+                <a href="mailto:mahmudkalifa6@gmail.com">
+                  <Mail className="h-6 w-6 hover:text-white" />
+                </a>
+              </div>
+            </div>
           </div>
         </header>
         <motion.section
