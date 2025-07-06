@@ -61,12 +61,12 @@ export default function Home() {
             </div>
             {/* Text and Socials on the right */}
             <div className="flex flex-col items-end text-right w-full">
-              <h1 className="text-4xl font-bold">
+              <h3 className="text-4xl font-bold">
                 Kherleefer
                 <p>
-                  <small>(Encryptoknight)</small>
+                  <small className="text-muted">(Encryptoknight)</small>
                 </p>
-              </h1>
+              </h3>
               <p className="text-lg text-blue-200 mt-2">Software Engineer</p>
               <div className="flex gap-4 mt-4 justify-center md:justify-start">
                 <a href="https://github.com/kherleefer">
