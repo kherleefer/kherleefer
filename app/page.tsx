@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 //import Link from "next/link";
+import Link from "next/link";
 import { Github, Send, Twitter, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -12,6 +13,39 @@ export default function Home() {
       transition={{ duration: 0.6 }}
       className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white p-8"
     >
+      {/* Navigation Bar */}
+      <nav className="flex justify-center gap-6 mb-10">
+        <Link
+          href="/about"
+          className="hover:underline text-blue-200 font-semibold"
+        >
+          About
+        </Link>
+        <Link
+          href="/blog"
+          className="hover:underline text-blue-200 font-semibold"
+        >
+          Blog
+        </Link>
+        <Link
+          href="/project"
+          className="hover:underline text-blue-200 font-semibold"
+        >
+          Projects
+        </Link>
+        <Link
+          href="/resume"
+          className="hover:underline text-blue-200 font-semibold"
+        >
+          Resume
+        </Link>
+        <Link
+          href="/contact"
+          className="hover:underline text-blue-200 font-semibold"
+        >
+          Contact
+        </Link>
+      </nav>
       <div className="max-w-4xl mx-auto">
         <header className="mb-12">
           <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 bg-blue-800/60 rounded-2xl p-4 md:p-6">
