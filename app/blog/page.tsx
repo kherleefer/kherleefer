@@ -33,7 +33,7 @@ export default function Blog() {
       <main className="max-w-2xl mx-auto flex flex-col gap-8">
 
         <motion.div 
-          className="bg-blue-800/60 rounded-2xl p-8 mb-6"
+          className="rounded-2xl p-8"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
