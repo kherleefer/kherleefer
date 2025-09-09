@@ -9,10 +9,10 @@ export default function DesktopOnly({ children }: { children: React.ReactNode })
   const terminalText = '$ echo "Desktop required ⚠️"';
 
   useEffect(() => {
-    const checkSize = () => setIsDesktop(window.innerWidth >= 1024);
-    checkSize();
-    window.addEventListener("resize", checkSize);
-    return () => window.removeEventListener("resize", checkSize);
+   // const checkSize = () => setIsDesktop(window.innerWidth >= 1024);
+  //  checkSize();
+   // window.addEventListener("resize", checkSize);
+  //  return () => window.removeEventListener("resize", checkSize);
   }, []);
 
   // Typewriter effect
