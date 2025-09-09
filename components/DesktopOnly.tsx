@@ -1,9 +1,9 @@
 "use client";
 
-//import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function DesktopOnly({ children }: { children: React.ReactNode }) {
-  {/*
+  
   const [isDesktop, setIsDesktop] = useState(true);
   const [typedText, setTypedText] = useState("");
 
@@ -28,8 +28,8 @@ export default function DesktopOnly({ children }: { children: React.ReactNode })
       return () => clearInterval(interval);
     }
   }, [isDesktop]);
-*/
-    {/*
+
+    
   if (!isDesktop) {
     return (
       <div className="w-screen h-screen flex items-center justify-center bg-black font-mono text-green-400 p-6 overflow-hidden">
@@ -48,6 +48,6 @@ export default function DesktopOnly({ children }: { children: React.ReactNode })
       </div>
     );
   }
-*/}
+
   return <>{children}</>;
 }
