@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+//import { ReactNode } from "react";
 
 // Types
 export type Project = { title: string; description: string; link: string; tech?: string[]; image?: string; };
