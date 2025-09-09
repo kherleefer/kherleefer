@@ -70,9 +70,9 @@ export default function RootLayout({
               backgroundRepeat: 'no-repeat',
             }}
           />
-          {/* Optional dark overlay for readability */}
+          {/* Optional dark overlay for readability 
           <div className="fixed inset-0 bg-black/40 -z-5" />
-
+*/}
           {/* Top bar stays fixed like a Linux desktop header */}
           <Header />
 
