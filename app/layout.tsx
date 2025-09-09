@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import DesktopOnly from "@components/DesktopOnly";
@@ -6,8 +5,49 @@ import Header from "@components/Header";
 import Footer from "@components/Footer";
 
 export const metadata: Metadata = {
-  title: "Kherleefer",
-  description: "Showcasing my work ",
+  title: "Kherleefer | Software Engineer Portfolio",
+  description: "Showcasing my work in web, app, and blockchain development projects.",
+  
+  // Canonical URL
+  metadataBase: new URL("https://kherleefer.com"),
+  alternates: {
+    canonical: "https://kherleefer.com",
+  },
+
+  // Open Graph for social sharing
+  openGraph: {
+    title: "Kherleefer | Software Engineer Portfolio",
+    description: "Showcasing my work in web, app, and blockchain development projects.",
+    url: "https://kherleefer.com",
+    type: "website",
+    images: [
+      {
+        url: "https://kherleefer.com/img/preview-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kherleefer Portfolio Preview",
+      },
+    ],
+  },
+
+  // Twitter card
+  twitter: {
+    card: "summary_large_image",
+    title: "Kherleefer | Software Engineer Portfolio",
+    description: "Showcasing my work in web, app, and blockchain development projects.",
+    images: ["https://kherleefer.com/img/preview-image.png"],
+    site: "@YourTwitterHandle",
+  },
+
+  // Robots
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -37,16 +77,9 @@ export default function RootLayout({
 
           {/* Main content pushed below header height */}
           <main className="pt-10 relative z-10">{children}</main>
-       <Footer />
+          <Footer />
         </DesktopOnly>
       </body>
     </html>
   );
 }
-
-
-
-
-
-
-
