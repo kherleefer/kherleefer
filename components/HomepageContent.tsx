@@ -33,7 +33,7 @@ export function AboutContent({
           src={profileImageSrc}
           alt="Profile Picture"
           width={100}
-          height={100}
+          height={70}
           className="rounded-full border-2 border-green-400"
         />
         <div className="flex-1 text-center md:text-left">
