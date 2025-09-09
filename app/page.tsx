@@ -106,36 +106,41 @@ export default function Home() {
         const isMax = maximized[win.id] || false;
         return (
           <motion.div
-            key={win.id}
-            drag={!isMax}
-            dragMomentum={false}
-            onDragStart={() => bringToFront(win.id)}
-            style={{
-              zIndex: windowZ[win.id] || 1,
-              top: isMax ? 0 : 40 + index * 30,
-              left: isMax ? 0 : 40 + index * 30,
-              position: 'absolute',
-            }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className={`bg-black border border-green-400 rounded-lg shadow-lg cursor-move ${isMax ? 'w-full h-full p-8' : 'w-80 p-6'}`}
-          >
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="font-bold cursor-grab">{win.title}</h2>
-              <button
-                className="text-green-300 hover:text-green-100 text-sm"
-                onClick={() =>
-                  setMaximized({ ...maximized, [win.id]: !maximized[win.id] })
-                }
-              >
-                {isMax ? "🗗" : "🗖"}
-              </button>
-            </div>
-            <div className={`${isMax ? 'h-full overflow-auto' : ''}`}>
-              {win.content}
-            </div>
-          </motion.div>
+  key={win.id}
+  drag={!isMax}
+  dragMomentum={false}
+  onDragStart={() => bringToFront(win.id)}
+  style={{
+    zIndex: windowZ[win.id] || 1,
+    top: isMax ? 0 : 40 + index * 30,
+    left: isMax ? 0 : 40 + index * 30,
+    position: 'absolute',
+  }}
+  initial={{ opacity: 0, y: 20 }}
+  animate={{
+    opacity: 1,
+    y: 0,
+    width: isMax ? '100%' : 320, // animate width
+    height: isMax ? '100%' : 'auto', // animate height
+  }}
+  transition={{ duration: 0.4 }}
+  className="bg-black border border-green-400 rounded-lg shadow-lg cursor-move p-6"
+>
+  <div className="flex justify-between items-center mb-2">
+    <h2 className="font-bold cursor-grab">{win.title}</h2>
+    <button
+      className="text-green-300 hover:text-green-100 text-sm"
+      onClick={() =>
+        setMaximized({ ...maximized, [win.id]: !maximized[win.id] })
+      }
+    >
+      {isMax ? "🗗" : "🗖"}
+    </button>
+  </div>
+  <div className={`${isMax ? 'h-full overflow-auto' : ''}`}>
+    {win.content}
+  </div>
+</motion.div>
         );
       })}
       <Footer />
