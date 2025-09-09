@@ -92,6 +92,7 @@ const windowsData = [
 export default function Home() {
   const [zIndex, setZIndex] = useState(1);
   const [windowZ, setWindowZ] = useState<Record<string, number>>({});
+  const [maximized, setMaximized] = useState<Record<string, boolean>>({});
 
   const bringToFront = (id: string) => {
     const newZ = zIndex + 1;
@@ -100,24 +101,44 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 p-8 text-green-400 font-mono relative">
-      {windowsData.map((win) => (
-        <motion.div
-          key={win.id}
-          drag
-          dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-          onDragStart={() => bringToFront(win.id)}
-          style={{ zIndex: windowZ[win.id] || 1 }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="absolute top-20 left-20 bg-black border border-green-400 rounded-lg p-6 shadow-lg cursor-move w-80"
-        >
-          <h2 className="font-bold mb-2 cursor-grab">{win.title}</h2>
-          {win.content}
-        </motion.div>
-      ))}
+    <div className="min-h-screen bg-zinc-950 p-8 text-green-400 font-mono relative overflow-hidden">
+      {windowsData.map((win, index) => {
+        const isMax = maximized[win.id] || false;
+        return (
+          <motion.div
+            key={win.id}
+            drag={!isMax}
+            dragMomentum={false}
+            onDragStart={() => bringToFront(win.id)}
+            style={{
+              zIndex: windowZ[win.id] || 1,
+              top: isMax ? 0 : 40 + index * 30,
+              left: isMax ? 0 : 40 + index * 30,
+              position: 'absolute',
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className={`bg-black border border-green-400 rounded-lg shadow-lg cursor-move ${isMax ? 'w-full h-full p-8' : 'w-80 p-6'}`}
+          >
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="font-bold cursor-grab">{win.title}</h2>
+              <button
+                className="text-green-300 hover:text-green-100 text-sm"
+                onClick={() =>
+                  setMaximized({ ...maximized, [win.id]: !maximized[win.id] })
+                }
+              >
+                {isMax ? "🗗" : "🗖"}
+              </button>
+            </div>
+            <div className={`${isMax ? 'h-full overflow-auto' : ''}`}>
+              {win.content}
+            </div>
+          </motion.div>
+        );
+      })}
       <Footer />
     </div>
   );
-}
+      }
