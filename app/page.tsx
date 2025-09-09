@@ -101,7 +101,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 p-8 text-green-400 font-mono relative overflow-hidden">
+    <div className="min-h-screen p-8 text-green-400 font-mono relative overflow-hidden">
       {windowsData.map((win, index) => {
         const isMax = maximized[win.id] || false;
         return (
