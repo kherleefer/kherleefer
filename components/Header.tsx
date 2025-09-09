@@ -1,49 +1,44 @@
 "use client";
 
-import Image from "next/image";
-import { Github, Send, Twitter, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Wifi, Battery, Clock } from "lucide-react";
 
 export default function Header() {
-  return (
-    <header className="mb-12">
-      <div className="flex flex-row flex-wrap items-center justify-between gap-4 rounded-2xl p-4 md:p-6">
-        {/* Profile Image on the left */}
-        <div className="flex-shrink-0">
-          <Image
-            src="/img/profileImage.png"
-            alt="Profile Picture"
-            width={100}
-            height={100}
-            className="rounded-full border-4 border-blue-700 shadow-lg"
-          />
-        </div>
+  const [time, setTime] = useState<string>("");
 
-        {/* Text and Socials on the right */}
-        <div className="flex flex-col items-center md:items-end text-center md:text-right flex-1 min-w-[200px]">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold break-words">
-            Kherleefer{" "}
-            <span className="text-blue-200 text-base sm:text-lg">
-              (Encryptoknight)
-            </span>
-          </h3>
-          <p className="text-base sm:text-lg text-blue-200 mt-2">
-            Software Engineer
-          </p>
-          <div className="flex gap-4 mt-4 flex-wrap justify-center md:justify-end">
-            <a href="https://github.com/kherleefer">
-              <Github className="h-6 w-6 hover:text-white" />
-            </a>
-            <a href="https://x.com/kherleefer_kk">
-              <Twitter className="h-6 w-6 hover:text-white" />
-            </a>
-            <a href="https://t.me/Encryptoknight">
-              <Send className="h-6 w-6 hover:text-white" />
-            </a>
-            <a href="mailto:mahmudkalifa6@gmail.com">
-              <Mail className="h-6 w-6 hover:text-white" />
-            </a>
-          </div>
-        </div>
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 60000); // update every min
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between 
+                       bg-zinc-900 text-zinc-100 h-10 px-4 font-mono text-sm">
+      {/* Left - Fake Linux Menu */}
+      <div className="flex items-center gap-4">
+        <span className="font-bold cursor-pointer hover:text-green-400">🟢 Menu</span>
+      </div>
+
+      {/* Center - Navigation */}
+      <nav className="flex gap-6">
+        <Link href="/" className="hover:text-green-400">Home</Link>
+        <Link href="/projects" className="hover:text-green-400">Projects</Link>
+        <Link href="/about" className="hover:text-green-400">About</Link>
+        <Link href="/contact" className="hover:text-green-400">Contact</Link>
+      </nav>
+
+      {/* Right - Fake system tray */}
+      <div className="flex items-center gap-3">
+        <Wifi size={16} />
+        <Battery size={16} />
+        <span>{time}</span>
       </div>
     </header>
   );
