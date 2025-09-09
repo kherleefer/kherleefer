@@ -1,4 +1,3 @@
-// components/DesktopOnly.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -15,13 +14,13 @@ export default function DesktopOnly({ children }: { children: React.ReactNode })
 
   if (!isDesktop) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center bg-black text-white text-center p-6 font-mono">
-        <div>
-          <h1 className="text-2xl mb-4">⚠️ Desktop Required</h1>
-          <p>
-            This portfolio is designed to look like a Linux desktop.
+      <div className="w-screen h-screen flex items-center justify-center bg-zinc-950 font-mono text-green-400 p-6">
+        <div className="bg-black border border-green-400 rounded-lg p-6 shadow-lg max-w-md text-center">
+          <p className="mb-4">$ echo "Desktop required ⚠️"</p>
+          <p className="text-sm text-green-200">
+            This portfolio is designed for desktop screens only.
             <br />
-            Please open it on a larger screen for the full experience.
+            Please open it on a larger device for the full Linux desktop experience.
           </p>
         </div>
       </div>
