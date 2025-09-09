@@ -1,4 +1,4 @@
-//import { ReactNode } from "react";
+import { ReactNode } from "react";
 
 // Types
 export type Project = { title: string; description: string; link: string; tech?: string[]; image?: string; };
@@ -6,7 +6,7 @@ export type ProjectsByTech = Record<string, Project[]>;
 export type SectionData = {
     id: string;
     title: string;
-    data: unknown; // Using 'any' for now as data structure varies per section type
+    data: React.ReactNode; // Using 'any' for now as data structure varies per section type
 };
 export type SocialLink = { name: string; url: string; icon: string; command: string; }; // icon is now a string identifier
 export type BlogPost = { title: string; content: string; link: string; };
