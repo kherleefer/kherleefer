@@ -20,7 +20,7 @@ export const homePageSectionsData: SectionData[] = [
     title: "About Me",
     // Raw data for the AboutContent component
     data: {
-      profileImageSrc: "/img/profileImage.png",
+      profileImageSrc: "/img/profile_image.png",
       name: "Kherleefer",
       nickname: "Encryptoknight",
       role: "Software Engineer",
@@ -84,7 +84,7 @@ export const allProjects: ProjectsByTech = {
 
 // --- About Page Data ---
 export const aboutPageData = {
-  profileAvatarSrc: "/img/profileAvatar.png",
+  profileAvatarSrc: "/img/profile_image.png",
   name: "Kherleefer",
   skills: [
     "Next.js", "TypeScript", "Solidity", "React",
