@@ -4,9 +4,10 @@ import "./globals.css";
 import DesktopOnly from "@components/DesktopOnly";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
+
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "Showcasing my work in a Linux desktop–style UI",
+  title: "Kherleefer",
+  description: "Showcasing my work ",
 };
 
 export default function RootLayout({
@@ -22,7 +23,7 @@ export default function RootLayout({
           <div
             className="fixed inset-0 -z-10"
             style={{
-              backgroundImage: 'url("/img/arch_background.arch_background.png")',
+              backgroundImage: 'url("/img/arch_wallpaper2.png")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -45,7 +46,7 @@ export default function RootLayout({
 
 
 
-.
+
 
 
 
