@@ -6,7 +6,8 @@ export type ProjectsByTech = Record<string, Project[]>;
 export type SectionData = {
     id: string;
     title: string;
-    data: React.ReactNode; // Using 'any' for now as data structure varies per section type
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any; 
 };
 export type SocialLink = { name: string; url: string; icon: string; command: string; }; // icon is now a string identifier
 export type BlogPost = { title: string; content: string; link: string; };
