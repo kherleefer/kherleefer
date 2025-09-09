@@ -16,11 +16,11 @@ export default function DesktopOnly({ children }: { children: React.ReactNode })
     return (
       <div className="w-screen h-screen flex items-center justify-center bg-zinc-950 font-mono text-green-400 p-6">
         <div className="bg-black border border-green-400 rounded-lg p-6 shadow-lg max-w-md text-center">
-          <p className="mb-4">$ echo "Desktop required ⚠️"</p>
+          <p className="mb-4">$ echo &qout;Desktop required ⚠️&qoute;</p>
           <p className="text-sm text-green-200">
-            This portfolio is designed for desktop screens only.
+           ⚠️ Desktop screens only.
             <br />
-            Please open it on a larger device for the full Linux desktop experience.
+            Please open it on a larger device to view My PortFolio.
           </p>
         </div>
       </div>
