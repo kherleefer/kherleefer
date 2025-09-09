@@ -50,7 +50,7 @@ export default function ProjectPage() {
                 ))}
             </div>
         ) : (
-            <p className="text-yellow-400">No projects found for '{techName}'. Check back later!</p>
+            <p className="text-yellow-400">No projects found for {techName}. Check back later!</p>
         )}
 
         {/* Command Prompt */}
