@@ -29,7 +29,7 @@ export default function Header() {
       {/* Center - Navigation */}
       <nav className="flex gap-6">
         <Link href="/" className="hover:text-green-400">Home</Link>
-        <Link href="/projects" className="hover:text-green-400">Projects</Link>
+        <Link href="/project" className="hover:text-green-400">Projects</Link>
         <Link href="/about" className="hover:text-green-400">About</Link>
         <Link href="/contact" className="hover:text-green-400">Contact</Link>
       </nav>

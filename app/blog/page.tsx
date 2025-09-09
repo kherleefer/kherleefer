@@ -1,71 +1,47 @@
 "use client";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import TerminalWindow from "@/components/TerminalWindow";
+import { blogPosts } from "@/lib/portfolioData";
 
 export default function Blog() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white p-8">
+    <TerminalWindow title="user@portfolio: ~/blog">
+      <div className="mb-4">
+        <span className="text-green-400">user@portfolio</span>
+        <span className="text-white">:</span>
+        <span className="text-blue-400">~/blog</span>
+        <span className="text-white">$</span>
+        <h2 className="text-xl font-bold text-green-300 ml-2">ls -l</h2>
+      </div>
 
-      {/* Navigation Bar */}
-      <motion.nav 
-        className="flex justify-center gap-6 mb-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        {[
-          { href: "/", label: "Home" },
-          { href: "/about", label: "About" },
-          { href: "/project", label: "Projects" },
-          { href: "/resume", label: "Resume" },
-          { href: "/contact", label: "Contact" },
-        ].map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="hover:underline text-blue-200 font-semibold"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </motion.nav>
-
-      <main className="max-w-2xl mx-auto flex flex-col gap-8">
+      <div className="max-w-2xl mx-auto flex flex-col gap-8">
 
         <motion.div 
-          className="rounded-2xl p-8"
+          className="p-2"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-bold mb-4">Blog</h1>
+          <h1 className="text-3xl font-bold text-green-300 mb-4">Blog Posts</h1>
         </motion.div>
 
-        {[{
-          title: "Why I Love Blockchain (And You Should Too!)",
-          content: "Blockchain isn’t just about crypto it’s about freedom, creativity, and building a better internet. Here’s why I’m obsessed, and how you can get started as a teen dev!",
-          link: "#"
-        }, {
-          title: "My First Hackathon: Lessons, Fails, and Pizza",
-          content: "I joined my first hackathon at a program organised by the Federal Government, built the Email spam filtering app, and learned more in 48 hours than a month of school. Here’s my story!",
-          link: "#"
-        }].map((post, index) => (
+        {blogPosts.map((post, index) => (
           <motion.article
             key={index}
-            className="bg-blue-700 rounded-2xl shadow p-6 flex flex-col gap-2"
+            className="bg-zinc-900/50 rounded-lg shadow p-6 flex flex-col gap-2 border border-green-600/50"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl font-bold">{post.title}</h2>
-            <p className="text-gray-700 dark:text-gray-300">{post.content}</p>
-            <a href={post.link} className="text-blue-500 hover:underline">Read more</a>
+            <h2 className="text-xl font-bold text-green-300">{post.title}</h2>
+            <p className="text-green-200 text-sm">{post.content}</p>
+            <a href={post.link} className="text-green-400 hover:underline text-xs">Read more &rarr;</a>
           </motion.article>
         ))}
 
         <motion.div
-          className="text-center text-blue-200 mt-8"
+          className="text-center text-green-300 mt-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -73,8 +49,15 @@ export default function Blog() {
           More posts coming soon! 🚧
         </motion.div>
 
-      </main>
+      </div>
 
-    </div>
+      <div className="mt-8 flex items-center">
+        <span className="text-green-400">user@portfolio</span>
+        <span className="text-white">:</span>
+        <span className="text-blue-400">~/blog</span>
+        <span className="text-white">$ </span>
+        <span className="ml-2 w-2 h-4 bg-green-400 animate-pulse"></span>
+      </div>
+    </TerminalWindow>
   );
 }

@@ -2,16 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-const techIcons = [
-  { src: "/icons/nextjs.png", href: "/projects/nextjs", label: "Next.js" },
-  { src: "/icons/react.png", href: "/projects/react", label: "React" },
-  { src: "/icons/ionic.png", href: "/projects/ionic", label: "Ionic" },
-  { src: "/icons/typescript.png", href: "/projects/typescript", label: "TypeScript" },
-  { src: "/icons/rust.png", href: "/projects/rust", label: "Rust" },
-  { src: "/icons/aws.png", href: "/projects/aws", label: "AWS" },
-  { src: "/icons/vercel.svg", href: "/projects/vercel", label: "Vercel" },
-];
+import { techIcons } from "@/lib/portfolioData";
 
 export default function Footer() {
   return (
@@ -29,7 +20,7 @@ export default function Footer() {
               alt={item.label}
               width={24}
               height={24}
-              className="grayscale hover:grayscale-0 transition-all"
+              className=" rounded-full hover:grayscale-0 transition-all"
             />
           </Link>
         ))}

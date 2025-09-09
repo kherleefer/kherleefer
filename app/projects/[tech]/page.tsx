@@ -2,36 +2,8 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import TerminalWindow from '@components/TerminalWindow';
-
-
-// --- Placeholder Project Data ---
-// You can replace this with your actual project data, maybe from a CMS or a local JSON file.
-const allProjects = {
-  react: [
-    { title: "React Project One", description: "A cool app built with React and Tailwind CSS.", link: "#" },
-    { title: "React E-commerce Site", description: "An online store powered by React.", link: "#" },
-  ],
-  nextjs: [
-    { title: "Next.js Portfolio", description: "The very portfolio you are looking at!", link: "/" },
-    { title: "Next.js Blog", description: "A content-heavy blog with SSG.", link: "#" },
-  ],
-  ionic: [
-    { title: "Ionic Fitness App", description: "A cross-platform mobile app for tracking workouts.", link: "#" },
-  ],
-  typescript: [
-    { title: "TypeScript Data Visualizer", description: "A tool for visualizing complex datasets.", link: "#" },
-  ],
-  rust: [
-    { title: "Rust Blockchain CLI", description: "A command-line interface for a custom blockchain.", link: "#" },
-  ],
-  aws: [],
-  vercel: [],
-};
-
-// Type definition for the project data
-type Project = { title: string; description: string; link: string };
-type ProjectsByTech = Record<string, Project[]>;
+import TerminalWindow from '@/components/TerminalWindow';
+import { allProjects, ProjectsByTech } from '@/lib/portfolioData';
 
 // --- The Page Component ---
 export default function ProjectPage() {

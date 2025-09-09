@@ -1,27 +1,48 @@
-import Link from "next/link";
+"use client";
 
-export default function Contact() {
+import TerminalWindow from "@/components/TerminalWindow";
+import { socialLinks } from "@/lib/portfolioData";
+
+export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-800 text-white p-8">
-      {/* Navigation Bar */}
-      <nav className="flex justify-center gap-6 mb-10">
-        <Link href="/" className="hover:underline text-blue-200 font-semibold">Home</Link>
-        <Link href="/about" className="hover:underline text-blue-200 font-semibold">About</Link>
-        <Link href="/blog" className="hover:underline text-blue-200 font-semibold">Blog</Link>
-        <Link href="/project" className="hover:underline text-blue-200 font-semibold">Projects</Link>
-        <Link href="/resume" className="hover:underline text-blue-200 font-semibold">Resume</Link>
-      </nav>
-      <main className="max-w-xl mx-auto flex flex-col gap-8">
-        <div className="bg-blue-800/60 rounded-2xl p-8 mb-6">
-          <h1 className="text-4xl font-bold mb-4">Contact</h1>
-        </div>
-        
-        <div className="flex gap-4 justify-center mt-4">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-blue-400">GitHub</a>
-          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-blue-200 hover:text-blue-400">Twitter</a>
-          <a href="mailto:you@email.com" className="text-blue-200 hover:text-blue-400">Email</a>
-        </div>
-      </main>
-    </div>
+    <TerminalWindow title="user@portfolio: ~/contact">
+      <div className="mb-4">
+        <span className="text-green-400">user@portfolio</span>
+        <span className="text-white">:</span>
+        <span className="text-blue-400">~/contact</span>
+        <span className="text-white">$</span>
+        <h2 className="text-xl font-bold text-green-300 ml-2">./connect.sh</h2>
+      </div>
+
+      <p className="text-green-200 mb-6">Establishing connections... Select a service to connect.</p>
+
+      <div className="space-y-4">
+        {socialLinks.map((link) => (
+          <div key={link.name} className="flex items-center gap-4">
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 bg-zinc-900/50 p-4 rounded-md border border-green-600/30 flex items-center gap-4 hover:border-green-400/80 transition-colors"
+            >
+              {link.icon}
+              <div className="flex-1">
+                <p className="font-semibold text-green-300">{link.name}</p>
+                <p className="text-xs text-green-200">{link.url}</p>
+              </div>
+              <span className="text-xs text-blue-400">Execute</span>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8 flex items-center">
+        <span className="text-green-400">user@portfolio</span>
+        <span className="text-white">:</span>
+        <span className="text-blue-400">~/contact</span>
+        <span className="text-white">$ </span>
+        <span className="ml-2 w-2 h-4 bg-green-400 animate-pulse"></span>
+      </div>
+    </TerminalWindow>
   );
 }
