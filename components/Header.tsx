@@ -38,7 +38,8 @@ export default function Header() {
       <div className="flex items-center gap-3">
         <Wifi size={16} />
         <Battery size={16} />
-        <span><Clock size={16} />{time}</span>
+        <Clock size={16} />
+        <span>{time}</span>
       </div>
     </header>
   );
