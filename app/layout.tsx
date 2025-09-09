@@ -4,6 +4,7 @@ import DesktopOnly from "@components/DesktopOnly";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 
+
 export const metadata: Metadata = {
   title: "Kherleefer | Software Engineer Portfolio",
   description: "Showcasing my work in web, app, and blockchain development projects.",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kherleefer | Software Engineer Portfolio",
     description: "Showcasing my work in web, app, and blockchain development projects.",
-    images: ["https://kherleefer.vercel.app/img/profileImage.png","],
+    images: ["https://kherleefer.vercel.app/img/profileImage.png"],
     site: "@kherleefer_kk",
   },
 
@@ -77,6 +78,7 @@ export default function RootLayout({
 
           {/* Main content pushed below header height */}
           <main className="pt-10 relative z-10">{children}</main>
+         
           <Footer />
         </DesktopOnly>
       </body>
