@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, ReactNode, useRef } from 'react';
-import Draggable from 'react-draggable';
+import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 
 interface TerminalWindowProps {
   title: ReactNode;
@@ -12,6 +12,7 @@ export default function TerminalWindow({ title, children }: TerminalWindowProps)
   const [isMinimized, setIsMinimized] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [isClosed, setIsClosed] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const nodeRef = useRef(null);
 
   const handleClose = () => setIsClosed(true);
@@ -19,7 +20,6 @@ export default function TerminalWindow({ title, children }: TerminalWindowProps)
   const handleMinimize = () => {
     const newMinimizedState = !isMinimized;
     setIsMinimized(newMinimizedState);
-    // Cannot be minimized and maximized at the same time
     if (newMinimizedState) {
       setIsMaximized(false);
     }
@@ -28,9 +28,14 @@ export default function TerminalWindow({ title, children }: TerminalWindowProps)
   const handleMaximize = () => {
     const newMaximizedState = !isMaximized;
     setIsMaximized(newMaximizedState);
-    // Cannot be maximized and minimized at the same time
     if (newMaximizedState) {
       setIsMinimized(false);
+    }
+  };
+
+  const onStop = (e: DraggableEvent, data: DraggableData) => {
+    if (!isMaximized) {
+      setPosition({ x: data.x, y: data.y });
     }
   };
 
@@ -48,18 +53,19 @@ export default function TerminalWindow({ title, children }: TerminalWindowProps)
   }
 
   const containerClasses = [
-    "min-h-screen flex justify-center p-4 font-mono text-green-400 transition-all duration-300",
+    "min-h-screen flex justify-center p-4 font-mono text-green-400",
     isMinimized ? "items-end" : "items-center"
   ].join(" ");
 
   const terminalClasses = [
-    "bg-black/70 backdrop-blur-sm rounded-lg shadow-2xl border border-green-500/30 flex flex-col transition-all duration-300",
+    "bg-black/70 backdrop-blur-sm rounded-lg shadow-2xl border border-green-500/30 flex flex-col",
     isMaximized
       ? "fixed inset-0 top-10 rounded-none z-50 w-full"
       : (isMinimized ? "w-full max-w-sm" : "relative w-full max-w-6xl"),
     isMinimized
       ? "" // Let the content define the height
-      : (isMaximized ? "h-[calc(100vh-2.5rem)]" : "h-[85vh]")
+      : (isMaximized ? "h-[calc(100vh-2.5rem)]" : "h-auto"),
+    !isMaximized && "transition-all duration-300"
   ].join(" ");
 
   return (
@@ -69,9 +75,10 @@ export default function TerminalWindow({ title, children }: TerminalWindowProps)
           nodeRef={nodeRef}
           handle=".handle"
           disabled={isMaximized || isMinimized}
+          position={isMaximized ? { x: 0, y: 0 } : position}
+          onStop={onStop}
         >
           <div ref={nodeRef} className={terminalClasses}>
-            {/* Terminal Header */}
             <div 
               className="handle flex items-center justify-between px-4 py-2 bg-gray-800/80 rounded-t-lg flex-shrink-0 cursor-grab"
               onDoubleClick={isMinimized ? handleMinimize : handleMaximize}
@@ -85,7 +92,6 @@ export default function TerminalWindow({ title, children }: TerminalWindowProps)
               <div className="w-12"></div>
             </div>
 
-            {/* Terminal Body */}
             <div className={`flex-1 p-6 overflow-y-auto ${isMinimized ? 'hidden' : ''}`}>
               {children}
             </div>
