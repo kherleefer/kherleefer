@@ -9,20 +9,20 @@ export const metadata: Metadata = {
   description: "Showcasing my work in web, app, and blockchain development projects.",
   
   // Canonical URL
-  metadataBase: new URL("https://kherleefer.com"),
+  metadataBase: new URL("https://kherleefer.vercel.app"),
   alternates: {
-    canonical: "https://kherleefer.com",
+    canonical: "https://kherleefer.vercel.app",
   },
 
   // Open Graph for social sharing
   openGraph: {
     title: "Kherleefer | Software Engineer Portfolio",
     description: "Showcasing my work in web, app, and blockchain development projects.",
-    url: "https://kherleefer.com",
+    url: "https://kherleefer.vercel.app",
     type: "website",
     images: [
       {
-        url: "https://kherleefer.com/img/preview-image.png",
+        url: "https://kherleefer.vercel.app/img/profileImage.png",
         width: 1200,
         height: 630,
         alt: "Kherleefer Portfolio Preview",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kherleefer | Software Engineer Portfolio",
     description: "Showcasing my work in web, app, and blockchain development projects.",
-    images: ["https://kherleefer.com/img/preview-image.png"],
-    site: "@YourTwitterHandle",
+    images: ["https://kherleefer.vercel.app/img/profileImage.png","],
+    site: "@kherleefer_kk",
   },
 
   // Robots
