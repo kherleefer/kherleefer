@@ -64,7 +64,7 @@ export default function RootLayout({
           <div
             className="fixed inset-0 -z-10"
             style={{
-              backgroundImage: 'url("/img/arch_wallpaper2.png")',
+              backgroundImage: 'url("/img/arch_wallpaper1.png")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
