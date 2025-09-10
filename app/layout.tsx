@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import DesktopOnly from "@components/DesktopOnly";
+//import DesktopOnly from "@components/DesktopOnly";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 
@@ -59,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased text-zinc-100 font-mono relative min-h-screen">
-         <DesktopOnly>
+        {  /* <DesktopOnly>*/}
           {/* Global background image */}
           <div
             className="fixed inset-0 -z-10"
@@ -79,7 +79,7 @@ export default function RootLayout({
           <main className="pt-10 relative z-10">{children}</main>
          
           <Footer />
-        </DesktopOnly>
+        {/* </DesktopOnly>*/}
       </body>
     </html>
   );
