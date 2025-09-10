@@ -66,7 +66,7 @@ interface ProjectsContentProps {
 
 export function ProjectsContent({ projects }: ProjectsContentProps) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {projects.map((p, idx) => (
                 <div key={idx} className="bg-zinc-900 p-4 rounded-lg border border-green-600/50">
                     <h3 className="font-bold text-green-300">{p.title}</h3>
