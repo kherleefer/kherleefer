@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://kherleefer.vercel.app/img/profileImage.png",
+        url: "https://kherleefer.vercel.app/img/profile_image.png",
         width: 1200,
         height: 630,
         alt: "Kherleefer Portfolio Preview",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kherleefer | Software Engineer Portfolio",
     description: "Showcasing my work in web, app, and blockchain development projects.",
-    images: ["https://kherleefer.vercel.app/img/profileImage.png"],
+    images: ["https://kherleefer.vercel.app/img/profile_image.png"],
     site: "@kherleefer_kk",
   },
 
