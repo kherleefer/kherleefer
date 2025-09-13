@@ -19,13 +19,12 @@ export const homePageSectionsData: SectionData[] = [
   {
     id: "about",
     title: "About Me",
-    // Raw data for the AboutContent component
     data: {
       profileImageSrc: "/img/profile_image.png",
       name: "Kherleefer",
       nickname: "Encryptoknight",
-      role: "Software Engineer",
-      description: "I am a software engineer specializing in Rust, Tact, Javascript/Typescript, NextJs, VueJs, and Mobile apps with Ionic Capacitor. I developed Gloxx Chain Mobile App, designed an Express-based API UI, and integrated Telegram Mini Apps Analytics into GetFI.",
+      role: "Software Engineer & Full-Stack Developer",
+      description: "I am a software engineer, website developer, and full-stack developer specializing in Rust, Tact, JavaScript/TypeScript, Next.js, Vue.js, and mobile apps with Ionic Capacitor. I developed the Gloxx Chain Mobile App, designed an Express-based API, and integrated Telegram Mini Apps Analytics into GetFI. Passionate about blockchain, web development, and scalable applications.",
       githubUrl: "https://github.com/kherleefer",
       twitterUrl: "https://x.com/kherleefer_kk",
       telegramUrl: "https://t.me/Encryptoknight",
@@ -35,27 +34,24 @@ export const homePageSectionsData: SectionData[] = [
   {
     id: "projects",
     title: "Projects",
-    // Raw data for the ProjectsContent component
     data: [
-      { title: "Gloxx Chain", description: "Web app with Ionic Vue and Supabase", link: "https://t.me/gloxx_chain/20" },
-      { title: "Gloxx Chain API", description: "API for crypto mining phase", link: "#" },
-      { title: "Email Filter App", description: "Detecting Spam & Phishing Emails", link: "https://thinkdoit.infy.uk" },
+      { title: "Gloxx Chain", description: "A blockchain-powered web and mobile app built with Ionic Vue and Supabase by a full-stack software engineer.", link: "https://t.me/gloxx_chain/20" },
+      { title: "Gloxx Chain API", description: "An Express.js and Node.js API developed to power the crypto mining phase of Gloxx Chain.", link: "#" },
+      { title: "Email Filter App", description: "A smart web app for detecting spam and phishing emails, showcasing skills in Python, AI, and full-stack web development.", link: "https://thinkdoit.infy.uk" },
     ],
   },
   {
     id: "skills",
     title: "Skills",
-    // Raw data for the SkillsContent component
     data: ["Ionic", "Vue.js", "TypeScript", "React", "NextJs", "ExpressJs", "RUST", "TACT", "Solidity", "Python", "Go"],
   },
   {
     id: "remarks",
     title: "Others Remarks",
-    // Raw data for the RemarksContent component
     data: [
-      { title: "selvuc(Zik)", description: "\"Exceptional developer with rare creativity and technical skill.\"" },
-      { title: "Michael Ofori", description: "\"Command over ExpressJS and Rust smart contracts is inspiring.\"" },
-      { title: "Rose Adam", description: "\"Professional, innovative, highly motivated.\"" },
+      { title: "selvuc(Zik)", description: "\"An exceptional software engineer and web developer with rare creativity and technical skill.\"" },
+      { title: "Michael Ofori", description: "\"His command over ExpressJS and Rust smart contracts as a blockchain developer is inspiring.\"" },
+      { title: "Rose Adam", description: "\"Professional, innovative, highly motivated full-stack developer.\"" },
     ],
   },
 ];
@@ -63,21 +59,21 @@ export const homePageSectionsData: SectionData[] = [
 // --- Projects by Tech Data (for dynamic project pages) ---
 export const allProjects: ProjectsByTech = {
   react: [
-    { title: "React Project One", description: "A cool app built with React and Tailwind CSS.", link: "#" },
-    { title: "React E-commerce Site", description: "An online store powered by React.", link: "#" },
+    { title: "React Project One", description: "A modern web application built with React and Tailwind CSS, showcasing responsive website development.", link: "#" },
+    { title: "React E-commerce Site", description: "A full-stack online store powered by React, optimized for user experience and performance.", link: "#" },
   ],
   nextjs: [
-    { title: "Next.js Portfolio", description: "The very portfolio you are looking at!", link: "/" },
-    { title: "Next.js Blog", description: "A content-heavy blog with SSG.", link: "#" },
+    { title: "Next.js Portfolio", description: "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.", link: "/" },
+    { title: "Next.js Blog", description: "A content-rich blog with SSG using Next.js, designed for developers and technical writers.", link: "#" },
   ],
   ionic: [
-    { title: "Ionic Fitness App", description: "A cross-platform mobile app for tracking workouts.", link: "#" },
+    { title: "Ionic Fitness App", description: "A cross-platform fitness mobile app developed with Ionic and Capacitor, built by a full-stack developer.", link: "#" },
   ],
   typescript: [
-    { title: "TypeScript Data Visualizer", description: "A tool for visualizing complex datasets.", link: "#" },
+    { title: "TypeScript Data Visualizer", description: "A web tool for visualizing complex datasets using TypeScript and modern web development best practices.", link: "#" },
   ],
   rust: [
-    { title: "Rust Blockchain CLI", description: "A command-line interface for a custom blockchain.", link: "#" },
+    { title: "Rust Blockchain CLI", description: "A blockchain command-line interface built in Rust, demonstrating strong skills as a blockchain developer.", link: "#" },
   ],
   aws: [],
   vercel: [],
@@ -124,36 +120,35 @@ export const socialLinks: SocialLink[] = [
 export const blogPosts: BlogPost[] = [
   {
     title: "Why I Love Blockchain (And You Should Too!)",
-    content: "Blockchain isn’t just about crypto it’s about freedom, creativity, and building a better internet. Here’s why I’m obsessed, and how you can get started as a teen dev!",
+    content: "Blockchain isn’t just about crypto — it’s about freedom, creativity, and building a better internet. As a blockchain developer and software engineer, here’s why I’m obsessed and how you can get started as a young dev!",
     link: "#"
   },
   {
     title: "My First Hackathon: Lessons, Fails, and Pizza",
-    content: "I joined my first hackathon at a program organised by the Federal Government, built the Email spam filtering app, and learned more in 48 hours than a month of school. Here’s my story!",
+    content: "I joined my first hackathon at a Federal Government program, built the Email Spam Filtering App as a full-stack web developer, and learned more in 48 hours than in a month of school. Here’s my story!",
     link: "#"
   },
 ];
 
-// --- Project Page Data (for the main /project route if it still exists) ---
-// Assuming this is for a general projects overview page, not the dynamic ones.
+// --- Project Page Data (general projects overview) ---
 export const generalProjects: Project[] = [
   {
     title: "CryptoQuest Game",
-    description: "A play-to-earn blockchain game where you collect, trade, and battle NFT creatures.",
+    description: "A play-to-earn blockchain game where you collect, trade, and battle NFT creatures. Developed as a full-stack project with smart contracts.",
     tech: ["Next.js", "Solidity", "Web3.js", "Polygon"],
     image: "/cryptoquest.png",
     link: "https://github.com/yourusername/cryptoquest",
   },
   {
     title: "TeenDAO",
-    description: "A decentralized autonomous organization for teens to learn, vote, and build together.",
+    description: "A decentralized autonomous organization for teens to learn, vote, and build together. A blockchain development and full-stack engineering project.",
     tech: ["React", "Ethereum", "IPFS"],
     image: "/teendao.png",
     link: "https://github.com/yourusername/teendao",
   },
   {
     title: "BlockChat Messenger",
-    description: "A privacy-first chat app using blockchain for end-to-end encryption and identity.",
+    description: "A privacy-first chat app using blockchain for end-to-end encryption and identity. Built by a software engineer with Next.js, Node.js, and Solidity.",
     tech: ["Next.js", "Node.js", "Solidity"],
     image: "/blockchat.png",
     link: "https://github.com/yourusername/blockchat",
@@ -175,15 +170,15 @@ export const techIcons: TechIcon[] = [
 export const experience: ResumeItem[] = [
   {
     title: "2024–Present:",
-    details: ["Blockchain Developer @ TeenDAO"],
+    details: ["Blockchain Developer @ TeenDAO — building decentralized applications and smart contracts."],
   },
   {
     title: "2023–2024:",
-    details: ["Full Stack Intern @ CryptoQuest"],
+    details: ["Full-Stack Intern @ CryptoQuest — contributing to blockchain gaming and website development."],
   },
   {
     title: "2022–2023:",
-    details: ["Open Source Contributor @ Various Web3 Projects"],
+    details: ["Open Source Contributor @ Various Web3 Projects — focusing on Rust, Solidity, and Next.js."],
   },
 ];
 
