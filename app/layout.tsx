@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 
   // Open Graph for social sharing
   openGraph: {
-    title: "Kherleefer | Software Engineer Portfolio",
-    description: "Showcasing my work in web, app, and blockchain development projects.",
+    title: "Kherleefer | Software Engineer & IT Consultant",
+    description: "Showcasing my work in WebApp, Mobile App, and Blockchain development projects.",
     url: "https://kherleefer.vercel.app",
     type: "website",
     images: [
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   // Twitter card
   twitter: {
     card: "summary_large_image",
-    title: "Kherleefer | Software Engineer Portfolio",
-    description: "Showcasing my work in web, app, and blockchain development projects.",
+    title: "Kherleefer | Software Engineer & IT Consultant",
+    description: "Showcasing my work in WebApp, Mobile App, and Blockchain development projects.",
     images: ["https://kherleefer.vercel.app/img/profile_image.png"],
     site: "@kherleefer_kk",
   },
