@@ -6,8 +6,8 @@ import Footer from "@components/Footer";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Kherleefer | Software Engineer Portfolio",
-  description: "Showcasing my work in web, app, and blockchain development projects.",
+  title: "Kherleefer | Software Engineer & IT Consultant",
+  description: "Showcasing my work in WebApp, Mobile App, and Blockchain development projects.",
 
   // Canonical URL
   metadataBase: new URL("https://kherleefer.vercel.app"),
@@ -91,6 +91,7 @@ export default function RootLayout({
               "https://github.com/kherleefer",
               "https://www.linkedin.com/in/kherleefer",
               "https://twitter.com/kherleefer_kk",
+"https://t.me/Encryptoknight",
             ],
           }),
         }}
