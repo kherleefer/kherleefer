@@ -3,7 +3,7 @@ import "./globals.css";
 import DesktopOnly from "@components/DesktopOnly";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
-
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Kherleefer | Software Engineer Portfolio",
@@ -58,6 +58,37 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+<head>
+<Script type="application/ld+json" dangerouslySetInnerHTML={{
+  __html: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kherleefer",
+    "url": "https://kherleefer.vercel.app",
+    "image": "https://kherleefer.vercel.app/img/profile_image.png",
+    "jobTitle": "Software Engineer & Web Developer",
+    "description": "Software engineer specializing in web, mobile, and blockchain development.",
+    "knowsAbout": [
+      "Next.js",
+"Vue.js", 
+      "React",
+"React Native",
+"Ionic Framework",
+      "Solidity",
+      "Firebase",
+      "Blockchain Development",
+      "Full Stack Web Development",
+"JavaScript TypeScript",
+"Rust"
+    ],
+    "sameAs": [
+      "https://github.com/kherleefer",
+      "https://www.linkedin.com/in/kherleefer",
+      "https://twitter.com/kherleefer_kk"
+    ]
+  })
+}} />
+</head>
       <body className="antialiased text-zinc-100 font-mono relative min-h-screen">
          <DesktopOnly>
           
