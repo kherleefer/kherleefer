@@ -8,14 +8,14 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "Kherleefer | Software Engineer Portfolio",
   description: "Showcasing my work in web, app, and blockchain development projects.",
-  
+
   // Canonical URL
   metadataBase: new URL("https://kherleefer.vercel.app"),
   alternates: {
     canonical: "https://kherleefer.vercel.app",
   },
 
-  // Open Graph for social sharing
+  // Open Graph
   openGraph: {
     title: "Kherleefer | Software Engineer & IT Consultant",
     description: "Showcasing my work in WebApp, Mobile App, and Blockchain development projects.",
@@ -58,60 +58,60 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-<head>
-<Script type="application/ld+json" dangerouslySetInnerHTML={{
-  __html: JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Kherleefer",
-    "url": "https://kherleefer.vercel.app",
-    "image": "https://kherleefer.vercel.app/img/profile_image.png",
-    "jobTitle": "Software Engineer & Web Developer",
-    "description": "Software engineer specializing in web, mobile, and blockchain development.",
-    "knowsAbout": [
-      "Next.js",
-"Vue.js", 
-      "React",
-"React Native",
-"Ionic Framework",
-      "Solidity",
-      "Firebase",
-      "Blockchain Development",
-      "Full Stack Web Development",
-"JavaScript TypeScript",
-"Rust"
-    ],
-    "sameAs": [
-      "https://github.com/kherleefer",
-      "https://www.linkedin.com/in/kherleefer",
-      "https://twitter.com/kherleefer_kk"
-    ]
-  })
-}} />
-</head>
+      {/* JSON-LD Schema */}
+      <Script
+        id="schema-person"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Kherleefer",
+            "url": "https://kherleefer.vercel.app",
+            "image": "https://kherleefer.vercel.app/img/profile_image.png",
+            "jobTitle": "Software Engineer & Web Developer",
+            "description":
+              "Software engineer specializing in web, mobile, and blockchain development.",
+            "knowsAbout": [
+              "Next.js",
+              "Vue.js",
+              "React",
+              "React Native",
+              "Ionic Framework",
+              "Solidity",
+              "Firebase",
+              "Blockchain Development",
+              "Full Stack Web Development",
+              "JavaScript",
+              "TypeScript",
+              "Rust",
+            ],
+            "sameAs": [
+              "https://github.com/kherleefer",
+              "https://www.linkedin.com/in/kherleefer",
+              "https://twitter.com/kherleefer_kk",
+            ],
+          }),
+        }}
+      />
       <body className="antialiased text-zinc-100 font-mono relative min-h-screen">
-         <DesktopOnly>
-          
+        <DesktopOnly>
           <div
             className="fixed inset-0 -z-10"
             style={{
               backgroundImage: 'url("/img/linux4.jpg")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
             }}
           />
-          
 
-         
           <Header />
-
           <main className="pt-10 relative z-10">{children}</main>
-         
           <Footer />
-         </DesktopOnly>
+        </DesktopOnly>
       </body>
     </html>
   );
 }
-
