@@ -49,6 +49,10 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+other: {
+    "og:image:width": "1200",
+    "og:image:height": "630",
+  },
 };
 
 export default function RootLayout({
