@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://kherleefer.vercel.app/img/profile_image.png",
-        width: 1200,
-        height: 630,
+        width: 1000,
+        height: 1000,
         alt: "Kherleefer Portfolio Preview",
       },
     ],
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
     },
   },
 other: {
-    "og:image:width": "1200",
-    "og:image:height": "630",
+    "og:image:width": "1000",
+    "og:image:height": "1000",
   },
 };
 
