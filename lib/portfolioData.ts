@@ -136,12 +136,12 @@ export const generalProjects: Project[] = [
     title: "React Jet",
     description: "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup.
 ",
-    tech: ["Next.js", "Solidity", "Web3.js", "Polygon"],
-    image: "/cryptoquest.png",
-    link: "https://github.com/yourusername/cryptoquest",
+    tech: ["Next.js", "Go", "Fastify", "Typescript"],
+    image: "/reactjet.png",
+    link: "https://github.com/kherleefer/React-jet-ui.git",
   },
   {
-    title: "TeenDAO",
+    title: "Gloxx Chain",
     description: "A decentralized autonomous organization for teens to learn, vote, and build together. A blockchain development and full-stack engineering project.",
     tech: ["React", "Ethereum", "IPFS"],
     image: "/teendao.png",
