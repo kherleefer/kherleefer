@@ -133,8 +133,9 @@ export const blogPosts: BlogPost[] = [
 // --- Project Page Data (general projects overview) ---
 export const generalProjects: Project[] = [
   {
-    title: "CryptoQuest Game",
-    description: "A play-to-earn blockchain game where you collect, trade, and battle NFT creatures. Developed as a full-stack project with smart contracts.",
+    title: "React Jet",
+    description: "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup.
+",
     tech: ["Next.js", "Solidity", "Web3.js", "Polygon"],
     image: "/cryptoquest.png",
     link: "https://github.com/yourusername/cryptoquest",
