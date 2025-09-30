@@ -147,7 +147,7 @@ export const generalProjects: Project[] = [
     link: "https://github.com/kherleefer/g-chain-ui.git",
   },
   {
-    title: "BlockChat Messenger",
+    title: "KK Glister Website",
     description: "A privacy-first chat app using blockchain for end-to-end encryption and identity. Built by a software engineer with Next.js, Node.js, and Solidity.",
     tech: ["Next.js", "Node.js", "Solidity"],
     image: "/blockchat.png",
