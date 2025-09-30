@@ -142,8 +142,8 @@ export const generalProjects: Project[] = [
   {
     title: "Gloxx Chain",
     description: "Gloxx Chain is a blockchain-powered mobile app built with Ionic Vue project built to power the GLX token with wallets, mining, and exchanges all under one secure ecosystem.",
-    tech: ["VueJs", "BNBCHAIN", "Solidity", "Ionic", "RUST", "ExpressJs", "Javascript", "Ethers"],
-    image: "/teendao.png",
+    tech: ["VueJs", "BNBCHAIN", "Solidity", "Ionic", "RUST", "ExpressJs", "Javascript", "Ethers", "PostgreSQL"],
+    image: "/GloxxUi.png",
     link: "https://github.com/kherleefer/g-chain-ui.git",
   },
   {
