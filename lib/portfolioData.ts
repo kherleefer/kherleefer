@@ -134,19 +134,17 @@ export const blogPosts: BlogPost[] = [
 export const generalProjects: Project[] = [
   {
     title: "React Jet",
-    description: "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup.
-",
-    tech: ["Next.js", "Go", "Fastify", "Typescript"],
+    description: "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup.",
+    tech: ["Next.js", "Go", "Fastify", "Typescript", "PostgreSQL"],
     image: "/reactjet.png",
     link: "https://github.com/kherleefer/React-jet-ui.git",
   },
   {
     title: "Gloxx Chain",
-    description: "Gloxx Chain is your futuristic blockchain project built to power the GLX token with wallets, mining, and exchanges all under one secure ecosystem.
-",
-    tech: ["React", "Ethereum", "IPFS"],
+    description: "Gloxx Chain is a blockchain-powered mobile app built with Ionic Vue project built to power the GLX token with wallets, mining, and exchanges all under one secure ecosystem.",
+    tech: ["VueJs", "BNBCHAIN", "Solidity", "Ionic", "RUST", "ExpressJs", "Javascript", "Ethers"],
     image: "/teendao.png",
-    link: "https://github.com/yourusername/teendao",
+    link: "https://github.com/kherleefer/g-chain-ui.git",
   },
   {
     title: "BlockChat Messenger",
