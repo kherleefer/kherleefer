@@ -142,7 +142,8 @@ export const generalProjects: Project[] = [
   },
   {
     title: "Gloxx Chain",
-    description: "A decentralized autonomous organization for teens to learn, vote, and build together. A blockchain development and full-stack engineering project.",
+    description: "Gloxx Chain is your futuristic blockchain project built to power the GLX token with wallets, mining, and exchanges all under one secure ecosystem.
+",
     tech: ["React", "Ethereum", "IPFS"],
     image: "/teendao.png",
     link: "https://github.com/yourusername/teendao",
