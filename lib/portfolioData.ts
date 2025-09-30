@@ -162,9 +162,7 @@ export const techIcons: TechIcon[] = [
   { src: "/icons/ionic.png", href: "/projects/ionic", label: "Ionic" },
   { src: "/icons/typescript.png", href: "/projects/typescript", label: "TypeScript" },
   { src: "/icons/rust.png", href: "/projects/rust", label: "Rust" },
-  { src: "/icons/aws.png", href: "/projects/aws", label: "AWS" },
-  { src: "/icons/vercel.svg", href: "/projects/vercel", label: "Vercel" },
-];
+ ];
 
 // --- Resume Page Data ---
 export const experience: ResumeItem[] = [
