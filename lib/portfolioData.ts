@@ -101,9 +101,9 @@ export const aboutPageData = {
     "Node.js", "Tailwind CSS", "Web3.js",
   ],
   funFacts: [
-    "I built my first smart contract at 15!",
-    "I love hackathons, memes, and pizza 🍕",
-    "My dream: launch a blockchain game that goes viral",
+    "I'm fluent in both frontend and backend languages, from JavaScript to Rust.",
+    "My passion for blockchain extends beyond code; I'm also an avid follower of the latest trends in DeFi and Web3.",
+    "When I'm not building scalable applications, you can find me exploring the world of mobile development with Ionic Capacitor.",
   ],
 };
 
