@@ -6,7 +6,7 @@ import { techIcons } from "@/lib/portfolioData";
 
 export default function Footer() {
   return (
-    <footer className="fixed bottom-4 left-1 -translate-x-1/2 z-50">
+    <footer className="fixed bottom-4 left-2 -translate-x-1/2 z-50">
       <div className="flex items-center gap-2 p-2 bg-gray-900/70 backdrop-blur-md border border-green-500/30 rounded-full shadow-2xl">
         {techIcons.map((item) => (
           <Link 
