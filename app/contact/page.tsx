@@ -2,10 +2,9 @@
 
 import TerminalWindow from "@/components/TerminalWindow";
 import { socialLinks } from "@/lib/portfolioData";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Github, Linkedin, Twitter, Mails, Send } from 'lucide-react';
+import * as Icons from 'lucide-react';
 
 const TYPING_SPEED_MS = 100;
 const COMMAND = "./connect.sh";
@@ -57,8 +56,11 @@ export default function ContactPage() {
           <p className="text-green-200 mb-6">Establishing connections... Select a service to connect.</p>
 
           <div className="space-y-4">
-            {socialLinks.map((link) => (
+            {socialLinks.map((link) => {
+              const Icon = Icons[link.icon] as React.ComponentType<{ size?: number | string; className?: string }>;
+            
 
+            return (
 
               < div key={link.name} className="flex items-center gap-4" >
                 <a
@@ -69,7 +71,7 @@ export default function ContactPage() {
                 >
 
                   
-                  <div dangerouslySetInnerHTML={{ __html: link.icon }} />
+                  <Icon size="24" className="text-green-300" />
 
                   <div className="flex-1">
                     <p className="font-semibold text-green-300">{link.name}</p>
@@ -78,7 +80,7 @@ export default function ContactPage() {
                   <span className="text-xs text-blue-400">Execute</span>
                 </a>
               </div>
-            ))}
+            )})}
           </div>
         </>
       )

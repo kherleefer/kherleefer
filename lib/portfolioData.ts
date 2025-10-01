@@ -1,15 +1,17 @@
 //import { ReactNode } from "react";
+import * as Icons from 'lucide-react';
 
+export type IconName = keyof typeof Icons;
 // Types
 export type Project = { title: string; description: string; link: string; tech?: string[]; image?: string; };
 export type ProjectsByTech = Record<string, Project[]>;
 export type SectionData = {
-    id: string;
-    title: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any; 
+  id: string;
+  title: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
 };
-export type SocialLink = { name: string; url: string; icon: string; command: string; }; // icon is now a string identifier
+export type SocialLink = { name: string; url: string; icon: IconName; command: string; }; // icon is now a string identifier
 export type BlogPost = { title: string; content: string; link: string; };
 export type ResumeItem = { title: string; details: string[]; };
 export type TechIcon = { src: string; href: string; label: string; };
@@ -97,9 +99,9 @@ export const aboutPageData = {
   profileAvatarSrc: "/img/profile_image.png",
   name: "Kherleefer",
   skills: [
-    "Ionic", "Vue.js", "TypeScript/Javascript", "React/ReactNative", 
+    "Ionic", "Vue.js", "TypeScript/Javascript", "React/ReactNative",
     "NextJs", "ExpressJs", "RUST", "Github Action Workflow",
-     "Solidity", "Python", "Go",".NET",
+    "Solidity", "Python", "Go", ".NET",
   ],
   funFacts: [
     "I'm fluent in both frontend and backend languages, from JavaScript to Rust.",
@@ -109,6 +111,8 @@ export const aboutPageData = {
 };
 
 // --- Contact Page Data ---
+
+
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
@@ -175,7 +179,7 @@ export const generalProjects: Project[] = [
   {
     title: "Emergency Report System",
     description: "An Emergency Report system that enable a user report an emergency to its nearest Authority (Hospital, Police, Fire Department)",
-    tech: ["VueJs",  "Ionic",  "ExpressJs", "Javascript", "Firebase", "Paystack"],
+    tech: ["VueJs", "Ionic", "ExpressJs", "Javascript", "Firebase", "Paystack"],
     image: "/erpsystem.png",
     link: "https://github.com/kherleefer/erp",
   },
@@ -188,7 +192,7 @@ export const techIcons: TechIcon[] = [
   { src: "/icons/ionic.png", href: "/projects/ionic", label: "Ionic" },
   { src: "/icons/typescript.png", href: "/projects/typescript", label: "TypeScript" },
   { src: "/icons/rust.png", href: "/projects/rust", label: "Rust" },
- ];
+];
 
 // --- Resume Page Data ---
 export const experience: ResumeItem[] = [
