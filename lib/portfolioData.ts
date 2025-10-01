@@ -97,8 +97,9 @@ export const aboutPageData = {
   profileAvatarSrc: "/img/profile_image.png",
   name: "Kherleefer",
   skills: [
-    "Next.js", "TypeScript", "Solidity", "React",
-    "Node.js", "Tailwind CSS", "Web3.js",
+    "Ionic", "Vue.js", "TypeScript/Javascript", "React/ReactNative", 
+    "NextJs", "ExpressJs", "RUST", "Github Action Workflow",
+     "Solidity", "Python", "Go",".NET",
   ],
   funFacts: [
     "I'm fluent in both frontend and backend languages, from JavaScript to Rust.",
