@@ -65,7 +65,7 @@ export default function ProjectsPage() {
               height={600}
               className="rounded-lg object-contain max-h-[90vh] w-auto h-auto"
             />
-            <button className="absolute top-4 right-4 text-white text-2xl" onClick={() => setSelectedImage(null)}>
+            <button className="absolute top-4 right-4 bg-red text-white text-2xl" onClick={() => setSelectedImage(null)}>
               &times;
             </button>
           </div>
