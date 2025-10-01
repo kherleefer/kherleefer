@@ -113,20 +113,32 @@ export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
     url: "https://github.com/kherleefer",
-    icon: "github",
+    icon: "Github",
     command: "connect github",
   },
   {
     name: "Twitter",
     url: "https://twitter.com/kherleefer_kk",
-    icon: "twitter",
+    icon: "Twitter",
     command: "connect twitter",
   },
   {
     name: "Email",
     url: "mailto:mahmudkalifa6@gmail.com",
-    icon: "mail",
+    icon: "Mails",
     command: "send-mail",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/kherleefer",
+    icon: "Linkedin",
+    command: "connect linkedin",
+  },
+  {
+    name: "Telegram",
+    url: "https://t.me/Encryptoknight",
+    icon: "Send",
+    command: "connect telegram",
   },
 ];
 
