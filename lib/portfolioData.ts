@@ -147,11 +147,11 @@ export const generalProjects: Project[] = [
     link: "https://github.com/kherleefer/g-chain-ui.git",
   },
   {
-    title: "KK Glister Website",
-    description: "A privacy-first chat app using blockchain for end-to-end encryption and identity. Built by a software engineer with Next.js, Node.js, and Solidity.",
-    tech: ["Next.js", "Node.js", "Solidity"],
-    image: "/blockchat.png",
-    link: "https://github.com/yourusername/blockchat",
+    title: "Emergency Report System",
+    description: "An Emergency Report system that enable a user report an emergency to its nearest Authority (Hospital, Police, Fire Department)",
+    tech: ["VueJs",  "Ionic",  "ExpressJs", "Javascript", "Firebase", "Paystack"],
+    image: "/erpsystem.png",
+    link: "https://github.com/kherleefer/erp",
   },
 ];
 

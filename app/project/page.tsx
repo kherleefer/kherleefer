@@ -63,7 +63,7 @@ export default function ProjectsPage() {
               alt="Expanded Image"
               width={800}
               height={600}
-              className="rounded-lg object-contain"
+              className="rounded-lg object-contain max-h-[90vh] w-auto h-auto"
             />
             <button className="absolute top-4 right-4 text-white text-2xl" onClick={() => setSelectedImage(null)}>
               &times;
