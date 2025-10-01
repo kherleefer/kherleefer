@@ -37,7 +37,7 @@ export const homePageSectionsData: SectionData[] = [
     data: [
       { title: "Gloxx Chain", description: "A blockchain-powered web and mobile app built with Ionic Vue and Supabase by a full-stack software engineer.", link: "https://t.me/gloxx_chain/20" },
       { title: "Gloxx Chain API", description: "An Express.js and Node.js API developed to power the crypto mining phase of Gloxx Chain.", link: "#" },
-      { title: "Email Filter App", description: "A smart web app for detecting spam and phishing emails, showcasing skills in Python, AI, and full-stack web development.", link: "https://thinkdoit.infy.uk" },
+      { title: "ReactJet", description: "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup", link: "https://reactjet.vercel.app" },
     ],
   },
   {
@@ -59,18 +59,31 @@ export const homePageSectionsData: SectionData[] = [
 // --- Projects by Tech Data (for dynamic project pages) ---
 export const allProjects: ProjectsByTech = {
   react: [
-    { title: "React Project One", description: "A modern web application built with React and Tailwind CSS, showcasing responsive website development.", link: "#" },
-    { title: "React E-commerce Site", description: "A full-stack online store powered by React, optimized for user experience and performance.", link: "#" },
+    { title: "Mahony Energy", description: "A website designed for Mahony Energy a smart agro city initiative.", link: "https://mahony-energy.com" },
+    { title: "", description: "", link: "#" },
   ],
   nextjs: [
-    { title: "Next.js Portfolio", description: "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.", link: "/" },
-    { title: "Next.js Blog", description: "A content-rich blog with SSG using Next.js, designed for developers and technical writers.", link: "#" },
+    { title: "This Portfolio", description: "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.", link: "/" },
+    { title: "Amees Empire", description: "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .", link: "https://ameesempire.ng" },
+    { title: "DeejaamaNg", description: "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .", link: "https://deejaama.ng" },
+    { title: "Daawah", description: "An Islamic educational website, designed for DaawahNg Islamic Foundation .", link: "https://daawah.ng" },
+
   ],
   ionic: [
-    { title: "Ionic Fitness App", description: "A cross-platform fitness mobile app developed with Ionic and Capacitor, built by a full-stack developer.", link: "#" },
+    { title: "Gloxx Chain", description: "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.", link: "https://t.me/gloxx_chain" },
+    { title: "Emergency Report System", description: "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.", link: "#" },
+
   ],
   typescript: [
-    { title: "TypeScript Data Visualizer", description: "A web tool for visualizing complex datasets using TypeScript and modern web development best practices.", link: "#" },
+    { title: "This Portfolio", description: "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.", link: "/" },
+    { title: "Amees Empire", description: "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .", link: "https://ameesempire.ng" },
+    { title: "DeejaamaNg", description: "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .", link: "https://deejaama.ng" },
+    { title: "Daawah", description: "An Islamic educational website, designed for DaawahNg Islamic Foundation .", link: "https://daawah.ng" },
+    { title: "Mahony Energy", description: "A website designed for Mahony Energy a smart agro city initiative.", link: "https://mahony-energy.com" },
+    { title: "Gloxx Chain Api", description: "The Gloxxchain api built using ExpressJS.", link: "#" },
+    { title: "Gloxx Chain", description: "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.", link: "https://t.me/gloxx_chain" },
+    { title: "Emergency Report System", description: "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.", link: "#" },
+
   ],
   rust: [
     { title: "Rust Blockchain CLI", description: "A blockchain command-line interface built in Rust, demonstrating strong skills as a blockchain developer.", link: "#" },
@@ -167,22 +180,22 @@ export const techIcons: TechIcon[] = [
 // --- Resume Page Data ---
 export const experience: ResumeItem[] = [
   {
-    title: "2024–Present:",
-    details: ["Blockchain Developer @ TeenDAO — building decentralized applications and smart contracts."],
+    title: "2025-Present (Part-time):",
+    details: ["Full-Stack Developer @ Techspeed Business Intelligence — building scalable Webapps, Mobile apps, PWAs and integrating APIs using modern tool and technology."],
   },
   {
-    title: "2023–2024:",
-    details: ["Full-Stack Intern @ CryptoQuest — contributing to blockchain gaming and website development."],
+    title: "2025-Present (Part-time):",
+    details: ["Course Instructor @ TechHub — Delivering training in web development, programming, Microsoft Suite. contribute in preparing curriculum modules covering modern Frameworks, databases and deployment strategies."],
   },
   {
-    title: "2022–2023:",
-    details: ["Open Source Contributor @ Various Web3 Projects — focusing on Rust, Solidity, and Next.js."],
+    title: "2022-Present:",
+    details: ["Software Engineer @ KK Gliste Technology — focusing on building SaaS products, Built Gloxx Chain, ERP, ReactJet."],
   },
 ];
 
 export const education: ResumeItem[] = [
   {
-    title: "High School Diploma (STEM Focus), 2025",
+    title: "High School Diploma (Computer Science), 2022",
     details: [],
   },
   {
