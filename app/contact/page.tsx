@@ -55,7 +55,7 @@ export default function ContactPage() {
         <>
           <p className="text-green-200 mb-6">Establishing connections... Select a service to connect.</p>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {socialLinks.map((link) => {
               const Icon = Icons[link.icon] as React.ComponentType<{ size?: number | string; className?: string }>;
             
@@ -63,17 +63,16 @@ export default function ContactPage() {
             return (
 
               < div key={link.name} className="flex items-center gap-4" >
-                <a
+                <a 
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 bg-zinc-900/50 p-4 rounded-md border border-green-600/30 flex items-center gap-4 hover:border-green-400/80 transition-colors"
+                  className="block bg-zinc-900/50 p-4 rounded-md border border-green-600/30 flex items-center gap-4 hover:border-green-400/80 transition-colors"
                 >
-
                   
                   <Icon size="24" className="text-green-300" />
 
-                  <div className="flex-1">
+                  <div>
                     <p className="font-semibold text-green-300">{link.name}</p>
                     <p className="text-xs text-green-200">{link.url}</p>
                   </div>
