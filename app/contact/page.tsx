@@ -55,7 +55,7 @@ export default function ContactPage() {
         <>
           <p className="text-green-200 mb-6">Establishing connections... Select a service to connect.</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {socialLinks.map((link) => {
               const Icon = Icons[link.icon] as React.ComponentType<{ size?: number | string; className?: string }>;
             

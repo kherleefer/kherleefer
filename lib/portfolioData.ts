@@ -127,6 +127,12 @@ export const socialLinks: SocialLink[] = [
     command: "connect twitter",
   },
   {
+    name: "Telegram",
+    url: "https://t.me/Encryptoknight",
+    icon: "Send",
+    command: "connect telegram",
+  },
+  {
     name: "Email",
     url: "mailto:mahmudkalifa6@gmail.com",
     icon: "Mails",
@@ -138,12 +144,7 @@ export const socialLinks: SocialLink[] = [
     icon: "Linkedin",
     command: "connect linkedin",
   },
-  {
-    name: "Telegram",
-    url: "https://t.me/Encryptoknight",
-    icon: "Send",
-    command: "connect telegram",
-  },
+  
 ];
 
 // --- Blog Page Data ---
