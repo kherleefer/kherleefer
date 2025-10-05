@@ -66,7 +66,7 @@ export default function RootLayout({
       <Script
         id="schema-person"
         type="application/ld+json"
-        strategy="beforeInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
