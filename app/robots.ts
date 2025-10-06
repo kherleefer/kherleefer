@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -9,5 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: "https://kherleefer.vercel.app/sitemap.xml",
+    host: "https://kherleefer.vercel.app",
   };
 }
