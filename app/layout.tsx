@@ -49,6 +49,12 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+
+//Google verification 
+verification:{
+google:"IoUr8PAUnnfvqJGU-42XOecfb1dlc8Bmem0yxbo3jlY"
+},
+
 other: {
     "og:image:width": "1000",
     "og:image:height": "1000",
