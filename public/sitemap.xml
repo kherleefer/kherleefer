@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Homepage -->
+  <!-- Home -->
   <url>
     <loc>https://kherleefer.vercel.app/</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://kherleefer.vercel.app/img/profile_image.png</image:loc>
+      <image:caption>Kherleefer Portfolio Home</image:caption>
+    </image:image>
   </url>
 
-  <!-- About Page -->
+  <!-- About -->
   <url>
     <loc>https://kherleefer.vercel.app/about</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Projects Page -->
+  <!-- Projects -->
   <url>
     <loc>https://kherleefer.vercel.app/projects</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Contact Page -->
+  <!-- Contact -->
   <url>
     <loc>https://kherleefer.vercel.app/contact</loc>
-    <lastmod>2025-10-11</lastmod>
+    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
