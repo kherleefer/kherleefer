@@ -7,7 +7,7 @@
   <!-- Home -->
   <url>
     <loc>https://kherleefer.vercel.app/</loc>
-    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -19,15 +19,15 @@
   <!-- About -->
   <url>
     <loc>https://kherleefer.vercel.app/about</loc>
-    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-31T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Projects -->
   <url>
-    <loc>https://kherleefer.vercel.app/projects</loc>
-    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
+    <loc>https://kherleefer.vercel.app/project</loc>
+    <lastmod>2026-01-31T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -35,7 +35,7 @@
   <!-- Contact -->
   <url>
     <loc>https://kherleefer.vercel.app/contact</loc>
-    <lastmod>2025-10-11T00:00:00+00:00</lastmod>
+    <lastmod>2026-01-31T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
