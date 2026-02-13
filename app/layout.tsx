@@ -25,25 +25,25 @@ export const metadata: Metadata = {
     "Express.js",
     "Fastify",
     "Full Stack Developer",
- "Frontend Developer",
- "Backend Developer",
+    "Frontend Developer",
+    "Backend Developer",
     "IT Consultant",
     "Nigeria",
     "in Nigeria",
   ],
 
-  metadataBase: new URL("https://kherleefer.vercel.app"),
-  alternates: { canonical: "https://kherleefer.vercel.app" },
+  metadataBase: new URL("https://kherleefer.netlify.app"),
+  alternates: { canonical: "https://kherleefer.netlify.app" },
 
   openGraph: {
     title: "Software Engineer, Full-Stack Developer, Web & Blockchain Developer",
     description:
       "Explore web and blockchain projects built with React, Next.js, Vue.js, Solidity, and BNB Chain by Kherleefer — a full-stack developer passionate about secure and scalable apps.",
-    url: "https://kherleefer.vercel.app",
+    url: "https://kherleefer.netlify.app",
     type: "website",
     images: [
       {
-        url: "https://kherleefer.vercel.app/img/profile_image.png",
+        url: "https://kherleefer.netlify.app/img/profile_image.png",
         width: 1000,
         height: 1000,
         alt: "Kherleefer Portfolio",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Software Engineer, Full-Stack Developer, Web & Blockchain Developer",
     description:
       "Software engineer specializing in web, mobile, and blockchain development using React, Ionic, Next.js, Vue.js, and Solidity.",
-    images: ["https://kherleefer.vercel.app/img/profile_image.png"],
+    images: ["https://kherleefer.netlify.app/img/profile_image.png"],
     site: "@kherleefer_kk",
   },
 
@@ -85,68 +85,74 @@ export default function RootLayout({
     <html lang="en">
       {/* JSON-LD Schema */}
       <Script
-  id="schema-data"
-  type="application/ld+json"
-  strategy="beforeInteractive"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify([
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Kherleefer",
-        "url": "https://kherleefer.vercel.app",
-        "image": "https://kherleefer.vercel.app/img/profile_image.png",
-        "jobTitle": "Software Engineer, FullStack, Frontend, Backend & Blockchain Developer",
-        "description":
-          "Software engineer specializing in React, Ionic, Next.js, Vue.js, and Solidity development for web, mobile, and blockchain systems.",
-        "knowsAbout": [
-          "Next.js",
-          "React",
-          "Vue.js",
-          "Ionic Framework",
-          "Solidity",
-          "OpenZeppelin",
-          "BNB Chain",
-          "Rust",
-          "TypeScript",
-          "Express.js",
-          "Fastify",
-          "Full Stack Web Development",
-          "Blockchain Engineering",
-        ],
-        "sameAs": [
-          "https://github.com/kherleefer",
-          "https://www.linkedin.com/in/kherleefer",
-          "https://twitter.com/kherleefer_kk",
-          "https://t.me/Encryptoknight",
-        ],
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Kherleefer Portfolio",
-        "url": "https://kherleefer.vercel.app",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://kherleefer.vercel.app/search?q={search_term_string}",
-          "query-input": "required name=search_term_string",
-        },
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "CreativeWork",
-        "name": "Kherleefer Projects",
-        "creator": { "@type": "Person", "name": "Kherleefer" },
-        "about": [
-          "Next.js Development",
-          "Vue.js Applications",
-          "Solidity Smart Contracts",
-          "BNB Chain Projects",
-        ],
-      },
-    ]),
-  }}
-/>
+        id="schema-data"
+        type="application/ld+json"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Kherleefer",
+              "url": "https://kherleefer.netlify.app",
+              "image": "https://kherleefer.netlify.app/img/profile_image.png",
+              "jobTitle": "Software Engineer, FullStack, Frontend, Backend & Blockchain Developer",
+              "description":
+                "Software engineer specializing in React, Ionic, Next.js, Vue.js, and Solidity development for web, mobile, and blockchain systems.",
+              "knowsAbout": [
+                "Next.js",
+                "React",
+                "Vue.js",
+                "Ionic Framework",
+                "Solidity",
+                "OpenZeppelin",
+                "BNB Chain",
+                "Rust",
+                "TypeScript",
+                "Express.js",
+                "Fastify",
+                "Full Stack Web Development",
+                "Blockchain Engineering",
+              ],
+              "sameAs": [
+                "https://github.com/kherleefer",
+                "https://www.linkedin.com/in/kherleefer",
+                "https://twitter.com/kherleefer_kk",
+                "https://t.me/Encryptoknight",
+              ],
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Kherleefer Portfolio",
+              "url": "https://kherleefer.netlify.app",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://kherleefer.netlify.app/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "CreativeWork",
+              "name": "Kherleefer Projects",
+              "creator": { "@type": "Person", "name": "Kherleefer" },
+              "about": [
+                "Next.js Development",
+                "Vue.js Applications",
+                "Solidity Smart Contracts",
+                "BNB Chain Projects",
+              ],
+            },
+          ]),
+        }}
+      />
+      <Script
+        id='adsbygoogle-init'
+        strategy='afterInteractive'
+        crossOrigin='anonymous'
+        src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6002764119448155'
+      />
       <body className="antialiased text-zinc-100 font-mono relative min-h-screen">
         <DesktopOnly>
           <div
