@@ -7,6 +7,7 @@ export default function Header() {
         <nav className="flex flex-wrap justify-end gap-x-5 gap-y-2 text-sm font-semibold">
           <Link href="/" className="muted transition-colors hover:text-[var(--foreground)]">Home</Link>
           <Link href="/project" className="muted transition-colors hover:text-[var(--foreground)]">Projects</Link>
+          <Link href="/courses" className="muted transition-colors hover:text-[var(--foreground)]">Courses</Link>
           <Link href="/about" className="muted transition-colors hover:text-[var(--foreground)]">About</Link>
           <Link href="/contact" className="muted transition-colors hover:text-[var(--foreground)]">Contact</Link>
           <Link href="/resume" className="muted transition-colors hover:text-[var(--foreground)]">Resume</Link>
