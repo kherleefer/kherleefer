@@ -1,101 +1,42 @@
-'use client';
-
 import TerminalWindow from "@/components/TerminalWindow";
 import { socialLinks } from "@/lib/portfolioData";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import * as Icons from 'lucide-react';
 
-const TYPING_SPEED_MS = 100;
-const COMMAND = "./connect.sh";
-
 export default function ContactPage() {
-  const [typedCommand, setTypedCommand] = useState('');
-  const [showContent, setShowContent] = useState(false);
-  const [showFinalPrompt, setShowFinalPrompt] = useState(false);
-  const [isTyping, setIsTyping] = useState(true);
-
-  useEffect(() => {
-    const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-
-    const animate = async () => {
-      await delay(500);
-      // Type the command
-      for (let i = 0; i < COMMAND.length; i++) {
-        await delay(TYPING_SPEED_MS);
-        setTypedCommand(COMMAND.substring(0, i + 1));
-      }
-
-      setIsTyping(false);
-
-      // Show content
-      await delay(500);
-      setShowContent(true);
-
-      // Show final prompt
-      await delay(1000);
-      setShowFinalPrompt(true);
-    };
-
-    animate();
-  }, []);
-
   return (
     <TerminalWindow title="user@portfolio: ~/contact">
-      <div className="mb-4">
-        <span className="text-green-400">user@portfolio</span>
-        <span className="text-white">:</span>
-        <span className="text-blue-400">~/contact</span>
-        <span className="text-white">$</span>
-        <h2 className="text-xl font-bold text-green-300 ml-2">{typedCommand}</h2>
-        {isTyping && <span className="ml-2 w-2 h-4 bg-green-400 animate-pulse"></span>}
-      </div>
-
-      {showContent && (
-        <>
-          <p className="text-green-200 mb-6">Establishing connections... Select a service to connect.</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div className="mx-auto max-w-3xl">
+        <p className="muted text-sm font-bold uppercase tracking-[0.2em]">Contact</p>
+        <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">Let&apos;s connect.</h1>
+        <p className="muted mt-5 max-w-xl leading-7">Have a project, idea, or opportunity in mind? Reach out through any of these channels.</p>
+        <div className="mt-10 grid gap-3 sm:grid-cols-2">
             {socialLinks.map((link) => {
               const Icon = Icons[link.icon] as React.ComponentType<{ size?: number | string; className?: string }>;
             
 
             return (
-
-              < div key={link.name} className="flex items-center gap-4" >
+              <div key={link.name}>
                 <a 
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block bg-zinc-900/50 p-4 rounded-md border border-green-600/30 flex items-center gap-4 hover:border-green-400/80 transition-colors"
+                  className="surface line flex items-center gap-4 border p-4 transition-colors hover:border-black dark:hover:border-white"
                 >
                   
-                  <Icon size="24" className="text-green-300" />
+                  <Icon size="24" />
 
                   <div>
-                    <p className="font-semibold text-green-300">{link.name}</p>
-                    <p className="text-xs text-green-200">{link.url}</p>
+                    <p className="font-semibold">{link.name}</p>
+                    <p className="muted break-all text-xs">{link.url}</p>
                   </div>
-                  <span className="text-xs text-blue-400">Execute</span>
+                  <span className="ml-auto text-xs font-bold">Open</span>
                 </a>
               </div>
             )})}
-          </div>
-        </>
-      )
-      }
-
-      {
-        showFinalPrompt && (
-          <div className="mt-8 flex items-center">
-            <span className="text-green-400">user@portfolio</span>
-            <span className="text-white">:</span>
-            <span className="text-blue-400">~/contact</span>
-            <span className="text-white">$ </span>
-            <span className="ml-2 w-2 h-4 bg-green-400 animate-pulse"></span>
-          </div>
-        )
-      }
-    </TerminalWindow >
+        </div>
+      </div>
+    </TerminalWindow>
   );
 }

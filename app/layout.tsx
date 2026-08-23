@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import DesktopOnly from "@components/DesktopOnly";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import Script from "next/script";
@@ -153,22 +152,12 @@ export default function RootLayout({
         crossOrigin='anonymous'
         src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6002764119448155'
       />
-      <body className="antialiased text-zinc-100 font-mono relative min-h-screen">
-        <DesktopOnly>
-          <div
-            className="fixed inset-0 -z-10"
-            style={{
-              backgroundImage: 'url("/img/linux4.jpg")',
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          />
-
+      <body className="antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+        <div className="portfolio-shell">
           <Header />
-          <main className="pt-10 relative z-10">{children}</main>
+          <main className="relative z-10">{children}</main>
           <Footer />
-        </DesktopOnly>
+        </div>
       </body>
     </html>
   );

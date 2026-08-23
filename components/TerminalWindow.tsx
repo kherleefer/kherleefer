@@ -1,7 +1,4 @@
-'use client';
-
-import { useState, ReactNode, useRef } from 'react';
-import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
+import { ReactNode } from 'react';
 
 interface TerminalWindowProps {
   title: ReactNode;
@@ -9,94 +6,11 @@ interface TerminalWindowProps {
 }
 
 export default function TerminalWindow({ title, children }: TerminalWindowProps) {
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [isMaximized, setIsMaximized] = useState(false);
-  const [isClosed, setIsClosed] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const nodeRef = useRef(null);
-
-  const handleClose = () => setIsClosed(true);
-
-  const handleMinimize = () => {
-    const newMinimizedState = !isMinimized;
-    setIsMinimized(newMinimizedState);
-    if (newMinimizedState) {
-      setIsMaximized(false);
-    }
-  };
-
-  const handleMaximize = () => {
-    const newMaximizedState = !isMaximized;
-    setIsMaximized(newMaximizedState);
-    if (newMaximizedState) {
-      setIsMinimized(false);
-    }
-  };
-
-  const onStop = (e: DraggableEvent, data: DraggableData) => {
-    if (!isMaximized) {
-      setPosition({ x: data.x, y: data.y });
-    }
-  };
-
-  if (isClosed) {
-    return (
-        <div className="min-h-screen flex items-center justify-center">
-            <button 
-                onClick={() => setIsClosed(false)} 
-                className="px-4 py-2 bg-green-500/20 text-green-300 border border-green-500/50 rounded-lg hover:bg-green-500/30"
-            >
-                Re-open Terminal
-            </button>
-        </div>
-    );
-  }
-
-  const containerClasses = [
-    "min-h-screen flex justify-center p-4 font-mono text-green-400",
-    isMinimized ? "items-end" : "items-center"
-  ].join(" ");
-
-  const terminalClasses = [
-    "bg-black/70 backdrop-blur-sm rounded-lg shadow-2xl border border-green-500/30 flex flex-col",
-    isMaximized
-      ? "fixed inset-0 top-10 rounded-none z-50 w-full"
-      : (isMinimized ? "w-full max-w-sm" : "relative w-full max-w-6xl"),
-    isMinimized
-      ? "" // Let the content define the height
-      : (isMaximized ? "h-[calc(100vh-2.5rem)]" : "h-auto"),
-    !isMaximized && "transition-all duration-300"
-  ].join(" ");
-
   return (
-    <div className={containerClasses}>
-      <div>
-        <Draggable
-          nodeRef={nodeRef}
-          handle=".handle"
-          disabled={isMaximized || isMinimized}
-          position={isMaximized ? { x: 0, y: 0 } : position}
-          onStop={onStop}
-        >
-          <div ref={nodeRef} className={terminalClasses}>
-            <div 
-              className="handle flex items-center justify-between px-4 py-2 bg-gray-800/80 rounded-t-lg flex-shrink-0 cursor-grab"
-              onDoubleClick={isMinimized ? handleMinimize : handleMaximize}
-            >
-              <div className="flex items-center space-x-2">
-                <button onClick={handleClose} className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600 focus:outline-none" aria-label="Close"></button>
-                <button onClick={handleMinimize} className="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-600 focus:outline-none" aria-label="Minimize"></button>
-                <button onClick={handleMaximize} className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-600 focus:outline-none" aria-label="Maximize"></button>
-              </div>
-              <div className="text-sm text-gray-300 select-none">{title}</div>
-              <div className="w-12"></div>
-            </div>
-
-            <div className={`flex-1 p-6 overflow-y-auto ${isMinimized ? 'hidden' : ''}`}>
-              {children}
-            </div>
-          </div>
-        </Draggable>
+    <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 lg:py-20">
+      <div className="w-full">
+        {title && <span className="sr-only">{title}</span>}
+        {children}
       </div>
     </div>
   );

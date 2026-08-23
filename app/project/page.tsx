@@ -3,122 +3,56 @@
 import Image from "next/image";
 import TerminalWindow from "@/components/TerminalWindow";
 import { generalProjects } from "@/lib/portfolioData";
-import { useState, useEffect } from "react";
-
-const TYPING_SPEED_MS = 100;
-const COMMAND = "ls -l --featured";
+import { useState } from "react";
 
 export default function ProjectsPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [typedCommand, setTypedCommand] = useState('');
-  const [showContent, setShowContent] = useState(false);
-  const [showFinalPrompt, setShowFinalPrompt] = useState(false);
-  const [isTyping, setIsTyping] = useState(true);
-
-  useEffect(() => {
-    const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-
-    const animate = async () => {
-      await delay(500);
-      // Type the command
-      for (let i = 0; i < COMMAND.length; i++) {
-        await delay(TYPING_SPEED_MS);
-        setTypedCommand(COMMAND.substring(0, i + 1));
-      }
-      
-      setIsTyping(false);
-
-      // Show content
-      await delay(500);
-      setShowContent(true);
-
-      // Show final prompt
-      await delay(1000);
-      setShowFinalPrompt(true);
-    };
-
-    animate();
-  }, []);
-
 
   return (
-    <TerminalWindow title="user@portfolio: ~/projects">
-      <div className="mb-4">
-        <span className="text-green-400">user@portfolio</span>
-        <span className="text-white">:</span>
-        <span className="text-blue-400">~/projects</span>
-        <span className="text-white">$</span>
-        <h2 className="text-xl font-bold text-green-300 ml-2">{typedCommand}</h2>
-        {isTyping && <span className="ml-2 w-2 h-4 bg-green-400 animate-pulse"></span>}
-      </div>
-      
-      {showContent && (
-        <>
-          <div className="grid gap-8 md:grid-cols-2">
-            {generalProjects.map((project) => (
-              <div key={project.title} className="rounded-xl border border-green-500/30 shadow-md hover:shadow-lg transition-all bg-zinc-900/50 p-4 flex flex-col gap-3 hover:border-green-400/80">
-                {project.image && (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={400}
-                    height={200}
-                    className="rounded-lg object-cover w-full h-40 border border-green-600/50 cursor-pointer"
-                    onClick={() => setSelectedImage(project.image || null)}
-                  />
-                )}
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h3 className="text-xl font-bold text-green-300">{project.title}</h3>
-                </a>
-                <p className="text-base text-green-200">{project.description}</p>
-                {project.tech && project.tech.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="bg-zinc-800 px-2 py-0.5 rounded-full text-xs text-green-300 border border-green-700/60"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {selectedImage && (
-            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50" onClick={() => setSelectedImage(null)}>
-              <div className="relative">
+    <TerminalWindow title="Selected projects">
+      <div className="mx-auto max-w-5xl">
+        <p className="muted text-sm font-bold uppercase tracking-[0.2em]">Portfolio</p>
+        <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">Selected projects</h1>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {generalProjects.map((project) => (
+            <article key={project.title} className="line flex flex-col gap-4 border-t pt-5">
+              {project.image && (
                 <Image
-                  src={selectedImage}
-                  alt="Expanded Image"
+                  src={project.image}
+                  alt={project.title}
                   width={800}
-                  height={600}
-                  className="rounded-lg object-contain max-h-[90vh] w-auto h-auto"
+                  height={400}
+                  className="surface aspect-[2/1] w-full cursor-pointer object-cover"
+                  onClick={() => setSelectedImage(project.image || null)}
                 />
-                <button className="absolute top-4 right-4 bg-red text-white text-2xl" onClick={() => setSelectedImage(null)}>
-                  &times;
-                </button>
-              </div>
-            </div>
-          )}
-        </>
-      )}
-
-      {showFinalPrompt && (
-        <div className="mt-8 flex items-center">
-          <span className="text-green-400">user@portfolio</span>
-          <span className="text-white">:</span>
-          <span className="text-blue-400">~/projects</span>
-          <span className="text-white">$ </span>
-          <span className="ml-2 w-2 h-4 bg-green-400 animate-pulse"></span>
+              )}
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <h2 className="text-2xl font-black hover:underline">{project.title}</h2>
+              </a>
+              <p className="muted leading-7">{project.description}</p>
+              {project.tech && (
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((technology) => (
+                    <span key={technology} className="soft-surface line border px-2 py-1 text-xs font-semibold">
+                      {technology}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
         </div>
+      </div>
+      {selectedImage && (
+        <button
+          type="button"
+          aria-label="Close image preview"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-5"
+          onClick={() => setSelectedImage(null)}
+        >
+          <Image src={selectedImage} alt="Expanded project preview" width={1200} height={800} className="max-h-[90vh] w-auto object-contain" />
+        </button>
       )}
-    </TerminalWindow >
+    </TerminalWindow>
   );
 }

@@ -1,29 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { techIcons } from "@/lib/portfolioData";
 
 export default function Footer() {
   return (
-    <footer className="fixed bottom-4 left-1/4 -translate-x-1/2 z-50">
-      <div className="flex items-center gap-2 p-2 bg-gray-900/70 backdrop-blur-md border border-green-500/30 rounded-full shadow-2xl">
-        {techIcons.map((item) => (
-          <Link 
-            key={item.label} 
-            href={item.href} 
-            aria-label={item.label}
-            className="px-2 rounded-full hover:bg-green-400/20 focus:outline-none focus:ring-2 focus:ring-green-400"
-          >
-            <Image
-              src={item.src}
-              alt={item.label}
-              width={24}
-              height={24}
-              className=" rounded-full hover:grayscale-0 transition-all"
-            />
-          </Link>
-        ))}
+    <footer className="border-t border-black/10 bg-white">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+        <span>Building thoughtful digital products.</span>
+        <div className="flex gap-4">
+          <Link href="https://github.com/kherleefer" className="hover:text-black">GitHub</Link>
+          <Link href="/contact" className="hover:text-black">Get in touch</Link>
+        </div>
       </div>
     </footer>
   );

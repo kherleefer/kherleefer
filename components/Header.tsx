@@ -1,45 +1,16 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Wifi, Battery, Clock } from "lucide-react";
-
 export default function Header() {
-  const [time, setTime] = useState<string>("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 60000); // update every min
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between 
-                       bg-zinc-900 text-zinc-100 h-10 px-4 font-mono text-sm">
-      {/* Left - Fake Linux Menu */}
-      <div className="flex items-center gap-4">
-        <span className="font-bold cursor-pointer hover:text-green-400">🟢 Menu</span>
-      </div>
-
-      {/* Center - Navigation */}
-      <nav className="flex gap-6">
-        <Link href="/" className="hover:text-green-400">Home</Link>
-        <Link href="/project" className="hover:text-green-400">Projects</Link>
-        <Link href="/about" className="hover:text-green-400">About</Link>
-        <Link href="/contact" className="hover:text-green-400">Contact</Link>
+    <header className="line sticky top-0 z-20 border-b bg-[color-mix(in_srgb,var(--background)_82%,transparent)] backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-5 sm:px-8">
+        <Link href="/" className="text-lg font-black tracking-[-0.06em]">KHERLEEFER<span className="muted">.</span></Link>
+        <nav className="flex flex-wrap justify-end gap-x-5 gap-y-2 text-sm font-semibold">
+          <Link href="/" className="muted transition-colors hover:text-[var(--foreground)]">Home</Link>
+          <Link href="/project" className="muted transition-colors hover:text-[var(--foreground)]">Projects</Link>
+          <Link href="/about" className="muted transition-colors hover:text-[var(--foreground)]">About</Link>
+          <Link href="/contact" className="muted transition-colors hover:text-[var(--foreground)]">Contact</Link>
+          <Link href="/resume" className="muted transition-colors hover:text-[var(--foreground)]">Resume</Link>
       </nav>
-
-      {/* Right - Fake system tray */}
-      <div className="flex items-center gap-3">
-        <Wifi size={16} />
-        <Battery size={16} />
-        <Clock size={16} />
-        <span>{time}</span>
       </div>
     </header>
   );
