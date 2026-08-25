@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import TerminalWindow from "@/components/TerminalWindow";
@@ -11,11 +11,18 @@ export default function ProjectsPage() {
   return (
     <TerminalWindow title="Selected projects">
       <div className="mx-auto max-w-5xl">
-        <p className="muted text-sm font-bold uppercase tracking-[0.2em]">Portfolio</p>
-        <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">Selected projects</h1>
+        <p className="muted text-sm font-bold uppercase tracking-[0.2em]">
+          Portfolio
+        </p>
+        <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+          Selected projects
+        </h1>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {generalProjects.map((project) => (
-            <article key={project.title} className="line flex flex-col gap-4 border-t pt-5">
+            <article
+              key={project.title}
+              className="line flex flex-col gap-4 border-t pt-5"
+            >
               {project.image && (
                 <Image
                   src={project.image}
@@ -27,13 +34,18 @@ export default function ProjectsPage() {
                 />
               )}
               <a href={project.link} target="_blank" rel="noopener noreferrer">
-                <h2 className="text-2xl font-black hover:underline">{project.title}</h2>
+                <h2 className="text-2xl font-black hover:underline">
+                  {project.title}
+                </h2>
               </a>
               <p className="muted leading-7">{project.description}</p>
               {project.tech && (
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((technology) => (
-                    <span key={technology} className="soft-surface line border px-2 py-1 text-xs font-semibold">
+                    <span
+                      key={technology}
+                      className="soft-surface line border px-2 py-1 text-xs font-semibold"
+                    >
                       {technology}
                     </span>
                   ))}
@@ -50,7 +62,13 @@ export default function ProjectsPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-5"
           onClick={() => setSelectedImage(null)}
         >
-          <Image src={selectedImage} alt="Expanded project preview" width={1200} height={800} className="max-h-[90vh] w-auto object-contain" />
+          <Image
+            src={selectedImage}
+            alt="Expanded project preview"
+            width={1200}
+            height={800}
+            className="max-h-[90vh] w-auto object-contain"
+          />
         </button>
       )}
     </TerminalWindow>

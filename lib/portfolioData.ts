@@ -1,9 +1,15 @@
 //import { ReactNode } from "react";
-import * as Icons from 'lucide-react';
+import * as Icons from "lucide-react";
 
 export type IconName = keyof typeof Icons;
 // Types
-export type Project = { title: string; description: string; link: string; tech?: string[]; image?: string; };
+export type Project = {
+  title: string;
+  description: string;
+  link: string;
+  tech?: string[];
+  image?: string;
+};
 export type ProjectsByTech = Record<string, Project[]>;
 export type SectionData = {
   id: string;
@@ -11,10 +17,15 @@ export type SectionData = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
 };
-export type SocialLink = { name: string; url: string; icon: IconName; command: string; }; // icon is now a string identifier
-export type BlogPost = { title: string; content: string; link: string; };
-export type ResumeItem = { title: string; details: string[]; };
-export type TechIcon = { src: string; href: string; label: string; };
+export type SocialLink = {
+  name: string;
+  url: string;
+  icon: IconName;
+  command: string;
+}; // icon is now a string identifier
+export type BlogPost = { title: string; content: string; link: string };
+export type ResumeItem = { title: string; details: string[] };
+export type TechIcon = { src: string; href: string; label: string };
 export type Course = {
   id: string;
   title: string;
@@ -29,7 +40,8 @@ export const courses: Course[] = [
   {
     id: "modern-web-foundations",
     title: "Modern Web Foundations",
-    description: "A practical path through HTML, CSS, JavaScript, Git, and shipping your first polished web project.",
+    description:
+      "A practical path through HTML, CSS, JavaScript, Git, and shipping your first polished web project.",
     level: "Beginner",
     price: 15000,
     currency: "NGN",
@@ -38,7 +50,8 @@ export const courses: Course[] = [
   {
     id: "blockchain-builder",
     title: "Blockchain Builder",
-    description: "Learn the building blocks behind wallets, smart contracts, token flows, and safer Web3 products.",
+    description:
+      "Learn the building blocks behind wallets, smart contracts, token flows, and safer Web3 products.",
     level: "Intermediate",
     price: 25000,
     currency: "NGN",
@@ -47,7 +60,8 @@ export const courses: Course[] = [
   {
     id: "full-stack-launchpad",
     title: "Full-Stack Launchpad",
-    description: "Build and deploy a production-minded app with Next.js, APIs, databases, authentication, and hosting.",
+    description:
+      "Build and deploy a production-minded app with Next.js, APIs, databases, authentication, and hosting.",
     level: "Intermediate",
     price: 30000,
     currency: "NGN",
@@ -65,7 +79,8 @@ export const homePageSectionsData: SectionData[] = [
       name: "Kherleefer",
       nickname: "Encryptoknight",
       role: "Software Engineer & Full-Stack Developer",
-      description: "I am a software engineer, website developer, and full-stack developer specializing in Rust, Tact, JavaScript/TypeScript, Next.js, Vue.js, and mobile apps with Ionic Capacitor. I developed the Gloxx Chain Mobile App, designed an Express-based API, and integrated Telegram Mini Apps Analytics into GetFI. Passionate about blockchain, web development, and scalable applications.",
+      description:
+        "I am a software engineer, website developer, and full-stack developer specializing in Rust, Tact, JavaScript/TypeScript, Next.js, Vue.js, and mobile apps with Ionic Capacitor. I developed the Gloxx Chain Mobile App, designed an Express-based API, and integrated Telegram Mini Apps Analytics into GetFI. Passionate about blockchain, web development, and scalable applications.",
       githubUrl: "https://github.com/kherleefer",
       twitterUrl: "https://x.com/kherleefer_kk",
       telegramUrl: "https://t.me/Encryptoknight",
@@ -76,23 +91,62 @@ export const homePageSectionsData: SectionData[] = [
     id: "projects",
     title: "Projects",
     data: [
-      { title: "Gloxx Chain", description: "A blockchain-powered web and mobile app built with Ionic Vue and Supabase by a full-stack software engineer.", link: "https://t.me/gloxx_chain/20" },
-      { title: "Gloxx Chain API", description: "An Express.js and Node.js API developed to power the crypto mining phase of Gloxx Chain.", link: "#" },
-      { title: "ReactJet", description: "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup", link: "https://reactjet.vercel.app" },
+      {
+        title: "Gloxx Chain",
+        description:
+          "A blockchain-powered web and mobile app built with Ionic Vue and Supabase by a full-stack software engineer.",
+        link: "https://t.me/gloxx_chain/20",
+      },
+      {
+        title: "Gloxx Chain API",
+        description:
+          "An Express.js and Node.js API developed to power the crypto mining phase of Gloxx Chain.",
+        link: "#",
+      },
+      {
+        title: "ReactJet",
+        description:
+          "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup",
+        link: "https://reactjet.vercel.app",
+      },
     ],
   },
   {
     id: "skills",
     title: "Skills",
-    data: ["Ionic", "Vue.js", "TypeScript", "React", "NextJs", "ExpressJs", "RUST", "TACT", "Solidity", "Python", "Go"],
+    data: [
+      "Ionic",
+      "Vue.js",
+      "TypeScript",
+      "React",
+      "NextJs",
+      "ExpressJs",
+      "RUST",
+      "TACT",
+      "Solidity",
+      "Python",
+      "Go",
+    ],
   },
   {
     id: "remarks",
     title: "Others Remarks",
     data: [
-      { title: "selvuc(Zik)", description: "\"An exceptional software engineer and web developer with rare creativity and technical skill.\"" },
-      { title: "Michael Ofori", description: "\"His command over ExpressJS and Rust smart contracts as a blockchain developer is inspiring.\"" },
-      { title: "Rose Adam", description: "\"Professional, innovative, highly motivated full-stack developer.\"" },
+      {
+        title: "selvuc(Zik)",
+        description:
+          '"An exceptional software engineer and web developer with rare creativity and technical skill."',
+      },
+      {
+        title: "Michael Ofori",
+        description:
+          '"His command over ExpressJS and Rust smart contracts as a blockchain developer is inspiring."',
+      },
+      {
+        title: "Rose Adam",
+        description:
+          '"Professional, innovative, highly motivated full-stack developer."',
+      },
     ],
   },
 ];
@@ -100,34 +154,110 @@ export const homePageSectionsData: SectionData[] = [
 // --- Projects by Tech Data (for dynamic project pages) ---
 export const allProjects: ProjectsByTech = {
   react: [
-    { title: "Mahony Energy", description: "A website designed for Mahony Energy a smart agro city initiative.", link: "https://mahony-energy.com" },
+    {
+      title: "Mahony Energy",
+      description:
+        "A website designed for Mahony Energy a smart agro city initiative.",
+      link: "https://mahony-energy.com",
+    },
     { title: "", description: "", link: "#" },
   ],
   nextjs: [
-    { title: "This Portfolio", description: "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.", link: "/" },
-    { title: "Amees Empire", description: "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .", link: "https://ameesempire.ng" },
-    { title: "DeejaamaNg", description: "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .", link: "https://deejaama.ng" },
-    { title: "Daawah", description: "An Islamic educational website, designed for DaawahNg Islamic Foundation .", link: "https://daawah.ng" },
-
+    {
+      title: "This Portfolio",
+      description:
+        "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.",
+      link: "/",
+    },
+    {
+      title: "Amees Empire",
+      description:
+        "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .",
+      link: "https://ameesempire.ng",
+    },
+    {
+      title: "DeejaamaNg",
+      description:
+        "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .",
+      link: "https://deejaama.ng",
+    },
+    {
+      title: "Daawah",
+      description:
+        "An Islamic educational website, designed for DaawahNg Islamic Foundation .",
+      link: "https://daawah.ng",
+    },
   ],
   ionic: [
-    { title: "Gloxx Chain", description: "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.", link: "https://t.me/gloxx_chain" },
-    { title: "Emergency Report System", description: "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.", link: "#" },
-
+    {
+      title: "Gloxx Chain",
+      description:
+        "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.",
+      link: "https://t.me/gloxx_chain",
+    },
+    {
+      title: "Emergency Report System",
+      description:
+        "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.",
+      link: "#",
+    },
   ],
   typescript: [
-    { title: "This Portfolio", description: "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.", link: "/" },
-    { title: "Amees Empire", description: "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .", link: "https://ameesempire.ng" },
-    { title: "DeejaamaNg", description: "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .", link: "https://deejaama.ng" },
-    { title: "Daawah", description: "An Islamic educational website, designed for DaawahNg Islamic Foundation .", link: "https://daawah.ng" },
-    { title: "Mahony Energy", description: "A website designed for Mahony Energy a smart agro city initiative.", link: "https://mahony-energy.com" },
-    { title: "Gloxx Chain Api", description: "The Gloxxchain api built using ExpressJS.", link: "#" },
-    { title: "Gloxx Chain", description: "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.", link: "https://t.me/gloxx_chain" },
-    { title: "Emergency Report System", description: "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.", link: "#" },
-
+    {
+      title: "This Portfolio",
+      description:
+        "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.",
+      link: "/",
+    },
+    {
+      title: "Amees Empire",
+      description:
+        "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .",
+      link: "https://ameesempire.ng",
+    },
+    {
+      title: "DeejaamaNg",
+      description:
+        "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .",
+      link: "https://deejaama.ng",
+    },
+    {
+      title: "Daawah",
+      description:
+        "An Islamic educational website, designed for DaawahNg Islamic Foundation .",
+      link: "https://daawah.ng",
+    },
+    {
+      title: "Mahony Energy",
+      description:
+        "A website designed for Mahony Energy a smart agro city initiative.",
+      link: "https://mahony-energy.com",
+    },
+    {
+      title: "Gloxx Chain Api",
+      description: "The Gloxxchain api built using ExpressJS.",
+      link: "#",
+    },
+    {
+      title: "Gloxx Chain",
+      description:
+        "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.",
+      link: "https://t.me/gloxx_chain",
+    },
+    {
+      title: "Emergency Report System",
+      description:
+        "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.",
+      link: "#",
+    },
   ],
   rust: [
-    { title: "Rust Blockchain CLI", description: "A blockchain command-line interface built in Rust, demonstrating strong skills as a blockchain developer.", link: "#" },
+    {
+      title: "Rust Blockchain CLI",
+      description:
+        "A blockchain command-line interface built in Rust, demonstrating strong skills as a blockchain developer.",
+      link: "#",
+    },
   ],
   aws: [],
   vercel: [],
@@ -138,9 +268,18 @@ export const aboutPageData = {
   profileAvatarSrc: "/img/profile_image.png",
   name: "Kherleefer",
   skills: [
-    "Ionic", "Vue.js", "TypeScript/Javascript", "React/ReactNative",
-    "NextJs", "ExpressJs", "RUST", "Github Action Workflow",
-    "Solidity", "Python", "Go", ".NET",
+    "Ionic",
+    "Vue.js",
+    "TypeScript/Javascript",
+    "React/ReactNative",
+    "NextJs",
+    "ExpressJs",
+    "RUST",
+    "Github Action Workflow",
+    "Solidity",
+    "Python",
+    "Go",
+    ".NET",
   ],
   funFacts: [
     "I'm fluent in both frontend and backend languages, from JavaScript to Rust.",
@@ -150,7 +289,6 @@ export const aboutPageData = {
 };
 
 // --- Contact Page Data ---
-
 
 export const socialLinks: SocialLink[] = [
   {
@@ -183,20 +321,21 @@ export const socialLinks: SocialLink[] = [
     icon: "Linkedin",
     command: "connect linkedin",
   },
-  
 ];
 
 // --- Blog Page Data ---
 export const blogPosts: BlogPost[] = [
   {
     title: "Why I Love Blockchain (And You Should Too!)",
-    content: "Blockchain isn’t just about crypto — it’s about freedom, creativity, and building a better internet. As a blockchain developer and software engineer, here’s why I’m obsessed and how you can get started as a young dev!",
-    link: "#"
+    content:
+      "Blockchain isn’t just about crypto — it’s about freedom, creativity, and building a better internet. As a blockchain developer and software engineer, here’s why I’m obsessed and how you can get started as a young dev!",
+    link: "#",
   },
   {
     title: "My First Hackathon: Lessons, Fails, and Pizza",
-    content: "I joined my first hackathon at a Federal Government program, built the Email Spam Filtering App as a full-stack web developer, and learned more in 48 hours than in a month of school. Here’s my story!",
-    link: "#"
+    content:
+      "I joined my first hackathon at a Federal Government program, built the Email Spam Filtering App as a full-stack web developer, and learned more in 48 hours than in a month of school. Here’s my story!",
+    link: "#",
   },
 ];
 
@@ -204,21 +343,34 @@ export const blogPosts: BlogPost[] = [
 export const generalProjects: Project[] = [
   {
     title: "React Jet",
-    description: "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup.",
+    description:
+      "A cloud platform that builds, signs, and delivers React and React Native apps without the pain of local setup.",
     tech: ["Next.js", "Go", "Fastify", "Typescript", "PostgreSQL"],
     image: "/reactjet.png",
     link: "https://github.com/kherleefer/React-jet-ui.git",
   },
   {
     title: "Gloxx Chain",
-    description: "Gloxx Chain is a blockchain-powered mobile app built with Ionic Vue project built to power the GLX token with wallets, mining, and exchanges all under one secure ecosystem.",
-    tech: ["VueJs", "BNBCHAIN", "Solidity", "Ionic", "RUST", "ExpressJs", "Javascript", "Ethers", "PostgreSQL"],
+    description:
+      "Gloxx Chain is a blockchain-powered mobile app built with Ionic Vue project built to power the GLX token with wallets, mining, and exchanges all under one secure ecosystem.",
+    tech: [
+      "VueJs",
+      "BNBCHAIN",
+      "Solidity",
+      "Ionic",
+      "RUST",
+      "ExpressJs",
+      "Javascript",
+      "Ethers",
+      "PostgreSQL",
+    ],
     image: "/GloxxUi.png",
     link: "https://github.com/kherleefer/g-chain-ui.git",
   },
   {
     title: "Emergency Report System",
-    description: "An Emergency Report system that enable a user report an emergency to its nearest Authority (Hospital, Police, Fire Department)",
+    description:
+      "An Emergency Report system that enable a user report an emergency to its nearest Authority (Hospital, Police, Fire Department)",
     tech: ["VueJs", "Ionic", "ExpressJs", "Javascript", "Firebase", "Paystack"],
     image: "/erpsystem.png",
     link: "https://github.com/kherleefer/erp",
@@ -230,7 +382,11 @@ export const techIcons: TechIcon[] = [
   { src: "/icons/nextjs.png", href: "/projects/nextjs", label: "Next.js" },
   { src: "/icons/react.png", href: "/projects/react", label: "React" },
   { src: "/icons/ionic.png", href: "/projects/ionic", label: "Ionic" },
-  { src: "/icons/typescript.png", href: "/projects/typescript", label: "TypeScript" },
+  {
+    src: "/icons/typescript.png",
+    href: "/projects/typescript",
+    label: "TypeScript",
+  },
   { src: "/icons/rust.png", href: "/projects/rust", label: "Rust" },
 ];
 
@@ -238,15 +394,21 @@ export const techIcons: TechIcon[] = [
 export const experience: ResumeItem[] = [
   {
     title: "2025-Present (Part-time):",
-    details: ["Full-Stack Developer @ Techspeed Business Intelligence — building scalable Webapps, Mobile apps, PWAs and integrating APIs using modern tool and technology."],
+    details: [
+      "Full-Stack Developer @ Techspeed Business Intelligence — building scalable Webapps, Mobile apps, PWAs and integrating APIs using modern tool and technology.",
+    ],
   },
   {
     title: "2025-Present (Part-time):",
-    details: ["Course Instructor @ TechHub — Delivering training in web development, programming, Microsoft Suite. contribute in preparing curriculum modules covering modern Frameworks, databases and deployment strategies."],
+    details: [
+      "Course Instructor @ TechHub — Delivering training in web development, programming, Microsoft Suite. contribute in preparing curriculum modules covering modern Frameworks, databases and deployment strategies.",
+    ],
   },
   {
     title: "2022-Present:",
-    details: ["Software Engineer @ KK Gliste Technology — focusing on building SaaS products, Built Gloxx Chain, ERP, ReactJet."],
+    details: [
+      "Software Engineer @ KK Gliste Technology — focusing on building SaaS products, Built Gloxx Chain, ERP, ReactJet.",
+    ],
   },
 ];
 

@@ -7,7 +7,9 @@ export default function Resume() {
     <TerminalWindow title="user@portfolio: ~/resume">
       <div className="max-w-2xl mx-auto flex flex-col gap-8">
         <div className="mb-6">
-          <p className="muted text-sm font-bold uppercase tracking-[0.2em]">Experience</p>
+          <p className="muted text-sm font-bold uppercase tracking-[0.2em]">
+            Experience
+          </p>
           <h1 className="mt-3 text-4xl font-black tracking-tight">Resume</h1>
         </div>
         <section className="line border-t pt-6">
@@ -15,7 +17,8 @@ export default function Resume() {
           <ul className="muted space-y-4 border-l-2 border-current pl-6 text-sm">
             {experience.map((item, idx) => (
               <li key={idx}>
-                <span className="font-semibold">{item.title}</span> {item.details.join(", ")}
+                <span className="font-semibold">{item.title}</span>{" "}
+                {item.details.join(", ")}
               </li>
             ))}
           </ul>
@@ -25,7 +28,8 @@ export default function Resume() {
           <ul className="muted ml-6 list-disc text-sm">
             {education.map((item, idx) => (
               <li key={idx}>
-                <span className="font-semibold">{item.title}</span> {item.details.join(", ")}
+                <span className="font-semibold">{item.title}</span>{" "}
+                {item.details.join(", ")}
               </li>
             ))}
           </ul>
@@ -38,7 +42,6 @@ export default function Resume() {
           Download PDF
         </a>
       </div>
-
     </TerminalWindow>
   );
 }

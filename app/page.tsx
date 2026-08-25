@@ -65,7 +65,6 @@ export default function Home() {
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.55 }}
         >
-         
           <AboutContent {...about.data} />
         </motion.section>
       )}
@@ -78,7 +77,6 @@ export default function Home() {
           transition={{ duration: 0.55 }}
         >
           <div className="mb-8 flex items-baseline justify-between">
-            
             <h2 className="text-3xl font-black tracking-tight">
               Selected work
             </h2>
