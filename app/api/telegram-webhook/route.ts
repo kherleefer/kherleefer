@@ -8,14 +8,14 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => null);
     if (!body) return NextResponse.json({ ok: true });
 
-    // Look for a chat event where a new member joins the group/channel
-    const chatMemberUpdate = body.chat_member;
+    
+    const chatMemberUpdate = body.chat_member_updated || body.chat_member;
     
     if (chatMemberUpdate) {
       const newStatus = chatMemberUpdate.new_chat_member?.status;
       const oldStatus = chatMemberUpdate.old_chat_member?.status;
 
-      // Check if the user went from NOT a member to being a MEMBER/ADMINISTRATOR
+      
       const isNewJoin = 
         ["member", "administrator", "creator"].includes(newStatus) && 
         !["member", "administrator", "creator"].includes(oldStatus);
@@ -23,15 +23,16 @@ export async function POST(request: Request) {
       if (isNewJoin) {
         const user = chatMemberUpdate.new_chat_member.user;
         const firstName = user.first_name || "Developer";
-        const chatId = chatMemberUpdate.chat.id; // The channel's internal ID
+        const chatId = chatMemberUpdate.chat.id; // The channel's internal broadcast ID
 
-        // The welcome message template
-        const welcomeText = ` *Welcome to the community, ${firstName}!* \n\n` +
+        
+        const welcomeText = `*Welcome to the community, ${firstName}!* \n\n` +
                             `Great to have you here. If you joined to unlock our premium portfolio courses for free, head back over to our website portal to verify your account!\n\n` +
-                            ` *Happy learning and coding!*`;
+                            `*Happy learning and coding!*`;
+ 
+        const telegramApiUrl = `https://telegram.org{botToken}/sendMessage`;
 
-        // Send the message directly into the channel feed
-        await fetch(`https://telegram.org{botToken}/sendMessage`, {
+        await fetch(telegramApiUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -46,6 +47,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Webhook Error:", error);
-    return NextResponse.json({ ok: true }); // Always return 200 OK so Telegram doesn't retry infinitely
+    return NextResponse.json({ ok: true }); 
   }
 }
