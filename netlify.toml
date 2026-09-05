@@ -5,5 +5,5 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[build.environment]
-  NETLIFY_IGNORE_EXPOSED_SECRETS = "true"
+[context.production.environment]
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_TELEGRAM_BOT_USERNAME"
