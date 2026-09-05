@@ -65,6 +65,7 @@ The `/courses` page supports paid Flutterwave checkout and free access for verif
 ```env
 NEXT_PUBLIC_SITE_URL=https://your-domain.example
 NEXT_PUBLIC_TELEGRAM_BOT_USERNAME=your_bot_username
+NEXT_PUBLIC_TELEGRAM_CHANNEL_URL=https://t.me/your_channel
 TELEGRAM_BOT_TOKEN=your_bot_token
 TELEGRAM_CHANNEL_USERNAME=@your_channel
 FLW_SECRET_KEY=your_flutterwave_secret_key

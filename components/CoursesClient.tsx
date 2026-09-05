@@ -31,31 +31,53 @@ export default function CoursesClient() {
   const [telegramUser, setTelegramUser] = useState<TelegramAuth | null>(null);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<string>("");
+  const [telegramWidgetState, setTelegramWidgetState] = useState<
+    "idle" | "loading" | "ready" | "error"
+  >("idle");
   const [loading, setLoading] = useState(false);
 
+  const telegramBotUsername = process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME;
+  const telegramChannelUrl =
+    process.env.NEXT_PUBLIC_TELEGRAM_CHANNEL_URL ||
+    "https://t.me/duniyar_computer";
+
   useEffect(() => {
-    window.onTelegramAuth = setTelegramUser;
+    window.onTelegramAuth = (user) => {
+      setTelegramUser(user);
+      setTelegramWidgetState("ready");
+      setStatus(
+        "Telegram account connected. Verify your channel membership to continue.",
+      );
+    };
     return () => {
       delete window.onTelegramAuth;
     };
   }, []);
 
   useEffect(() => {
-    const botUsername = process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME;
-    if (!selectedCourse || telegramUser || !botUsername) return;
+    if (!selectedCourse || telegramUser || !telegramBotUsername) return;
 
+    setTelegramWidgetState("loading");
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-widget.js?22";
     script.async = true;
-    script.setAttribute("data-telegram-login", botUsername);
+    script.setAttribute("data-telegram-login", telegramBotUsername);
     script.setAttribute("data-size", "medium");
     script.setAttribute("data-userpic", "false");
     script.setAttribute("data-onauth", "onTelegramAuth(user)");
     script.setAttribute("data-request-access", "write");
-    document.getElementById("telegram-login")?.appendChild(script);
+    script.addEventListener("load", () => setTelegramWidgetState("ready"));
+    script.addEventListener("error", () => {
+      setTelegramWidgetState("error");
+      setStatus(
+        "Telegram login could not load. Disable ad blockers and confirm the bot username and domain in BotFather.",
+      );
+    });
+    const container = document.getElementById("telegram-login");
+    if (container) container.replaceChildren(script);
 
     return () => script.remove();
-  }, [selectedCourse, telegramUser]);
+  }, [selectedCourse, telegramUser, telegramBotUsername]);
 
   async function startPayment(course: Course) {
     setLoading(true);
@@ -217,16 +239,17 @@ export default function CoursesClient() {
                   access and download without payment.
                 </p>
                 <a
-                  href="https://t.me/duniyar_computer"
+                  href={telegramChannelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-3 inline-block text-sm font-bold underline underline-offset-4"
                 >
                   Join the Telegram channel
                 </a>
-                {!process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME ? (
+                {!telegramBotUsername ? (
                   <p className="muted mt-4 text-xs">
-                    Telegram access is being configured.
+                    Telegram login is not configured yet. You can still pay for
+                    this course.
                   </p>
                 ) : telegramUser ? (
                   <div className="mt-4">
@@ -244,7 +267,24 @@ export default function CoursesClient() {
                     </button>
                   </div>
                 ) : (
-                  <div id="telegram-login" className="mt-4 min-h-10" />
+                  <div className="mt-4">
+                    <div
+                      id="telegram-login"
+                      className="min-h-10"
+                      aria-live="polite"
+                    />
+                    {telegramWidgetState === "loading" && (
+                      <p className="muted mt-2 text-xs">
+                        Loading secure Telegram sign-in...
+                      </p>
+                    )}
+                    {telegramWidgetState === "error" && (
+                      <p className="mt-2 text-xs font-semibold">
+                        The Telegram sign-in button could not load. Check your
+                        browser blockers or try again.
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
             </div>

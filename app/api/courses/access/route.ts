@@ -50,11 +50,21 @@ export async function POST(request: Request) {
     `https://api.telegram.org/bot${botToken}/getChatMember?chat_id=${encodeURIComponent(channel)}&user_id=${encodeURIComponent(String(user.id))}`,
   );
   const telegramData = await telegramResponse.json();
+  if (!telegramResponse.ok || !telegramData.ok) {
+    console.error("Telegram getChatMember failed", telegramData);
+    return NextResponse.json(
+      {
+        error:
+          "Telegram could not check membership. Confirm the bot is an administrator and the channel username is correct.",
+      },
+      { status: 502 },
+    );
+  }
   const member = telegramData?.result;
   const allowed =
-    telegramData?.ok &&
     member &&
-    ["creator", "administrator", "member"].includes(member.status);
+    (["creator", "administrator", "member"].includes(member.status) ||
+      (member.status === "restricted" && member.is_member === true));
   if (!allowed)
     return NextResponse.json(
       { error: "Join the Telegram channel before accessing this material." },
