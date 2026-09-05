@@ -6,4 +6,4 @@
   package = "@netlify/plugin-nextjs"
 
 [build.environment]
-  NETLIFY_IGNORE_EXPOSED_SECRETS = "true
+  NETLIFY_IGNORE_EXPOSED_SECRETS = "true"
