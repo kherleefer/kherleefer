@@ -26,6 +26,18 @@ function formatPrice(course: Course) {
   }).format(course.price);
 }
 
+type ApiResponse<T> = T & { error?: string };
+
+async function readApiResponse<T>(response: Response): Promise<ApiResponse<T>> {
+  const text = await response.text();
+  if (!text) return {} as ApiResponse<T>;
+  try {
+    return JSON.parse(text) as ApiResponse<T>;
+  } catch {
+    return { error: `Request failed (${response.status}).` } as ApiResponse<T>;
+  }
+}
+
 export default function CoursesClient() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
@@ -42,7 +54,7 @@ export default function CoursesClient() {
   useEffect(() => {
     fetch("/api/courses")
       .then(async (response) => {
-        const data = await response.json();
+        const data = await readApiResponse<Course[]>(response);
         if (!response.ok)
           throw new Error(data.error || "Courses are unavailable.");
         setCourses(data);
@@ -69,7 +81,13 @@ export default function CoursesClient() {
   }, []);
 
   useEffect(() => {
-    if (!selectedCourse || telegramUser || !telegramBotUsername) return;
+    if (
+      !selectedCourse ||
+      accessMode !== "free" ||
+      telegramUser ||
+      !telegramBotUsername
+    )
+      return;
 
     setTelegramWidgetState("loading");
     const container = document.getElementById("telegram-login");
@@ -81,17 +99,26 @@ export default function CoursesClient() {
     script.setAttribute("data-userpic", "false");
     script.setAttribute("data-onauth", "onTelegramAuth(user)");
     script.setAttribute("data-request-access", "write");
-    const timeout = window.setTimeout(() => {
-      if (!container?.querySelector("iframe")) {
+    let pollId: number | undefined;
+    const startedAt = Date.now();
+    const checkForWidget = () => {
+      if (container?.querySelector("iframe")) {
+        setTelegramWidgetState("ready");
+        if (pollId) window.clearInterval(pollId);
+        return;
+      }
+      if (Date.now() - startedAt >= 15000) {
         setTelegramWidgetState("error");
         setStatus(
           "Telegram sign-in is unavailable right now. Try again, or continue with paid access.",
         );
+        if (pollId) window.clearInterval(pollId);
       }
-    }, 6000);
-    script.addEventListener("load", () => setTelegramWidgetState("ready"));
+    };
+    pollId = window.setInterval(checkForWidget, 250);
+    script.addEventListener("load", checkForWidget);
     script.addEventListener("error", () => {
-      window.clearTimeout(timeout);
+      if (pollId) window.clearInterval(pollId);
       setTelegramWidgetState("error");
       setStatus(
         "Telegram sign-in could not load. Try again, or continue with paid access.",
@@ -100,11 +127,12 @@ export default function CoursesClient() {
     if (container) container.replaceChildren(script);
 
     return () => {
-      window.clearTimeout(timeout);
+      if (pollId) window.clearInterval(pollId);
       script.remove();
     };
   }, [
     selectedCourse,
+    accessMode,
     telegramUser,
     telegramBotUsername,
     telegramWidgetAttempt,
@@ -119,7 +147,7 @@ export default function CoursesClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ courseId: course.id, email }),
       });
-      const data = await response.json();
+      const data = await readApiResponse<{ paymentLink: string }>(response);
       if (!response.ok)
         throw new Error(data.error || "Unable to start checkout.");
       window.location.href = data.paymentLink;
@@ -141,7 +169,7 @@ export default function CoursesClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ courseId: selectedCourse.id, telegramUser }),
       });
-      const data = await response.json();
+      const data = await readApiResponse<{ materialUrl: string }>(response);
       if (!response.ok)
         throw new Error(data.error || "Membership could not be verified.");
       window.location.href = data.materialUrl;
