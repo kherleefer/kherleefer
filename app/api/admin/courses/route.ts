@@ -40,19 +40,22 @@ export async function POST(request: Request) {
     const slug = `${slugify(title)}-${crypto.randomUUID().slice(0, 8)}`;
     const materialPath = `${slug}/${file.name.replace(/[^a-zA-Z0-9._-]/g, "-")}`;
     await uploadCourseFile(materialPath, file);
-    const rows = await supabaseRequest("/rest/v1/courses", {
-      method: "POST",
-      headers: { Prefer: "return=representation" },
-      body: JSON.stringify({
-        slug,
-        title,
-        description,
-        level,
-        price: Math.round(price),
-        currency,
-        material_path: materialPath,
-      }),
-    });
+    const rows = await supabaseRequest<Record<string, unknown>[]>(
+      "/rest/v1/courses",
+      {
+        method: "POST",
+        headers: { Prefer: "return=representation" },
+        body: JSON.stringify({
+          slug,
+          title,
+          description,
+          level,
+          price: Math.round(price),
+          currency,
+          material_path: materialPath,
+        }),
+      },
+    );
     return NextResponse.json({ course: rows?.[0] || rows }, { status: 201 });
   } catch (error) {
     const message =
