@@ -73,7 +73,7 @@ export default function CoursesClient() {
       if (!container?.querySelector("iframe")) {
         setTelegramWidgetState("error");
         setStatus(
-          "Telegram did not display its sign-in button. Check the bot username, BotFather domain, or browser ad blockers.",
+          "Telegram sign-in is unavailable right now. Try again, or continue with paid access.",
         );
       }
     }, 6000);
@@ -82,7 +82,7 @@ export default function CoursesClient() {
       window.clearTimeout(timeout);
       setTelegramWidgetState("error");
       setStatus(
-        "Telegram login could not load. Disable ad blockers and confirm the bot username and domain in BotFather.",
+        "Telegram sign-in could not load. Try again, or continue with paid access.",
       );
     });
     if (container) container.replaceChildren(script);

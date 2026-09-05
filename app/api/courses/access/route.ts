@@ -24,7 +24,10 @@ export async function POST(request: Request) {
   const channel = process.env.TELEGRAM_CHANNEL_USERNAME;
   if (!botToken || !channel)
     return NextResponse.json(
-      { error: "Telegram access is not configured yet." },
+      {
+        error:
+          "Free Telegram access is temporarily unavailable. Please try again later or choose paid access.",
+      },
       { status: 503 },
     );
 
@@ -33,7 +36,10 @@ export async function POST(request: Request) {
   const user = body?.telegramUser as Record<string, unknown> | undefined;
   if (!course || !user || !isValidTelegramLogin(user, botToken)) {
     return NextResponse.json(
-      { error: "Telegram identity could not be verified." },
+      {
+        error:
+          "We could not confirm your Telegram account. Please sign in with Telegram again.",
+      },
       { status: 401 },
     );
   }
@@ -55,7 +61,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Telegram could not check membership. Confirm the bot is an administrator and the channel username is correct.",
+          "We could not check your channel membership right now. Please try again in a moment.",
       },
       { status: 502 },
     );
