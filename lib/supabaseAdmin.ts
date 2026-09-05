@@ -47,6 +47,13 @@ export async function uploadCourseFile(path: string, file: File) {
   if (!response.ok) throw new Error("Course file upload failed.");
 }
 
+export async function deleteCourseFile(path: string) {
+  await supabaseRequest("/storage/v1/object/remove", {
+    method: "POST",
+    body: JSON.stringify({ prefixes: [`course-materials/${path}`] }),
+  });
+}
+
 export async function createCourseMaterialUrl(path: string) {
   const data = await supabaseRequest<{ signedURL: string }>(
     "/storage/v1/object/sign/course-materials",
