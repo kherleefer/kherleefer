@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
-import { courses } from "@/lib/portfolioData";
+import { getStoredCourse } from "@/lib/courseData";
+import { createCourseMaterialUrl } from "@/lib/supabaseAdmin";
 
 function isValidTelegramLogin(user: Record<string, unknown>, botToken: string) {
   const receivedHash = typeof user.hash === "string" ? user.hash : "";
@@ -32,7 +33,10 @@ export async function POST(request: Request) {
     );
 
   const body = await request.json().catch(() => null);
-  const course = courses.find((item) => item.id === body?.courseId);
+  const course =
+    typeof body?.courseId === "string"
+      ? await getStoredCourse(body.courseId)
+      : undefined;
   const user = body?.telegramUser as Record<string, unknown> | undefined;
   if (!course || !user || !isValidTelegramLogin(user, botToken)) {
     return NextResponse.json(
@@ -77,5 +81,7 @@ export async function POST(request: Request) {
       { status: 403 },
     );
 
-  return NextResponse.json({ materialUrl: course.materialUrl });
+  return NextResponse.json({
+    materialUrl: await createCourseMaterialUrl(course.material_path),
+  });
 }

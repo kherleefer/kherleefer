@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.115.0",
     "@tailwindcss/postcss": "^4.1.17",
     "@v9v/ts-react-telegram-login": "^1.1.1",
     "framer-motion": "^12.23.25",

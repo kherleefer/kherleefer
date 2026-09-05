@@ -36,39 +36,6 @@ export type Course = {
   materialUrl: string;
 };
 
-export const courses: Course[] = [
-  {
-    id: "modern-web-foundations",
-    title: "Modern Web Foundations",
-    description:
-      "A practical path through HTML, CSS, JavaScript, Git, and shipping your first polished web project.",
-    level: "Beginner",
-    price: 15000,
-    currency: "NGN",
-    materialUrl: "https://t.me/Encryptoknight",
-  },
-  {
-    id: "blockchain-builder",
-    title: "Blockchain Builder",
-    description:
-      "Learn the building blocks behind wallets, smart contracts, token flows, and safer Web3 products.",
-    level: "Intermediate",
-    price: 25000,
-    currency: "NGN",
-    materialUrl: "https://t.me/Encryptoknight",
-  },
-  {
-    id: "full-stack-launchpad",
-    title: "Full-Stack Launchpad",
-    description:
-      "Build and deploy a production-minded app with Next.js, APIs, databases, authentication, and hosting.",
-    level: "Intermediate",
-    price: 30000,
-    currency: "NGN",
-    materialUrl: "https://t.me/Encryptoknight",
-  },
-];
-
 // Data for Homepage Sections
 export const homePageSectionsData: SectionData[] = [
   {

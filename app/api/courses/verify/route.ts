@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { courses } from "@/lib/portfolioData";
+import { getStoredCourse } from "@/lib/courseData";
+import { createCourseMaterialUrl } from "@/lib/supabaseAdmin";
 
 export async function GET(request: Request) {
   const secretKey = process.env.FLW_SECRET_KEY;
@@ -19,9 +20,10 @@ export async function GET(request: Request) {
   );
   const data = await response.json();
   const transaction = data?.data;
-  const course = courses.find(
-    (item) => item.id === transaction?.meta?.courseId,
-  );
+  const course =
+    typeof transaction?.meta?.courseId === "string"
+      ? await getStoredCourse(transaction.meta.courseId)
+      : undefined;
   const isValid =
     response.ok &&
     data.status === "success" &&
@@ -39,7 +41,7 @@ export async function GET(request: Request) {
       { status: 400 },
     );
   return NextResponse.json({
-    materialUrl: course.materialUrl,
+    materialUrl: await createCourseMaterialUrl(course.material_path),
     courseTitle: course.title,
   });
 }

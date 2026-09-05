@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { courses } from "@/lib/portfolioData";
+import { getStoredCourse } from "@/lib/courseData";
 
 export async function POST(request: Request) {
   const secretKey = process.env.FLW_SECRET_KEY;
@@ -10,7 +10,10 @@ export async function POST(request: Request) {
     );
 
   const body = await request.json().catch(() => null);
-  const course = courses.find((item) => item.id === body?.courseId);
+  const course =
+    typeof body?.courseId === "string"
+      ? await getStoredCourse(body.courseId)
+      : undefined;
   const email = typeof body?.email === "string" ? body.email.trim() : "";
   if (!course || !email || !email.includes("@")) {
     return NextResponse.json(

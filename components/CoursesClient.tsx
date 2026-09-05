@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Check, LockKeyhole, Send } from "lucide-react";
-import { courses, type Course } from "@/lib/portfolioData";
+import { type Course } from "@/lib/portfolioData";
 
 type TelegramAuth = {
   id: number;
@@ -28,6 +28,7 @@ function formatPrice(course: Course) {
 
 export default function CoursesClient() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [accessMode, setAccessMode] = useState<"paid" | "free">("paid");
   const [telegramUser, setTelegramUser] = useState<TelegramAuth | null>(null);
   const [email, setEmail] = useState("");
@@ -37,6 +38,17 @@ export default function CoursesClient() {
   >("idle");
   const [telegramWidgetAttempt, setTelegramWidgetAttempt] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/courses")
+      .then(async (response) => {
+        const data = await response.json();
+        if (!response.ok)
+          throw new Error(data.error || "Courses are unavailable.");
+        setCourses(data);
+      })
+      .catch((error: Error) => setStatus(error.message));
+  }, []);
 
   const telegramBotUsername = process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME;
   const telegramChannelUrl =

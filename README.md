@@ -71,4 +71,8 @@ TELEGRAM_CHANNEL_USERNAME=@your_channel
 FLW_SECRET_KEY=your_flutterwave_secret_key
 ```
 
-Add the bot to the Telegram channel as an administrator so it can verify membership. Replace each course `materialUrl` in `lib/portfolioData.ts` with a protected download or private course delivery URL. Do not expose `FLW_SECRET_KEY` or `TELEGRAM_BOT_TOKEN` as `NEXT_PUBLIC_` variables.
+Add the bot to the Telegram channel as an administrator so it can verify membership. Do not expose `FLW_SECRET_KEY`, `TELEGRAM_BOT_TOKEN`, or `SUPABASE_SERVICE_ROLE_KEY` as `NEXT_PUBLIC_` variables.
+
+### Course admin setup
+
+Run `supabase/courses.sql` in the Supabase SQL editor. Set `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD`, and `ADMIN_SESSION_SECRET` in local or Netlify environment variables. Open `/admin/courses`, unlock it with the admin password, and upload course material. The bucket is private; learners receive a 15-minute signed URL only after verified payment or Telegram membership. This uses a separate admin password and does not use Supabase Auth.
