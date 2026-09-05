@@ -28,6 +28,7 @@ function formatPrice(course: Course) {
 
 export default function CoursesClient() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [accessMode, setAccessMode] = useState<"paid" | "free">("paid");
   const [telegramUser, setTelegramUser] = useState<TelegramAuth | null>(null);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<string>("");
@@ -180,6 +181,7 @@ export default function CoursesClient() {
               type="button"
               onClick={() => {
                 setSelectedCourse(course);
+                setAccessMode("paid");
                 setStatus("");
               }}
               className="mt-8 flex items-center justify-between border-t pt-4 text-left text-sm font-bold"
@@ -224,107 +226,147 @@ export default function CoursesClient() {
               </button>
             </div>
 
-            <div className="mt-8 grid gap-3">
-              <label
-                className="muted text-sm font-semibold"
-                htmlFor="course-email"
+            <div className="mt-8">
+              <div
+                className="grid grid-cols-2 border-b"
+                role="tablist"
+                aria-label="Course access options"
               >
-                Email for your receipt
-              </label>
-              <input
-                id="course-email"
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="you@example.com"
-                className="line border bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--foreground)]"
-              />
-              <button
-                type="button"
-                disabled={loading}
-                onClick={() => startPayment(selectedCourse)}
-                className="flex items-center justify-between bg-[var(--foreground)] px-4 py-3 text-left text-sm font-bold text-[var(--background)] disabled:opacity-50"
-              >
-                <span>
-                  <LockKeyhole className="mr-2 inline" size={16} /> Pay{" "}
-                  {formatPrice(selectedCourse)} with Flutterwave
-                </span>
-                <ArrowUpRight size={18} />
-              </button>
-              <div className="line border-t pt-5">
-                <div className="flex items-center gap-3">
-                  <Send size={18} />
-                  <h3 className="text-sm font-bold">
-                    Free access for channel members
-                  </h3>
-                </div>
-                <p className="muted mt-2 text-sm leading-6">
-                  Join the channel, then use the Telegram button below to
-                  identify your account. We check your membership securely
-                  before opening the material.
-                </p>
-                <a
-                  href={telegramChannelUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-block text-sm font-bold underline underline-offset-4"
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={accessMode === "paid"}
+                  onClick={() => {
+                    setAccessMode("paid");
+                    setStatus("");
+                  }}
+                  className={`border-b-2 px-3 pb-3 text-left text-sm font-bold ${accessMode === "paid" ? "border-[var(--foreground)]" : "muted border-transparent"}`}
                 >
-                  Join the Telegram channel
-                </a>
-                {!telegramBotUsername ? (
-                  <p className="muted mt-4 text-xs">
-                    Telegram login is not configured yet. You can still pay for
-                    this course.
-                  </p>
-                ) : telegramUser ? (
-                  <div className="mt-4">
-                    <p className="text-sm font-bold">
-                      <Check className="mr-1 inline" size={16} /> Signed in as{" "}
-                      {telegramUser.first_name}
-                    </p>
-                    <button
-                      type="button"
-                      disabled={loading}
-                      onClick={verifyTelegramAccess}
-                      className="mt-3 border px-4 py-3 text-sm font-bold disabled:opacity-50"
-                    >
-                      Verify channel membership
-                    </button>
-                  </div>
-                ) : (
-                  <div className="mt-5 border p-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em]">
-                      Step 2: Sign in
-                    </p>
-                    <div
-                      id="telegram-login"
-                      className="mt-3 min-h-10"
-                      aria-live="polite"
-                    />
-                    {telegramWidgetState === "loading" && (
-                      <p className="muted mt-2 text-xs">
-                        Loading secure Telegram sign-in...
-                      </p>
-                    )}
-                    {telegramWidgetState === "error" && (
-                      <div className="mt-3">
-                        <p className="text-xs font-semibold">
-                          The Telegram button could not load.
-                        </p>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setTelegramWidgetAttempt((attempt) => attempt + 1)
-                          }
-                          className="mt-3 border px-3 py-2 text-xs font-bold"
-                        >
-                          Try again
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
+                  Pay with Flutterwave
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={accessMode === "free"}
+                  onClick={() => {
+                    setAccessMode("free");
+                    setStatus("");
+                  }}
+                  className={`border-b-2 px-3 pb-3 text-left text-sm font-bold ${accessMode === "free" ? "border-[var(--foreground)]" : "muted border-transparent"}`}
+                >
+                  Free Telegram access
+                </button>
               </div>
+
+              {accessMode === "paid" ? (
+                <div className="mt-6 grid gap-3" role="tabpanel">
+                  <p className="muted text-sm leading-6">
+                    Pay once and open the course material after Flutterwave
+                    confirms your transaction.
+                  </p>
+                  <label
+                    className="muted text-sm font-semibold"
+                    htmlFor="course-email"
+                  >
+                    Email for your receipt
+                  </label>
+                  <input
+                    id="course-email"
+                    type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="you@example.com"
+                    className="line border bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--foreground)]"
+                  />
+                  <button
+                    type="button"
+                    disabled={loading}
+                    onClick={() => startPayment(selectedCourse)}
+                    className="flex items-center justify-between bg-[var(--foreground)] px-4 py-3 text-left text-sm font-bold text-[var(--background)] disabled:opacity-50"
+                  >
+                    <span>
+                      <LockKeyhole className="mr-2 inline" size={16} /> Pay{" "}
+                      {formatPrice(selectedCourse)} with Flutterwave
+                    </span>
+                    <ArrowUpRight size={18} />
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-6" role="tabpanel">
+                  <div className="flex items-center gap-3">
+                    <Send size={18} />
+                    <h3 className="text-sm font-bold">
+                      Free access for channel members
+                    </h3>
+                  </div>
+                  <p className="muted mt-2 text-sm leading-6">
+                    Join the channel, then use the Telegram button below to
+                    identify your account. We check your membership securely
+                    before opening the material.
+                  </p>
+                  <a
+                    href={telegramChannelUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-block text-sm font-bold underline underline-offset-4"
+                  >
+                    Join the Telegram channel
+                  </a>
+                  {!telegramBotUsername ? (
+                    <p className="muted mt-4 text-xs">
+                      Telegram login is not configured yet. You can still pay
+                      for this course.
+                    </p>
+                  ) : telegramUser ? (
+                    <div className="mt-4">
+                      <p className="text-sm font-bold">
+                        <Check className="mr-1 inline" size={16} /> Signed in as{" "}
+                        {telegramUser.first_name}
+                      </p>
+                      <button
+                        type="button"
+                        disabled={loading}
+                        onClick={verifyTelegramAccess}
+                        className="mt-3 border px-4 py-3 text-sm font-bold disabled:opacity-50"
+                      >
+                        Verify channel membership
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mt-5 border p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em]">
+                        Step 2: Sign in
+                      </p>
+                      <div
+                        id="telegram-login"
+                        className="mt-3 min-h-10"
+                        aria-live="polite"
+                      />
+                      {telegramWidgetState === "loading" && (
+                        <p className="muted mt-2 text-xs">
+                          Loading secure Telegram sign-in...
+                        </p>
+                      )}
+                      {telegramWidgetState === "error" && (
+                        <div className="mt-3">
+                          <p className="text-xs font-semibold">
+                            The Telegram button could not load.
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setTelegramWidgetAttempt((attempt) => attempt + 1)
+                            }
+                            className="mt-3 border px-3 py-2 text-xs font-bold"
+                          >
+                            Try again
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             {status && (
               <p className="mt-5 text-sm font-semibold" role="alert">
