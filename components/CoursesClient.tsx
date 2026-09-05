@@ -34,6 +34,7 @@ export default function CoursesClient() {
   const [telegramWidgetState, setTelegramWidgetState] = useState<
     "idle" | "loading" | "ready" | "error"
   >("idle");
+  const [telegramWidgetAttempt, setTelegramWidgetAttempt] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const telegramBotUsername = process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME;
@@ -58,6 +59,7 @@ export default function CoursesClient() {
     if (!selectedCourse || telegramUser || !telegramBotUsername) return;
 
     setTelegramWidgetState("loading");
+    const container = document.getElementById("telegram-login");
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-widget.js?22";
     script.async = true;
@@ -66,18 +68,34 @@ export default function CoursesClient() {
     script.setAttribute("data-userpic", "false");
     script.setAttribute("data-onauth", "onTelegramAuth(user)");
     script.setAttribute("data-request-access", "write");
+    const timeout = window.setTimeout(() => {
+      if (!container?.querySelector("iframe")) {
+        setTelegramWidgetState("error");
+        setStatus(
+          "Telegram did not display its sign-in button. Check the bot username, BotFather domain, or browser ad blockers.",
+        );
+      }
+    }, 6000);
     script.addEventListener("load", () => setTelegramWidgetState("ready"));
     script.addEventListener("error", () => {
+      window.clearTimeout(timeout);
       setTelegramWidgetState("error");
       setStatus(
         "Telegram login could not load. Disable ad blockers and confirm the bot username and domain in BotFather.",
       );
     });
-    const container = document.getElementById("telegram-login");
     if (container) container.replaceChildren(script);
 
-    return () => script.remove();
-  }, [selectedCourse, telegramUser, telegramBotUsername]);
+    return () => {
+      window.clearTimeout(timeout);
+      script.remove();
+    };
+  }, [
+    selectedCourse,
+    telegramUser,
+    telegramBotUsername,
+    telegramWidgetAttempt,
+  ]);
 
   async function startPayment(course: Course) {
     setLoading(true);
@@ -234,9 +252,16 @@ export default function CoursesClient() {
                 <ArrowUpRight size={18} />
               </button>
               <div className="line border-t pt-5">
-                <p className="muted text-sm leading-6">
-                  Already a channel member? Sign in with Telegram to verify
-                  access and download without payment.
+                <div className="flex items-center gap-3">
+                  <Send size={18} />
+                  <h3 className="text-sm font-bold">
+                    Free access for channel members
+                  </h3>
+                </div>
+                <p className="muted mt-2 text-sm leading-6">
+                  Join the channel, then use the Telegram button below to
+                  identify your account. We check your membership securely
+                  before opening the material.
                 </p>
                 <a
                   href={telegramChannelUrl}
@@ -267,10 +292,13 @@ export default function CoursesClient() {
                     </button>
                   </div>
                 ) : (
-                  <div className="mt-4">
+                  <div className="mt-5 border p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.14em]">
+                      Step 2: Sign in
+                    </p>
                     <div
                       id="telegram-login"
-                      className="min-h-10"
+                      className="mt-3 min-h-10"
                       aria-live="polite"
                     />
                     {telegramWidgetState === "loading" && (
@@ -279,10 +307,20 @@ export default function CoursesClient() {
                       </p>
                     )}
                     {telegramWidgetState === "error" && (
-                      <p className="mt-2 text-xs font-semibold">
-                        The Telegram sign-in button could not load. Check your
-                        browser blockers or try again.
-                      </p>
+                      <div className="mt-3">
+                        <p className="text-xs font-semibold">
+                          The Telegram button could not load.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setTelegramWidgetAttempt((attempt) => attempt + 1)
+                          }
+                          className="mt-3 border px-3 py-2 text-xs font-bold"
+                        >
+                          Try again
+                        </button>
+                      </div>
                     )}
                   </div>
                 )}
