@@ -55,12 +55,21 @@ export async function deleteCourseFile(path: string) {
 }
 
 export async function createCourseMaterialUrl(path: string) {
+  const encodedPath = path
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
   const data = await supabaseRequest<{ signedURL: string }>(
-    `/storage/v1/object/sign/course-materials/${path
-      .split("/")
-      .map(encodeURIComponent)
-      .join("/")}`,
+    `/storage/v1/object/sign/course-materials/${encodedPath}`,
     { method: "POST", body: JSON.stringify({ expiresIn: 900 }) },
   );
-  return `${config().url}/storage/v1${data.signedURL}`;
+  if (!data?.signedURL || typeof data.signedURL !== "string") {
+    throw new Error("Supabase did not return a signed material URL.");
+  }
+
+  if (/^https?:\/\//i.test(data.signedURL)) return data.signedURL;
+  if (data.signedURL.startsWith("/")) {
+    return `${config().url}/storage/v1${data.signedURL}`;
+  }
+  return `${config().url}/storage/v1/${data.signedURL}`;
 }
