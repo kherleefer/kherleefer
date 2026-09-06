@@ -269,9 +269,10 @@ export default function CoursesClient() {
             key={course.id}
             className="surface interactive-line flex flex-col border p-6 rounded-lg"
           >
-            <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.16em]">
-              <span className="muted">{course.category}</span>
-              <span className="muted">{course.level}</span>
+            <span className="text-sm font-bold border-b py-2">{course.category}</span>
+
+            <div className=" pt-2  flex items-center justify-between text-xs font-bold uppercase tracking-[0.16em]">
+              <span className="muted ">{course.level}</span>
               <span>{formatPrice(course)}</span>
             </div>
             <h2 className="mt-12 text-2xl font-black tracking-tight">
