@@ -56,11 +56,11 @@ export async function deleteCourseFile(path: string) {
 
 export async function createCourseMaterialUrl(path: string) {
   const data = await supabaseRequest<{ signedURL: string }>(
-    "/storage/v1/object/sign/course-materials",
-    {
-      method: "POST",
-      body: JSON.stringify({ path, expiresIn: 900 }),
-    },
+    `/storage/v1/object/sign/course-materials/${path
+      .split("/")
+      .map(encodeURIComponent)
+      .join("/")}`,
+    { method: "POST", body: JSON.stringify({ expiresIn: 900 }) },
   );
   return `${config().url}/storage/v1${data.signedURL}`;
 }

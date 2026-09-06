@@ -374,7 +374,7 @@ export default function CoursesClient() {
                   ) : (
                     <div className="mt-5 border p-4">
                       <p className="text-xs font-bold uppercase tracking-[0.14em]">
-                        Step 2: Sign in
+                        Sign in
                       </p>
                       <div
                         id="telegram-login"
