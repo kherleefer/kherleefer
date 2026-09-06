@@ -6,6 +6,7 @@ type AdminCourse = {
   id: string;
   title: string;
   description: string;
+  category: string;
   level: string;
   price: number;
   currency: string;
@@ -161,6 +162,18 @@ export default function CourseAdminPage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="grid gap-2">
+              <label className="text-sm font-semibold" htmlFor="category">
+                Category
+              </label>
+              <input
+                id="category"
+                name="category"
+                placeholder="Programming"
+                required
+                className="line border bg-transparent px-4 py-3 outline-none"
+              />
+            </div>
+            <div className="grid gap-2">
               <label className="text-sm font-semibold" htmlFor="level">
                 Level
               </label>
@@ -245,6 +258,13 @@ export default function CourseAdminPage() {
                     required
                     className="line border bg-transparent px-3 py-2 text-sm"
                     aria-label="Course title"
+                  />
+                  <input
+                    name="category"
+                    defaultValue={course.category}
+                    required
+                    className="line border bg-transparent px-3 py-2 text-sm"
+                    aria-label="Course category"
                   />
                   <input
                     name="level"

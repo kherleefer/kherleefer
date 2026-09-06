@@ -3,6 +3,7 @@ create table if not exists public.courses (
   slug text unique not null,
   title text not null,
   description text not null,
+  category text not null default 'Programming',
   level text not null,
   price integer not null check (price >= 0),
   currency text not null default 'NGN',
@@ -10,6 +11,8 @@ create table if not exists public.courses (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.courses add column if not exists category text not null default 'Programming';
 
 alter table public.courses enable row level security;
 

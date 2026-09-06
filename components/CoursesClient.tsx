@@ -41,6 +41,12 @@ async function readApiResponse<T>(response: Response): Promise<ApiResponse<T>> {
 export default function CoursesClient() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
+  const [totalCourses, setTotalCourses] = useState(0);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [level, setLevel] = useState("");
+  const pageSize = 12;
   const [accessMode, setAccessMode] = useState<"paid" | "free">("paid");
   const [telegramUser, setTelegramUser] = useState<TelegramAuth | null>(null);
   const [email, setEmail] = useState("");
@@ -52,15 +58,28 @@ export default function CoursesClient() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("/api/courses")
+    const query = new URLSearchParams({
+      page: String(page),
+      pageSize: String(pageSize),
+    });
+    if (search.trim()) query.set("search", search.trim());
+    if (category) query.set("category", category);
+    if (level) query.set("level", level);
+    fetch(`/api/courses?${query.toString()}`)
       .then(async (response) => {
-        const data = await readApiResponse<Course[]>(response);
+        const data = await readApiResponse<{
+          courses: Course[];
+          total: number;
+        }>(response);
         if (!response.ok)
           throw new Error(data.error || "Courses are unavailable.");
-        setCourses(data);
+        setCourses(data.courses || []);
+        setTotalCourses(data.total || 0);
       })
       .catch((error: Error) => setStatus(error.message));
-  }, []);
+  }, [page, search, category, level]);
+
+  const totalPages = Math.max(1, Math.ceil(totalCourses / pageSize));
 
   const telegramBotUsername = process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME;
   const telegramChannelUrl =
@@ -197,6 +216,50 @@ export default function CoursesClient() {
         </p>
       </header>
 
+      <div className="mt-12 grid gap-3 sm:grid-cols-[1fr_auto_auto]">
+        <input
+          value={search}
+          onChange={(event) => {
+            setSearch(event.target.value);
+            setPage(1);
+          }}
+          placeholder="Search courses..."
+          className="line border bg-transparent px-4 py-3 text-sm outline-none"
+          aria-label="Search courses"
+        />
+        <select
+          value={category}
+          onChange={(event) => {
+            setCategory(event.target.value);
+            setPage(1);
+          }}
+          className="line border bg-transparent px-4 py-3 text-sm"
+          aria-label="Filter by category"
+        >
+          <option value="">All categories</option>
+          <option value="Programming">Programming</option>
+          <option value="Office & Productivity">
+            Office &amp; Productivity
+          </option>
+          <option value="Data & Analytics">Data &amp; Analytics</option>
+          <option value="Creative & AI">Creative &amp; AI</option>
+        </select>
+        <select
+          value={level}
+          onChange={(event) => {
+            setLevel(event.target.value);
+            setPage(1);
+          }}
+          className="line border bg-transparent px-4 py-3 text-sm"
+          aria-label="Filter by level"
+        >
+          <option value="">All levels</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+
       <section
         className="mt-14 grid gap-5 md:grid-cols-3 "
         aria-label="Available courses"
@@ -207,6 +270,7 @@ export default function CoursesClient() {
             className="surface interactive-line flex flex-col border p-6 rounded-lg"
           >
             <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.16em]">
+              <span className="muted">{course.category}</span>
               <span className="muted">{course.level}</span>
               <span>{formatPrice(course)}</span>
             </div>
@@ -230,6 +294,31 @@ export default function CoursesClient() {
           </article>
         ))}
       </section>
+
+      <nav
+        className="mt-10 flex items-center justify-between"
+        aria-label="Course pages"
+      >
+        <button
+          type="button"
+          disabled={page <= 1}
+          onClick={() => setPage((current) => current - 1)}
+          className="border px-4 py-2 text-sm font-bold disabled:opacity-40"
+        >
+          Previous
+        </button>
+        <span className="muted text-sm">
+          Page {page} of {totalPages}
+        </span>
+        <button
+          type="button"
+          disabled={page >= totalPages}
+          onClick={() => setPage((current) => current + 1)}
+          className="border px-4 py-2 text-sm font-bold disabled:opacity-40"
+        >
+          Next
+        </button>
+      </nav>
 
       <p className="muted mt-12 flex items-center gap-2 text-sm">
         <Send size={16} /> Telegram members can access the material for free.

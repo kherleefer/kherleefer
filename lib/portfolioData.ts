@@ -30,6 +30,7 @@ export type Course = {
   id: string;
   title: string;
   description: string;
+  category: string;
   level: string;
   price: number;
   currency: string;

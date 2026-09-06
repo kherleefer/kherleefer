@@ -8,7 +8,10 @@ function config() {
   return { url: url.replace(/\/$/, ""), key };
 }
 
-export async function supabaseRequest<T>(path: string, init: RequestInit = {}) {
+export async function supabaseRequestWithMeta<T>(
+  path: string,
+  init: RequestInit = {},
+) {
   const { url, key } = config();
   const response = await fetch(`${url}${path}`, {
     ...init,
@@ -26,7 +29,12 @@ export async function supabaseRequest<T>(path: string, init: RequestInit = {}) {
     throw new Error(
       data?.message || data?.error_description || "Supabase request failed.",
     );
-  return data as T;
+  return { data: data as T, headers: response.headers };
+}
+
+export async function supabaseRequest<T>(path: string, init: RequestInit = {}) {
+  const result = await supabaseRequestWithMeta<T>(path, init);
+  return result.data;
 }
 
 export async function uploadCourseFile(path: string, file: File) {

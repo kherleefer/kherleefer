@@ -75,4 +75,14 @@ Add the bot to the Telegram channel as an administrator so it can verify members
 
 ### Course admin setup
 
-Run `supabase/courses.sql` in the Supabase SQL editor. Set `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD`, and `ADMIN_SESSION_SECRET` in local or Netlify environment variables. Open `/admin/courses`, unlock it with the admin password, and upload course material. The bucket is private; learners receive a 15-minute signed URL only after verified payment or Telegram membership. This uses a separate admin password and does not use Supabase Auth.
+Run `supabase/courses.sql` in the Supabase SQL editor. Set `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_PASSWORD`, and `ADMIN_SESSION_SECRET` in local or Netlify environment variables. Open `/admin/courses`, unlock it with the admin password, and upload course material. Choose categories such as `Programming`, `Office & Productivity`, `Data & Analytics`, or `Creative & AI`; the public catalog searches and paginates these records instead of loading every course at once. The bucket is private; learners receive a 15-minute signed URL only after verified payment or Telegram membership. This uses a separate admin password and does not use Supabase Auth.
+
+### Telegram welcome webhook
+
+The bot must be an administrator of the channel. Register the deployed webhook once, replacing the placeholders:
+
+```text
+https://api.telegram.org/botYOUR_BOT_TOKEN/setWebhook?url=https://your-domain.example/api/telegram-webhook&allowed_updates=["chat_member"]
+```
+
+The webhook welcomes new members. New course announcements are sent automatically when a course is uploaded from `/admin/courses`, using `TELEGRAM_CHANNEL_USERNAME` as the announcement destination.

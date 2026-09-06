@@ -5,6 +5,12 @@ import {
   supabaseRequest,
   uploadCourseFile,
 } from "@/lib/supabaseAdmin";
+import {
+  escapeTelegramHtml,
+  getTelegramAnnouncementChat,
+  sendTelegramMessage,
+} from "@/lib/telegram";
+import { getServerEnv } from "@/lib/serverEnv";
 
 function slugify(value: string) {
   return value
@@ -20,6 +26,7 @@ export async function POST(request: Request) {
     const form = await request.formData();
     const title = String(form.get("title") || "").trim();
     const description = String(form.get("description") || "").trim();
+    const category = String(form.get("category") || "Programming").trim();
     const level = String(form.get("level") || "").trim();
     const currency = String(form.get("currency") || "NGN")
       .trim()
@@ -30,6 +37,7 @@ export async function POST(request: Request) {
       !title ||
       !description ||
       !level ||
+      !category ||
       !Number.isFinite(price) ||
       price < 0 ||
       !(file instanceof File) ||
@@ -53,6 +61,7 @@ export async function POST(request: Request) {
           slug,
           title,
           description,
+          category,
           level,
           price: Math.round(price),
           currency,
@@ -60,6 +69,14 @@ export async function POST(request: Request) {
         }),
       },
     );
+    const channel = getTelegramAnnouncementChat();
+    if (channel) {
+      const courseUrl = `${getServerEnv("NEXT_PUBLIC_SITE_URL") || new URL(request.url).origin}/courses`;
+      await sendTelegramMessage(
+        channel,
+        `<b>New course material available</b>\n\n<b>${escapeTelegramHtml(title)}</b>\n${escapeTelegramHtml(description)}\n\nCategory: ${escapeTelegramHtml(category)}\nLevel: ${escapeTelegramHtml(level)}\n\n<a href="${courseUrl}">View the course</a>`,
+      ).catch((error) => console.error("Course announcement failed", error));
+    }
     return NextResponse.json({ course: rows?.[0] || rows }, { status: 201 });
   } catch (error) {
     const message =
@@ -105,6 +122,7 @@ export async function PATCH(request: Request) {
     const id = String(form.get("id") || "");
     const title = String(form.get("title") || "").trim();
     const description = String(form.get("description") || "").trim();
+    const category = String(form.get("category") || "Programming").trim();
     const level = String(form.get("level") || "").trim();
     const currency = String(form.get("currency") || "NGN")
       .trim()
@@ -115,6 +133,7 @@ export async function PATCH(request: Request) {
       !title ||
       !description ||
       !level ||
+      !category ||
       !Number.isFinite(price) ||
       price < 0
     ) {
@@ -143,6 +162,7 @@ export async function PATCH(request: Request) {
         body: JSON.stringify({
           title,
           description,
+          category,
           level,
           price: Math.round(price),
           currency,
