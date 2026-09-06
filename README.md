@@ -26,6 +26,11 @@ you are in liberty to use it under MIT License.
 - [Data Analysis Dashboard](https://thinker.com): A dashboard for visualizing phishing & Spam email data.
 - [Network Vulnerability Scanner](https://): A tool for identifying network vulnerabilities.
 
+## npm Packages
+
+- [@glister/currency-utils](https://www.npmjs.com/package/@glister/currency-utils): Lightweight, tree-shakable currency and number formatting utilities built on the native `Intl` API.
+- [@gloxx/gloxx-wasm](https://www.npmjs.com/package/@gloxx/gloxx-wasm): WebAssembly bindings for the Gloxx Network — high-performance cryptographic operations and wallet management for interacting with the Gloxx blockchain.
+
 ## Education
 
 - **Kaduna City University:** Computer Science

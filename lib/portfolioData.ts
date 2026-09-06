@@ -60,6 +60,18 @@ export const homePageSectionsData: SectionData[] = [
     title: "Projects",
     data: [
       {
+        title: "@glister/currency-utils",
+        description:
+          "Published npm package — lightweight, tree-shakable currency and number formatting utilities built on the native Intl API.",
+        link: "https://www.npmjs.com/package/@glister/currency-utils",
+      },
+      {
+        title: "@gloxx/gloxx-wasm",
+        description:
+          "Published npm package — a WebAssembly wallet library for interacting with the Gloxx blockchain from the browser.",
+        link: "https://www.npmjs.com/package/@gloxx/gloxx-wasm",
+      },
+      {
         title: "Gloxx Chain",
         description:
           "A blockchain-powered web and mobile app built with Ionic Vue and Supabase by a full-stack software engineer.",
@@ -309,6 +321,20 @@ export const blogPosts: BlogPost[] = [
 
 // --- Project Page Data (general projects overview) ---
 export const generalProjects: Project[] = [
+  {
+    title: "@glister/currency-utils",
+    description:
+      "Published npm package — a lightweight, zero-dependency currency and number formatting library built on the native Intl API with first-class TypeScript support.",
+    tech: ["TypeScript", "Intl API", "ESM", "npm"],
+    link: "https://www.npmjs.com/package/@glister/currency-utils",
+  },
+  {
+    title: "@gloxx/gloxx-wasm",
+    description:
+      "Published npm package — WebAssembly bindings for the Gloxx Network, providing high-performance cryptographic operations and wallet management for interacting with the Gloxx blockchain from the browser.",
+    tech: ["Rust", "WebAssembly", "TypeScript", "Gloxx Chain"],
+    link: "https://www.npmjs.com/package/@gloxx/gloxx-wasm",
+  },
   {
     title: "React Jet",
     description:
