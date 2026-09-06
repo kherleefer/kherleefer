@@ -99,7 +99,6 @@ export default function CoursesClient() {
     script.setAttribute("data-userpic", "false");
     script.setAttribute("data-onauth", "onTelegramAuth(user)");
     script.setAttribute("data-request-access", "write");
-    let pollId: number | undefined;
     const startedAt = Date.now();
     const checkForWidget = () => {
       if (container?.querySelector("iframe")) {
@@ -115,7 +114,7 @@ export default function CoursesClient() {
         if (pollId) window.clearInterval(pollId);
       }
     };
-    pollId = window.setInterval(checkForWidget, 250);
+    const pollId = window.setInterval(checkForWidget, 250);
     script.addEventListener("load", checkForWidget);
     script.addEventListener("error", () => {
       if (pollId) window.clearInterval(pollId);
