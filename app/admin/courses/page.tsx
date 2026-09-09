@@ -165,25 +165,63 @@ export default function CourseAdminPage() {
               <label className="text-sm font-semibold" htmlFor="category">
                 Category
               </label>
-              <input
+              <select
                 id="category"
                 name="category"
-                placeholder="Programming"
+                className="line border bg-transparent text-muted px-4 py-3 text-sm"
+                aria-label="Filter by category"
                 required
-                className="line border bg-transparent px-4 py-3 outline-none"
-              />
+              >
+                <option value="" className="bg-gray-900 text-white">
+                  All categories
+                </option>
+                <option value="Programming" className="bg-gray-900 text-white">
+                  Programming
+                </option>
+                <option
+                  value="Office & Productivity"
+                  className="bg-gray-900 text-white"
+                >
+                  Office &amp; Productivity
+                </option>
+                <option
+                  value="Data & Analytics"
+                  className="bg-gray-900 text-white"
+                >
+                  Data &amp; Analytics
+                </option>
+                <option
+                  value="Creative & AI"
+                  className="bg-gray-900 text-white"
+                >
+                  Creative &amp; AI
+                </option>
+              </select>
             </div>
             <div className="grid gap-2">
               <label className="text-sm font-semibold" htmlFor="level">
                 Level
               </label>
-              <input
+              <select
                 id="level"
                 name="level"
-                placeholder="Beginner"
+                className="line border bg-transparent px-4 py-3 text-sm"
+                aria-label="Filter by level"
                 required
-                className="line border bg-transparent px-4 py-3 outline-none"
-              />
+              >
+                <option value="" className="bg-gray-900 text-white">
+                  All levels
+                </option>
+                <option value="Beginner" className="bg-gray-900 text-white">
+                  Beginner
+                </option>
+                <option value="Intermediate" className="bg-gray-900 text-white">
+                  Intermediate
+                </option>
+                <option value="Advanced" className="bg-gray-900 text-white">
+                  Advanced
+                </option>
+              </select>
             </div>
             <div className="grid gap-2">
               <label className="text-sm font-semibold" htmlFor="price">
@@ -259,20 +297,65 @@ export default function CourseAdminPage() {
                     className="line border bg-transparent px-3 py-2 text-sm"
                     aria-label="Course title"
                   />
-                  <input
-                    name="category"
+                  <select
                     defaultValue={course.category}
+                    name="category"
+                    className="line border bg-transparent text-muted px-4 py-3 text-sm"
+                    aria-label="Filter by category"
                     required
-                    className="line border bg-transparent px-3 py-2 text-sm"
-                    aria-label="Course category"
-                  />
-                  <input
-                    name="level"
+                  >
+                    <option value="" className="bg-gray-900 text-white">
+                      All categories
+                    </option>
+                    <option
+                      value="Programming"
+                      className="bg-gray-900 text-white"
+                    >
+                      Programming
+                    </option>
+                    <option
+                      value="Office & Productivity"
+                      className="bg-gray-900 text-white"
+                    >
+                      Office &amp; Productivity
+                    </option>
+                    <option
+                      value="Data & Analytics"
+                      className="bg-gray-900 text-white"
+                    >
+                      Data &amp; Analytics
+                    </option>
+                    <option
+                      value="Creative & AI"
+                      className="bg-gray-900 text-white"
+                    >
+                      Creative &amp; AI
+                    </option>
+                  </select>
+
+                  <select
                     defaultValue={course.level}
+                    name="level"
+                    className="line border bg-transparent px-4 py-3 text-sm"
+                    aria-label="Filter by level"
                     required
-                    className="line border bg-transparent px-3 py-2 text-sm"
-                    aria-label="Course level"
-                  />
+                  >
+                    <option value="" className="bg-gray-900 text-white">
+                      All levels
+                    </option>
+                    <option value="Beginner" className="bg-gray-900 text-white">
+                      Beginner
+                    </option>
+                    <option
+                      value="Intermediate"
+                      className="bg-gray-900 text-white"
+                    >
+                      Intermediate
+                    </option>
+                    <option value="Advanced" className="bg-gray-900 text-white">
+                      Advanced
+                    </option>
+                  </select>
                   <input
                     name="price"
                     type="number"

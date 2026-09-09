@@ -236,13 +236,13 @@ export default function CoursesClient() {
           className="line border bg-transparent px-4 py-3 text-sm"
           aria-label="Filter by category"
         >
-          <option value="">All categories</option>
-          <option value="Programming">Programming</option>
-          <option value="Office & Productivity">
+          <option value="" className="bg-gray-900 text-white">All categories</option>
+          <option value="Programming" className="bg-gray-900 text-white">Programming</option>
+          <option value="Office & Productivity" className="bg-gray-900 text-white">
             Office &amp; Productivity
           </option>
-          <option value="Data & Analytics">Data &amp; Analytics</option>
-          <option value="Creative & AI">Creative &amp; AI</option>
+          <option value="Data & Analytics" className="bg-gray-900 text-white">Data &amp; Analytics</option>
+          <option value="Creative & AI" className="bg-gray-900 text-white">Creative &amp; AI</option>
         </select>
         <select
           value={level}
@@ -253,10 +253,10 @@ export default function CoursesClient() {
           className="line border bg-transparent px-4 py-3 text-sm"
           aria-label="Filter by level"
         >
-          <option value="">All levels</option>
-          <option value="Beginner">Beginner</option>
-          <option value="Intermediate">Intermediate</option>
-          <option value="Advanced">Advanced</option>
+          <option value="" className="bg-gray-900 text-white">All levels</option>
+          <option value="Beginner" className="bg-gray-900 text-white">Beginner</option>
+          <option value="Intermediate" className="bg-gray-900 text-white">Intermediate</option>
+          <option value="Advanced" className="bg-gray-900 text-white">Advanced</option>
         </select>
       </div>
 
