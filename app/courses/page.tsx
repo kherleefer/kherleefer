@@ -1,6 +1,7 @@
+import type { Metadata } from "next";
 import CoursesClient from "@components/CoursesClient";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Courses | Learn with Kherleefer",
   description:
     "Choose a practical Engineering, Analytics or Productivity courses and access its learning materials.",
