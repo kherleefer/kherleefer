@@ -31,7 +31,7 @@ export default function AboutPage() {
             twitterUrl="https://x.com/kherleefer_kk"
             telegramUrl="https://t.me/Encryptoknight"
             email="mailto:mahmudkalifa6@gmail.com"
-            chessUrl="https://link.chess.com/friend/lt7FeV"
+            chessUrl="https://www.chess.com/member/encryptoknight"
           />
         </section>
         <section className="line border-t pt-8">

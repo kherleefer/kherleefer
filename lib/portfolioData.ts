@@ -53,7 +53,7 @@ export const homePageSectionsData: SectionData[] = [
       twitterUrl: "https://x.com/kherleefer_kk",
       telegramUrl: "https://t.me/Encryptoknight",
       email: "mailto:mahmudkalifa6@gmail.com",
-      chessUrl: "https://link.chess.com/friend/lt7FeV",
+      chessUrl: "https://www.chess.com/member/encryptoknight",
     },
   },
   {
@@ -192,7 +192,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: "Chess.com",
-    url: "https://link.chess.com/friend/lt7FeV",
+    url: "https://www.chess.com/member/encryptoknight",
     icon: "Trophy",
     command: "connect & play",
   },
