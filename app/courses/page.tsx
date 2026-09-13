@@ -1,7 +1,7 @@
 import CoursesClient from "@components/CoursesClient";
 
 export const metadata = {
-  title: "Courses | Kherleefer",
+  title: "Courses | Learn with Kherleefer",
   description:
     "Choose a practical software engineering course and access its learning materials.",
 };

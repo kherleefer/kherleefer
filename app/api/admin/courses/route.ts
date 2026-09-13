@@ -74,7 +74,7 @@ export async function POST(request: Request) {
       const courseUrl = `${getServerEnv("NEXT_PUBLIC_SITE_URL") || new URL(request.url).origin}/courses`;
       await sendTelegramMessage(
         channel,
-        `<b>New course material available</b>\n\n<b>${escapeTelegramHtml(title)}</b>\n${escapeTelegramHtml(description)}\n\nCategory: ${escapeTelegramHtml(category)}\nLevel: ${escapeTelegramHtml(level)}\n\n<a href="${courseUrl}">View the course</a>`,
+        `<b>New course material available</b>\n\n<b>${escapeTelegramHtml(title)}</b>\n\n${escapeTelegramHtml(description)}\n\nCategory: ${escapeTelegramHtml(category)}\nLevel: ${escapeTelegramHtml(level)}\n\n<a href="${courseUrl}/courses">View the course</a>`,
       ).catch((error) => console.error("Course announcement failed", error));
     }
     return NextResponse.json({ course: rows?.[0] || rows }, { status: 201 });
