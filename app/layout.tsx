@@ -7,7 +7,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "Software Engineer, Full-Stack Developer,  Web & Blockchain Developer",
   description:
-    "Portfolio of Kherleefer — a full-stack software engineer specializing in React ecosystem, Next.js, Vue.js, Ionic, and Solidity development for scalable web and blockchain applications.",
+    "Portfolio of Kherleefer — a Data-Analyst and full-stack software engineer specializing in React ecosystem (ReactNative Next.js), Vue.js, Ionic, and Solidity and Rust. Building scalable web, mobile applications and blockchain.",
   keywords: [
     "Software Engineer",
     "Web Developer",
@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     "Frontend Developer",
     "Backend Developer",
     "IT Consultant",
+    "Data",
+    "Analyst",
+    "Ai Automation",
     "Nigeria",
     "in Nigeria",
   ],
@@ -35,9 +38,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://kherleefer.netlify.app" },
 
   openGraph: {
-    title: "Software Engineer, Full-Stack Developer, Web & Blockchain Developer",
+    title: "Data Analyst, Software Engineer, Full-Stack Developer, Web & Blockchain Developer",
     description:
-      "Explore web and blockchain projects built with React, Next.js, Vue.js, Solidity, and BNB Chain by Kherleefer — a full-stack developer passionate about secure and scalable apps.",
+      "Explore Data Analytics, Mobile, web and blockchain projects built with React, Next.js, Vue.js, Solidity, and Rust by Kherleefer — a full-stack developer passionate about secure and scalable apps.",
     url: "https://kherleefer.netlify.app",
     type: "website",
     images: [
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Software Engineer, Full-Stack Developer, Web & Blockchain Developer",
+    title: "Data Analyst, Software Engineer, Full-Stack Developer, Web & Blockchain Developer",
     description:
       "Software engineer specializing in web, mobile, and blockchain development using React, Ionic, Next.js, Vue.js, and Solidity.",
     images: ["https://kherleefer.netlify.app/img/profile_image.png"],
@@ -95,7 +98,7 @@ export default function RootLayout({
               "name": "Kherleefer",
               "url": "https://kherleefer.netlify.app",
               "image": "https://kherleefer.netlify.app/img/profile_image.png",
-              "jobTitle": "Software Engineer, FullStack, Frontend, Backend & Blockchain Developer",
+              "jobTitle": "Data Analyst, Software Engineer, Full-Stack Developer, Web & Blockchain Developer",
               "description":
                 "Software engineer specializing in React, Ionic, Next.js, Vue.js, and Solidity development for web, mobile, and blockchain systems.",
               "knowsAbout": [

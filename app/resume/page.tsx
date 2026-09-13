@@ -28,7 +28,7 @@ export default function Resume() {
           <ul className="muted ml-6 list-disc text-sm">
             {education.map((item, idx) => (
               <li key={idx}>
-                <span className="font-semibold">{item.title}</span>{" "}
+                <span className="font-semibold">{item.title}</span>{" "} <br />
                 {item.details.join(", ")}
               </li>
             ))}

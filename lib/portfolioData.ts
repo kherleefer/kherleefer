@@ -132,7 +132,6 @@ export const homePageSectionsData: SectionData[] = [
   },
 ];
 
-
 // --- About Page Data ---
 export const aboutPageData = {
   profileAvatarSrc: "/img/profile_image.png",
@@ -154,7 +153,7 @@ export const aboutPageData = {
   funFacts: [
     "I'm fluent in both frontend and backend languages, from JavaScript to Rust.",
     "My passion for blockchain extends beyond code; I'm also an avid follower of the latest trends in DeFi and Web3.",
-    "When I'm not building scalable applications, you can find me exploring the world of mobile development with Ionic Capacitor.",
+    "When I'm not building scalable applications, you can find me Kicking a** in chess.com, i love chess.",
   ],
 };
 
@@ -239,24 +238,25 @@ export const generalProjects: Project[] = [
     link: "https://ameesempire.ng",
   },
   {
-    title: "DeejaamaNg",
+    title: "GloxxWeb Platform",
     description:
-      "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .",
-    tech: ["Next.js", "Typescript", "PostgreSQL", "threeJs"],
-    link: "https://deejaama.ng",
+      "The Gloxx network web platform for tranperency and interaction.",
+    tech: ["Next.js", "Typescript"],
+    image: "/gloxxweb.png",
+    link: "https://gloxx.netlify.app",
   },
   {
     title: "Daawah",
     description:
       "An Islamic educational website, designed for DaawahNg Islamic Foundation .",
-    tech: ["Next.js", "Typescript", "Firebase",],
+    tech: ["Next.js", "Typescript", "Firebase"],
     link: "https://daawah.ng",
   },
   {
     title: "Mahony Energy",
     description:
       "A website designed for Mahony Energy a smart agro city initiative.",
-    tech: ["Next.js",  "Typescript"],
+    tech: ["Next.js", "Typescript"],
     link: "https://mahony-energy.com",
   },
   {
@@ -268,7 +268,7 @@ export const generalProjects: Project[] = [
     link: "https://github.com/kherleefer/React-jet-ui.git",
   },
   {
-    title: "Gloxx Chain",
+    title: "Gloxx Chain Mobile App",
     description:
       "Gloxx Chain is a blockchain-powered mobile app built with Ionic Vue project built to power the GLX token with wallets, mining, and exchanges all under one secure ecosystem.",
     tech: [
@@ -283,15 +283,7 @@ export const generalProjects: Project[] = [
       "PostgreSQL",
     ],
     image: "/GloxxUi.png",
-    link: "https://github.com/kherleefer/g-chain-ui.git",
-  },
-  {
-    title: "Emergency Report System",
-    description:
-      "An Emergency Report system that enable a user report an emergency to its nearest Authority (Hospital, Police, Fire Department)",
-    tech: ["VueJs", "Ionic", "ExpressJs", "Javascript", "Firebase", "Paystack"],
-    image: "/erpsystem.png",
-    link: "https://github.com/kherleefer/erp",
+    link: "https://gloxx.netlify.app/ref?id=encryptoknight",
   },
 ];
 
@@ -323,9 +315,15 @@ export const experience: ResumeItem[] = [
     ],
   },
   {
+    title: "2023-Present: National Broadcasting Commission (NBC)",
+    details: [
+      "Volunteer Monitoring officer @ National Broadcasting Commission — Assisting on broadcast station program analysis on broadcast airtime and compliance trends and broadcasting content analysis.",
+    ],
+  },
+  {
     title: "2022-Present:",
     details: [
-      "Software Engineer @ KK Gliste Technology — focusing on building SaaS products, Built Gloxx Chain, ERP, ReactJet.",
+      "Software Engineer @ KK Glister Technology — Focusing on building SaaS products, Built Gloxx Chain, ERP, ReactJet.",
     ],
   },
 ];
@@ -336,7 +334,45 @@ export const education: ResumeItem[] = [
     details: [],
   },
   {
-    title: "Self-taught Solidity, Next.js, and Blockchain Fundamentals",
-    details: [],
+    title: "Self-taught JavaScript, React, Solidity, Rust, and Blockchain Fundamentals",
+    details: [
+      "During My Student Industrial working Experience Scheme @ Telemax 2019, i  was introduce to python programming and web development and i explore to learm more via different channel includes youtube, w2schools and coursera."
+    ],
+  },
+  {
+    title: "Cyber-Security , 2024: ",
+    details: [
+      "Learned the fundamentals of system, Network and endpoint security @ 3MTT/NITDA, Kad ICT HUB FE/23/1874056"
+    ],
+  },
+  {
+    title: "Endpoint Security , 2024: ",
+    details: [
+      "Learned the fundamentals of endpoint security @ Cisco Networking Academy"
+    ],
+  },
+  {
+    title: "Cyber-Threat Management , 2024: ",
+    details: [
+      "Learned the practical and strategic cyber-threat mitigation technique and detection @ Cisco Networking Academy"
+    ],
+  },
+  {
+    title: "Data Analysis, 2023: ",
+    details: [
+      "Learned the Fundamentals of Data analytics, Data cleaning & Visualization  @ Skills Build IBM"
+    ],
+  },
+  {
+    title: "Python for Data Science , 2023: ",
+    details: [
+      "Learned the uses of python for analytics and python lib: numpy, pandas and matplotlib and introduction to Scikit-learn, Pytorch e.t.c  @ Skills Build IBM"
+    ],
+  },
+  {
+    title: "Routing & Switching , 2019: ",
+    details: [
+      "Learned the basics of networking  @ Ahmadu Bello University (ABU) Zaria (Affiliate)"
+    ],
   },
 ];
