@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github, Send, Twitter, Mail as MailIcon } from "lucide-react";
+import { Github, Send, Twitter, Mail as MailIcon, Trophy } from "lucide-react";
 
 interface AboutContentProps {
   profileImageSrc: string;
@@ -14,6 +14,7 @@ interface AboutContentProps {
   twitterUrl: string;
   telegramUrl: string;
   email: string;
+  chessUrl: string;
 }
 
 export function AboutContent({
@@ -26,6 +27,7 @@ export function AboutContent({
   twitterUrl,
   telegramUrl,
   email,
+  chessUrl,
 }: AboutContentProps) {
   return (
     <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-center">
@@ -62,6 +64,12 @@ export function AboutContent({
           </a>
           <a href={email} className="flex items-center gap-1 hover:underline">
             <MailIcon size={16} /> Email
+          </a>
+          <a
+            href={chessUrl}
+            className="flex items-center gap-1 hover:underline"
+          >
+            <Trophy size={16} /> Chess
           </a>
         </div>
       </div>

@@ -48,11 +48,12 @@ export const homePageSectionsData: SectionData[] = [
       nickname: "Encryptoknight",
       role: "Software Engineer & Full-Stack Developer",
       description:
-        "I am a software engineer, website developer, and full-stack developer specializing in Rust, Tact, JavaScript/TypeScript, Next.js, Vue.js, and mobile apps with Ionic Capacitor. I developed the Gloxx Chain Mobile App, designed an Express-based API, and integrated Telegram Mini Apps Analytics into GetFI. Passionate about blockchain, web development, and scalable applications.",
+        "I am a software engineer, website developer, and full-stack developer specializing in Rust, Tact, JavaScript/TypeScript, Next.js, Vue.js, and mobile apps with Ionic Capacitor. I developed the Gloxx Chain Mobile App, designed an Express-based API, and integrated Telegram Mini Apps Analytics into GetFI. Passionate about blockchain, web development, and scalable applications. Also love Chess ",
       githubUrl: "https://github.com/kherleefer",
       twitterUrl: "https://x.com/kherleefer_kk",
       telegramUrl: "https://t.me/Encryptoknight",
       email: "mailto:mahmudkalifa6@gmail.com",
+      chessUrl: "https://link.chess.com/friend/lt7FeV",
     },
   },
   {
@@ -75,7 +76,7 @@ export const homePageSectionsData: SectionData[] = [
         title: "Gloxx Chain",
         description:
           "A blockchain-powered web and mobile app built with Ionic Vue and Supabase by a full-stack software engineer.",
-        link: "https://t.me/gloxx_chain/20",
+        link: "https://gloxx.netlify.app",
       },
       {
         title: "Gloxx Chain API",
@@ -131,117 +132,6 @@ export const homePageSectionsData: SectionData[] = [
   },
 ];
 
-// --- Projects by Tech Data (for dynamic project pages) ---
-export const allProjects: ProjectsByTech = {
-  react: [
-    {
-      title: "Mahony Energy",
-      description:
-        "A website designed for Mahony Energy a smart agro city initiative.",
-      link: "https://mahony-energy.com",
-    },
-    { title: "", description: "", link: "#" },
-  ],
-  nextjs: [
-    {
-      title: "This Portfolio",
-      description:
-        "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.",
-      link: "/",
-    },
-    {
-      title: "Amees Empire",
-      description:
-        "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .",
-      link: "https://ameesempire.ng",
-    },
-    {
-      title: "DeejaamaNg",
-      description:
-        "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .",
-      link: "https://deejaama.ng",
-    },
-    {
-      title: "Daawah",
-      description:
-        "An Islamic educational website, designed for DaawahNg Islamic Foundation .",
-      link: "https://daawah.ng",
-    },
-  ],
-  ionic: [
-    {
-      title: "Gloxx Chain",
-      description:
-        "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.",
-      link: "https://t.me/gloxx_chain",
-    },
-    {
-      title: "Emergency Report System",
-      description:
-        "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.",
-      link: "#",
-    },
-  ],
-  typescript: [
-    {
-      title: "This Portfolio",
-      description:
-        "The portfolio of a software engineer and website developer, built with Next.js for SEO and speed.",
-      link: "/",
-    },
-    {
-      title: "Amees Empire",
-      description:
-        "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .",
-      link: "https://ameesempire.ng",
-    },
-    {
-      title: "DeejaamaNg",
-      description:
-        "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .",
-      link: "https://deejaama.ng",
-    },
-    {
-      title: "Daawah",
-      description:
-        "An Islamic educational website, designed for DaawahNg Islamic Foundation .",
-      link: "https://daawah.ng",
-    },
-    {
-      title: "Mahony Energy",
-      description:
-        "A website designed for Mahony Energy a smart agro city initiative.",
-      link: "https://mahony-energy.com",
-    },
-    {
-      title: "Gloxx Chain Api",
-      description: "The Gloxxchain api built using ExpressJS.",
-      link: "#",
-    },
-    {
-      title: "Gloxx Chain",
-      description:
-        "A blockchain-powered mobile app built with Ionic Vue, Capacitor and PostgreSQL.",
-      link: "https://t.me/gloxx_chain",
-    },
-    {
-      title: "Emergency Report System",
-      description:
-        "A  mobile app built with Ionic Vue, Capacitor and PostgreSQL for reporting emergency situation.",
-      link: "#",
-    },
-  ],
-  rust: [
-    {
-      title: "Rust Blockchain CLI",
-      description:
-        "A blockchain command-line interface built in Rust, demonstrating strong skills as a blockchain developer.",
-      link: "#",
-    },
-  ],
-  aws: [],
-  vercel: [],
-};
 
 // --- About Page Data ---
 export const aboutPageData = {
@@ -301,6 +191,12 @@ export const socialLinks: SocialLink[] = [
     icon: "Linkedin",
     command: "connect linkedin",
   },
+  {
+    name: "Chess.com",
+    url: "https://link.chess.com/friend/lt7FeV",
+    icon: "Trophy",
+    command: "connect & play",
+  },
 ];
 
 // --- Blog Page Data ---
@@ -334,6 +230,34 @@ export const generalProjects: Project[] = [
       "Published npm package — WebAssembly bindings for the Gloxx Network, providing high-performance cryptographic operations and wallet management for interacting with the Gloxx blockchain from the browser.",
     tech: ["Rust", "WebAssembly", "TypeScript", "Gloxx Chain"],
     link: "https://www.npmjs.com/package/@gloxx/gloxx-wasm",
+  },
+  {
+    title: "Amees Empire",
+    description:
+      "An E-commerce website with SSG using Next.js, designed for Amees Empire Cloting and acessories .",
+    tech: ["Next.js", "Typescript", "PostgreSQL", "threeJs"],
+    link: "https://ameesempire.ng",
+  },
+  {
+    title: "DeejaamaNg",
+    description:
+      "An E-commerce website with SSG using Next.js, designed for DeejaamaNg Fashion Cloting and acessories .",
+    tech: ["Next.js", "Typescript", "PostgreSQL", "threeJs"],
+    link: "https://deejaama.ng",
+  },
+  {
+    title: "Daawah",
+    description:
+      "An Islamic educational website, designed for DaawahNg Islamic Foundation .",
+    tech: ["Next.js", "Typescript", "Firebase",],
+    link: "https://daawah.ng",
+  },
+  {
+    title: "Mahony Energy",
+    description:
+      "A website designed for Mahony Energy a smart agro city initiative.",
+    tech: ["Next.js",  "Typescript"],
+    link: "https://mahony-energy.com",
   },
   {
     title: "React Jet",
