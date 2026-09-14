@@ -339,40 +339,64 @@ export const education: ResumeItem[] = [
       "During My Student Industrial working Experience Scheme @ Telemax 2019, i  was introduce to python programming and web development and i explore to learm more via different channel includes youtube, w2schools and coursera."
     ],
   },
+
+];
+
+export type Certificate = {
+  title: string;
+  issuer: string;
+  year: string;
+};
+
+export const certificates: Certificate[] = [
   {
-    title: "Cyber-Security , 2024: ",
-    details: [
-      "Learned the fundamentals of system, Network and endpoint security @ 3MTT/NITDA, Kad ICT HUB FE/23/1874056"
-    ],
+    title: "Cyber-Security Fundamentals",
+    issuer: "3MTT / NITDA — KadICT Hub",
+    year: "2024",
   },
   {
-    title: "Endpoint Security , 2024: ",
-    details: [
-      "Learned the fundamentals of endpoint security @ Cisco Networking Academy"
-    ],
+    title: "Endpoint Security",
+    issuer: "Cisco Networking Academy",
+    year: "2024",
   },
   {
-    title: "Cyber-Threat Management , 2024: ",
-    details: [
-      "Learned the practical and strategic cyber-threat mitigation technique and detection @ Cisco Networking Academy"
-    ],
+    title: "Cyber-Threat Management",
+    issuer: "Cisco Networking Academy",
+    year: "2024",
   },
   {
-    title: "Data Analysis, 2023: ",
-    details: [
-      "Learned the Fundamentals of Data analytics, Data cleaning & Visualization  @ Skills Build IBM"
-    ],
+    title: "Routing & Switching",
+    issuer: "Cisco Networking Academy (ABU Zaria Affiliate)",
+    year: "2019",
   },
   {
-    title: "Python for Data Science , 2023: ",
-    details: [
-      "Learned the uses of python for analytics and python lib: numpy, pandas and matplotlib and introduction to Scikit-learn, Pytorch e.t.c  @ Skills Build IBM"
-    ],
+    title: "Data Analysis",
+    issuer: "IBM SkillsBuild",
+    year: "2023",
   },
   {
-    title: "Routing & Switching , 2019: ",
-    details: [
-      "Learned the basics of networking  @ Ahmadu Bello University (ABU) Zaria (Affiliate)"
-    ],
+    title: "Python for Data Science",
+    issuer: "IBM SkillsBuild",
+    year: "2023",
+  },
+  {
+    title: "Data Science Foundations",
+    issuer: "IBM SkillsBuild",
+    year: "2023",
+  },
+  {
+    title: "Data Visualization",
+    issuer: "IBM SkillsBuild",
+    year: "2023",
+  },
+  {
+    title: "Python Programming",
+    issuer: "KadICT Hub",
+    year: "2023",
+  },
+  {
+    title: "Database Management",
+    issuer: "KadICT Hub",
+    year: "2023",
   },
 ];
