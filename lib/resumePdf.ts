@@ -10,23 +10,42 @@ import {
 } from "./portfolioData";
 
 export const PORTFOLIO_URL = "https://kherleefer.netlify.app";
+export const FULL_NAME = "Mahmud Abubakar";
+export const KNOWN_AS = "Kherleefer";
 
 const PAGE_WIDTH = 595.28; // A4 width (pt)
 const PAGE_HEIGHT = 841.89; // A4 height (pt)
 const MARGIN = 46;
 const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
 
+type RGB = readonly [number, number, number];
+
 const COLOR = {
-  ink: "#181818",
-  soft: "#585858",
-  faint: "#8c8c8c",
-  rule: "#d6d6d6",
-  accent: "#101010",
+  ink: [24, 24, 24] as const,
+  soft: [88, 88, 88] as const,
+  faint: [140, 140, 140] as const,
+  rule: [214, 214, 214] as const,
+  accent: [16, 16, 16] as const,
+  bannerText: [248, 248, 248] as const,
+  bannerMuted: [196, 196, 196] as const,
+  bannerFaint: [170, 170, 170] as const,
+  link: [60, 110, 180] as const,
 } as const;
+
+function applyFill(doc: jsPDF, [r, g, b]: RGB): void {
+  doc.setFillColor(r, g, b);
+}
+
+function applyText(doc: jsPDF, [r, g, b]: RGB): void {
+  doc.setTextColor(r, g, b);
+}
+
+function applyStroke(doc: jsPDF, [r, g, b]: RGB): void {
+  doc.setDrawColor(r, g, b);
+}
 
 type AboutData = {
   profileImageSrc: string;
-  name: string;
   nickname: string;
   role: string;
   description: string;
@@ -39,14 +58,27 @@ function wrap(doc: jsPDF, text: string, width: number): string[] {
   return doc.splitTextToSize(text, width);
 }
 
+function emitLines(
+  doc: jsPDF,
+  lines: string[],
+  x: number,
+  y: number,
+  lineHeight: number,
+): number {
+  for (let i = 0; i < lines.length; i++) {
+    doc.text(lines[i], x, y + i * lineHeight);
+  }
+  return lines.length * lineHeight;
+}
+
 function drawSectionTitle(doc: jsPDF, title: string, y: number): void {
-  doc.setFillColor(COLOR.accent);
+  applyFill(doc, COLOR.accent);
   doc.rect(MARGIN, y - 9, 3.2, 13, "F");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12);
-  doc.setTextColor(COLOR.ink);
+  applyText(doc, COLOR.ink);
   doc.text(title.toUpperCase(), MARGIN + 11, y + 1);
-  doc.setDrawColor(COLOR.rule);
+  applyStroke(doc, COLOR.rule);
   doc.setLineWidth(0.5);
   doc.line(MARGIN + 11, y + 6, PAGE_WIDTH - MARGIN, y + 6);
 }
@@ -54,7 +86,7 @@ function drawSectionTitle(doc: jsPDF, title: string, y: number): void {
 function numberedFooter(doc: jsPDF): void {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
-  doc.setTextColor(COLOR.faint);
+  applyText(doc, COLOR.faint);
   doc.text(
     `Kherleefer — Resume    •    ${PORTFOLIO_URL}`,
     MARGIN,
@@ -91,10 +123,10 @@ export async function generateResumePdf(): Promise<void> {
   const aboutSection = homePageSectionsData.find((s) => s.id === "about");
   const about = (aboutSection?.data ?? {
     profileImageSrc: "/img/profile_image.png",
-    name: "Mahmud Abubakar (Kherleefer)",
     nickname: "Encryptoknight",
     role: "Data Analyst, Software Engineer & Full-Stack Developer",
-    description: "",
+    description:
+      "Software engineer and data analyst specialising in full-stack web, mobile and blockchain development.",
     email: "mahmudkalifa6@gmail.com",
     githubUrl: "https://github.com/kherleefer",
     telegramUrl: "https://t.me/Encryptoknight",
@@ -116,49 +148,28 @@ export async function generateResumePdf(): Promise<void> {
     ) ?? "";
 
   // ---------- Header banner ----------
-  const BANNER_H = 150;
-  const imgSize = 94;
+  const BANNER_H = 158;
+  const imgSize = 96;
+  const corner = 18;
   const imgX = MARGIN;
   const imgY = (BANNER_H - imgSize) / 2;
 
-  doc.setFillColor(COLOR.accent);
+  applyFill(doc, COLOR.accent);
   doc.rect(0, 0, PAGE_WIDTH, BANNER_H, "F");
 
+  // Profile photo placed plainly — the rounded look comes from four
+  // banner-coloured corner circles. No clip() or graphics-state surgery,
+  // so the rest of the page always renders its text.
   const imageData = await loadImageDataUrl(about.profileImageSrc);
-  let imagePlaced = false;
   if (imageData) {
-    const graphics = doc as jsPDF & {
-      clip?: () => void;
-      saveGraphicsState?: () => void;
-      restoreGraphicsState?: () => void;
-    };
-    if (
-      graphics.saveGraphicsState &&
-      graphics.clip &&
-      graphics.restoreGraphicsState
-    ) {
-      try {
-        graphics.saveGraphicsState();
-        doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2);
-        graphics.clip();
-        doc.addImage(imageData, "PNG", imgX, imgY, imgSize, imgSize);
-        graphics.restoreGraphicsState();
-        imagePlaced = true;
-      } catch {
-        try {
-          graphics.restoreGraphicsState();
-        } catch {
-          // ignore
-        }
-      }
-    }
-    if (!imagePlaced) {
-      doc.addImage(imageData, "PNG", imgX, imgY, imgSize, imgSize);
-      imagePlaced = true;
-    }
-  }
-  if (!imagePlaced) {
-    doc.setFillColor(90, 90, 90);
+    doc.addImage(imageData, "PNG", imgX, imgY, imgSize, imgSize);
+    applyFill(doc, COLOR.accent);
+    doc.circle(imgX + corner, imgY + corner, corner, "F");
+    doc.circle(imgX + imgSize - corner, imgY + corner, corner, "F");
+    doc.circle(imgX + corner, imgY + imgSize - corner, corner, "F");
+    doc.circle(imgX + imgSize - corner, imgY + imgSize - corner, corner, "F");
+  } else {
+    applyFill(doc, [90, 90, 90]);
     doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2, "F");
     doc.setFont("helvetica", "bold");
     doc.setFontSize(30);
@@ -168,26 +179,27 @@ export async function generateResumePdf(): Promise<void> {
     });
   }
 
-  const textX = imgX + imgSize + 24;
+  // Full name, known-as tag, nickname and role
+  const nameX = imgX + imgSize + 26;
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(26);
-  doc.setTextColor(248, 248, 248);
-  doc.text(about.name.toUpperCase(), textX, imgY + 34);
+  doc.setFontSize(25);
+  applyText(doc, COLOR.bannerText);
+  doc.text(FULL_NAME.toUpperCase(), nameX, imgY + 34);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9);
-  doc.setTextColor(170, 170, 170);
+  applyText(doc, COLOR.bannerFaint);
   doc.text(
-    `aka ${about.nickname}`,
-    textX + doc.getTextWidth(about.name.toUpperCase()) + 10,
+    `aka ${KNOWN_AS}  •  @${about.nickname}`,
+    nameX + doc.getTextWidth(FULL_NAME.toUpperCase()) + 12,
     imgY + 34,
   );
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10.5);
-  doc.setTextColor(196, 196, 196);
-  const roleLines = wrap(doc, about.role, PAGE_WIDTH - textX - MARGIN);
-  doc.text(roleLines, textX, imgY + 56);
+  applyText(doc, COLOR.bannerMuted);
+  const roleLines = wrap(doc, about.role, PAGE_WIDTH - nameX - MARGIN);
+  emitLines(doc, roleLines, nameX, imgY + 54, 13);
 
   numberedFooter(doc);
 
@@ -195,7 +207,7 @@ export async function generateResumePdf(): Promise<void> {
   y = BANNER_H + 28;
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.8);
-  doc.setTextColor(COLOR.soft);
+  applyText(doc, COLOR.soft);
   const contactParts = [
     about.email.replace(/^mailto:/, ""),
     PORTFOLIO_URL.replace(/^https?:\/\//, ""),
@@ -204,8 +216,7 @@ export async function generateResumePdf(): Promise<void> {
     about.telegramUrl.replace(/^https?:\/\//, ""),
   ];
   const contactLines = wrap(doc, contactParts.join("    •    "), CONTENT_WIDTH);
-  doc.text(contactLines, MARGIN, y);
-  y += contactLines.length * 12 + 12;
+  y += emitLines(doc, contactLines, MARGIN, y, 12) + 12;
 
   // ---------- Summary ----------
   ensureSpace(70);
@@ -213,10 +224,9 @@ export async function generateResumePdf(): Promise<void> {
   y += 24;
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9.5);
-  doc.setTextColor(COLOR.soft);
+  applyText(doc, COLOR.soft);
   const summaryLines = wrap(doc, about.description, CONTENT_WIDTH).slice(0, 4);
-  doc.text(summaryLines, MARGIN, y);
-  y += summaryLines.length * 13 + 14;
+  y += emitLines(doc, summaryLines, MARGIN, y, 13) + 14;
 
   // ---------- Experience ----------
   ensureSpace(40);
@@ -226,19 +236,17 @@ export async function generateResumePdf(): Promise<void> {
     ensureSpace(46);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
-    doc.setTextColor(COLOR.ink);
+    applyText(doc, COLOR.ink);
     const titleLines = wrap(doc, item.title, CONTENT_WIDTH);
-    doc.text(titleLines, MARGIN, y);
-    y += titleLines.length * 13 + 2;
+    y += emitLines(doc, titleLines, MARGIN, y, 13) + 2;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9.3);
-    doc.setTextColor(COLOR.soft);
+    applyText(doc, COLOR.soft);
     for (const detail of item.details) {
       const lines = wrap(doc, detail, CONTENT_WIDTH - 14);
-      doc.setFillColor(COLOR.accent);
+      applyFill(doc, COLOR.accent);
       doc.circle(MARGIN + 3, y - 3, 1.3, "F");
-      doc.text(lines, MARGIN + 13, y);
-      y += lines.length * 12.5 + 3;
+      y += emitLines(doc, lines, MARGIN + 13, y, 12.5) + 3;
     }
     y += 6;
   }
@@ -251,17 +259,15 @@ export async function generateResumePdf(): Promise<void> {
     ensureSpace(36);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
-    doc.setTextColor(COLOR.ink);
+    applyText(doc, COLOR.ink);
     const titleLines = wrap(doc, item.title, CONTENT_WIDTH - 10);
-    doc.text(titleLines, MARGIN, y);
-    y += titleLines.length * 13 + 2;
+    y += emitLines(doc, titleLines, MARGIN, y, 13) + 2;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9.3);
-    doc.setTextColor(COLOR.soft);
+    applyText(doc, COLOR.soft);
     for (const detail of item.details) {
       const lines = wrap(doc, detail, CONTENT_WIDTH - 10);
-      doc.text(lines, MARGIN + 10, y);
-      y += lines.length * 12.5 + 2;
+      y += emitLines(doc, lines, MARGIN + 10, y, 12.5) + 2;
     }
     y += 6;
   }
@@ -274,15 +280,15 @@ export async function generateResumePdf(): Promise<void> {
     ensureSpace(24);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9.5);
-    doc.setTextColor(COLOR.ink);
+    applyText(doc, COLOR.ink);
     doc.text(cert.title, MARGIN, y);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(8.6);
-    doc.setTextColor(COLOR.faint);
+    applyText(doc, COLOR.faint);
     doc.text(cert.year, PAGE_WIDTH - MARGIN, y, { align: "right" });
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9);
-    doc.setTextColor(COLOR.soft);
+    applyText(doc, COLOR.soft);
     doc.text(cert.issuer, MARGIN, y + 11);
     y += 24;
   }
@@ -295,12 +301,12 @@ export async function generateResumePdf(): Promise<void> {
     ensureSpace(52);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
-    doc.setTextColor(COLOR.ink);
+    applyText(doc, COLOR.ink);
     doc.text(project.title, MARGIN, y);
     if (project.tech && project.tech.length > 0) {
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8.2);
-      doc.setTextColor(COLOR.faint);
+      applyText(doc, COLOR.faint);
       doc.text(
         project.tech.join("  ·  "),
         MARGIN + doc.getTextWidth(project.title) + 10,
@@ -310,14 +316,13 @@ export async function generateResumePdf(): Promise<void> {
     y += 12.5;
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9.3);
-    doc.setTextColor(COLOR.soft);
+    applyText(doc, COLOR.soft);
     const descLines = wrap(doc, project.description, CONTENT_WIDTH);
-    doc.text(descLines, MARGIN, y);
-    y += descLines.length * 12.5 + 3;
+    y += emitLines(doc, descLines, MARGIN, y, 12.5) + 3;
     if (project.link && project.link !== "#") {
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8.4);
-      doc.setTextColor(60, 110, 180);
+      applyText(doc, COLOR.link);
       doc.text(project.link, MARGIN, y);
       y += 13;
     }
@@ -330,13 +335,13 @@ export async function generateResumePdf(): Promise<void> {
   y += 24;
   doc.setFont("helvetica", "normal");
   doc.setFontSize(9.3);
-  doc.setTextColor(COLOR.soft);
+  applyText(doc, COLOR.soft);
   const skillLines = wrap(
     doc,
     aboutPageData.skills.join("    •    "),
     CONTENT_WIDTH,
   );
-  doc.text(skillLines, MARGIN, y);
+  emitLines(doc, skillLines, MARGIN, y, 12.5);
 
   doc.save("Kherleefer-Resume.pdf");
 }

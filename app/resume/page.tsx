@@ -29,9 +29,14 @@ export default function Resume() {
       <div className="max-w-2xl mx-auto flex flex-col gap-8">
         <div className="mb-6">
           <p className="muted text-sm font-bold uppercase tracking-[0.2em]">
-            Experience
+            Resume
           </p>
-          <h1 className="mt-3 text-4xl font-black tracking-tight">Resume</h1>
+          <h1 className="mt-3 text-4xl font-black tracking-tight">
+            Mahmud Abubakar
+          </h1>
+          <p className="muted mt-2 text-sm font-semibold">
+            aka Kherleefer &bull; @Encryptoknight
+          </p>
         </div>
         <section className="line border-t pt-6">
           <h2 className="mb-4 text-xl font-bold">Experience timeline</h2>
