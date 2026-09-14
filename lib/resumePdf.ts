@@ -150,24 +150,17 @@ export async function generateResumePdf(): Promise<void> {
   // ---------- Header banner ----------
   const BANNER_H = 158;
   const imgSize = 96;
-  const corner = 18;
   const imgX = MARGIN;
   const imgY = (BANNER_H - imgSize) / 2;
 
   applyFill(doc, COLOR.accent);
   doc.rect(0, 0, PAGE_WIDTH, BANNER_H, "F");
 
-  // Profile photo placed plainly — the rounded look comes from four
-  // banner-coloured corner circles. No clip() or graphics-state surgery,
-  // so the rest of the page always renders its text.
+  // Profile photo placed plainly — no clip() and no overlay shapes, so the
+  // image stays fully visible and the rest of the page always renders.
   const imageData = await loadImageDataUrl(about.profileImageSrc);
   if (imageData) {
     doc.addImage(imageData, "PNG", imgX, imgY, imgSize, imgSize);
-    applyFill(doc, COLOR.accent);
-    doc.circle(imgX + corner, imgY + corner, corner, "F");
-    doc.circle(imgX + imgSize - corner, imgY + corner, corner, "F");
-    doc.circle(imgX + corner, imgY + imgSize - corner, corner, "F");
-    doc.circle(imgX + imgSize - corner, imgY + imgSize - corner, corner, "F");
   } else {
     applyFill(doc, [90, 90, 90]);
     doc.circle(imgX + imgSize / 2, imgY + imgSize / 2, imgSize / 2, "F");
@@ -179,27 +172,24 @@ export async function generateResumePdf(): Promise<void> {
     });
   }
 
-  // Full name, known-as tag, nickname and role
+  // Full name on the first line, the "aka" tag on its own line underneath
+  // (never inline with the name), then the role line below that.
   const nameX = imgX + imgSize + 26;
   doc.setFont("helvetica", "bold");
   doc.setFontSize(25);
   applyText(doc, COLOR.bannerText);
-  doc.text(FULL_NAME.toUpperCase(), nameX, imgY + 34);
+  doc.text(FULL_NAME.toUpperCase(), nameX, imgY + 38);
 
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(9);
+  doc.setFontSize(9.5);
   applyText(doc, COLOR.bannerFaint);
-  doc.text(
-    `aka ${KNOWN_AS}  •  @${about.nickname}`,
-    nameX + doc.getTextWidth(FULL_NAME.toUpperCase()) + 12,
-    imgY + 34,
-  );
+  doc.text(`aka ${KNOWN_AS}  •  @${about.nickname}`, nameX, imgY + 53);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10.5);
   applyText(doc, COLOR.bannerMuted);
   const roleLines = wrap(doc, about.role, PAGE_WIDTH - nameX - MARGIN);
-  emitLines(doc, roleLines, nameX, imgY + 54, 13);
+  emitLines(doc, roleLines, nameX, imgY + 66, 13);
 
   numberedFooter(doc);
 
@@ -298,28 +288,33 @@ export async function generateResumePdf(): Promise<void> {
   drawSectionTitle(doc, "Selected Projects", y);
   y += 26;
   for (const project of generalProjects) {
-    ensureSpace(52);
+    ensureSpace(64);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
     applyText(doc, COLOR.ink);
-    doc.text(project.title, MARGIN, y);
+    const titleLines = wrap(doc, project.title, CONTENT_WIDTH);
+    y += emitLines(doc, titleLines, MARGIN, y, 13);
+
+    // Tech tags on their own line below the title so they never overlap it.
     if (project.tech && project.tech.length > 0) {
+      ensureSpace(22);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8.2);
       applyText(doc, COLOR.faint);
-      doc.text(
-        project.tech.join("  ·  "),
-        MARGIN + doc.getTextWidth(project.title) + 10,
-        y,
-      );
+      const techLines = wrap(doc, project.tech.join("  ·  "), CONTENT_WIDTH);
+      y += emitLines(doc, techLines, MARGIN, y, 10.5) + 1;
     }
-    y += 12.5;
+    y += 1;
+
+    ensureSpace(46);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(9.3);
     applyText(doc, COLOR.soft);
     const descLines = wrap(doc, project.description, CONTENT_WIDTH);
     y += emitLines(doc, descLines, MARGIN, y, 12.5) + 3;
+
     if (project.link && project.link !== "#") {
+      ensureSpace(16);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8.4);
       applyText(doc, COLOR.link);
