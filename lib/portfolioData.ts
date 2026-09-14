@@ -46,9 +46,9 @@ export const homePageSectionsData: SectionData[] = [
       profileImageSrc: "/img/profile_image.png",
       name: "Kherleefer",
       nickname: "Encryptoknight",
-      role: "Software Engineer & Full-Stack Developer",
+      role: "Data Analyst, Software Engineer & Full-Stack Developer",
       description:
-        "I am a software engineer, website developer, and full-stack developer specializing in Rust, Tact, JavaScript/TypeScript, Next.js, Vue.js, and mobile apps with Ionic Capacitor. I developed the Gloxx Chain Mobile App, designed an Express-based API, and integrated Telegram Mini Apps Analytics into GetFI. Passionate about blockchain, web development, and scalable applications. Also love Chess ",
+        "I am a software engineer, Data-Analyst, website developer, and full-stack developer specializing in Rust, Tact, JavaScript/TypeScript, Next.js, Vue.js, and mobile apps with Ionic Capacitor. I developed the Gloxx Chain Mobile App, designed an Express-based API, and integrated Telegram Mini Apps Analytics into GetFI. Passionate about blockchain, web development, and scalable applications. Also love Chess ",
       githubUrl: "https://github.com/kherleefer",
       twitterUrl: "https://x.com/kherleefer_kk",
       telegramUrl: "https://t.me/Encryptoknight",
