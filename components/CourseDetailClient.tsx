@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Check, Send, Share } from "lucide-react";
+import { ArrowUpRight, Check, Send, Share2 } from "lucide-react";
 import { type Course } from "@/lib/portfolioData";
 import { formatCoursePrice } from "@/lib/courseFormat";
 import { copyToClipboard, getCourseShareUrl } from "@/lib/courseShare";
@@ -89,11 +89,7 @@ export default function CourseDetailClient({ course }: { course: Course }) {
           onClick={copyLink}
           className="flex items-center gap-2 border px-6 py-3 text-sm font-bold"
         >
-          {linkCopied ? (
-            <Check size={16} />
-          ) : (
-            <Share size={16} />
-          )}
+          {linkCopied ? <Check size={16} /> : <Share2 size={16} />}
           {linkCopied ? "Link copied" : "Copy share link"}
         </button>
       </div>
@@ -111,8 +107,8 @@ export default function CourseDetailClient({ course }: { course: Course }) {
           </a>
         </div>
         <p className="muted mt-3 text-sm leading-6">
-          Preview the first 2 pages of the material free. The complete course
-          unlocks after payment or verified Telegram membership.
+          Few Pages Preview the of the material. The complete course unlocks
+          after payment or verified Telegram membership.
         </p>
         {previewState === "loading" && (
           <div className="mt-6 border p-16 text-center">
@@ -120,7 +116,7 @@ export default function CourseDetailClient({ course }: { course: Course }) {
           </div>
         )}
         {previewState === "ready" && previewUrl && (
-          <div className="surface mt-6 border p-2 sm:p-4">
+          <div className="surface mt-6 p-2 sm:p-4">
             <iframe
               src={previewUrl}
               title={`Preview of ${course.title}`}
@@ -131,8 +127,8 @@ export default function CourseDetailClient({ course }: { course: Course }) {
         {previewState === "error" && (
           <div className="mt-6 border p-10">
             <p className="muted text-sm leading-7">
-              A preview is only available for PDF materials. This course may
-              use another file format, or the preview could not be loaded.
+              A preview is only available for PDF materials. This course may use
+              another file format, or the preview could not be loaded.
             </p>
           </div>
         )}

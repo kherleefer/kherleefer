@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, Send, Share } from "lucide-react";
+import { ArrowUpRight, Check, Send, Share2 } from "lucide-react";
 import { type Course } from "@/lib/portfolioData";
 import { readApiResponse } from "@/lib/api";
 import { formatCoursePrice } from "@/lib/courseFormat";
@@ -155,7 +155,7 @@ export default function CoursesClient() {
                 {sharedSlug === course.slug ? (
                   <Check size={14} />
                 ) : (
-                  <Share size={14} />
+                  <Share2 size={14} />
                 )}
                 {sharedSlug === course.slug ? "Link copied" : "Share"}
               </button>
