@@ -205,6 +205,6 @@ export default function CoursesClient() {
           onClose={() => setSelectedCourse(null)}
         />
       )}
-</main>
+    </main>
   );
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { getCourseBySlug, type StoredCourse } from "@/lib/courseData";
 import { type Course } from "@/lib/portfolioData";
 import CourseDetailClient from "@components/CourseDetailClient";
@@ -97,10 +96,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
   return (
     <>
       <CourseDetailClient course={toClientCourse(course)} />
-      <Script
-        id="course-schema"
+      <script
         type="application/ld+json"
-        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",

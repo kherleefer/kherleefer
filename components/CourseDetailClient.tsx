@@ -12,6 +12,7 @@ export default function CourseDetailClient({ course }: { course: Course }) {
   const [accessOpen, setAccessOpen] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewPageCount, setPreviewPageCount] = useState<number | null>(null);
   const [previewState, setPreviewState] = useState<
     "loading" | "ready" | "error"
   >("loading");
@@ -24,6 +25,13 @@ export default function CourseDetailClient({ course }: { course: Course }) {
         const contentType = response.headers.get("content-type") || "";
         if (!response.ok || !/application\/pdf/i.test(contentType)) {
           throw new Error("Preview is not available for this material.");
+        }
+        const previewPages = response.headers.get("x-preview-pages");
+        if (previewPages) {
+          const parsed = Number(previewPages);
+          if (Number.isFinite(parsed) && parsed > 0) {
+            setPreviewPageCount(parsed);
+          }
         }
         objectUrl = URL.createObjectURL(await response.blob());
         if (cancelled) {
@@ -107,11 +115,14 @@ export default function CourseDetailClient({ course }: { course: Course }) {
           </a>
         </div>
         <p className="muted mt-3 text-sm leading-6">
-          Few Pages Preview the of the material. The complete course unlocks
-          after payment or verified Telegram membership.
+          {previewPageCount
+            ? `Preview about 1/6 of the material free (the first ${previewPageCount} page${previewPageCount === 1 ? "" : "s"}). `
+            : "Preview a few pages of the material free. "}
+          The complete course unlocks after payment or verified Telegram
+          membership.
         </p>
         {previewState === "loading" && (
-          <div className="mt-6 border p-16 text-center">
+          <div className="mt-6 p-16 text-center">
             <p className="muted text-sm">Loading preview&hellip;</p>
           </div>
         )}
