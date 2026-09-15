@@ -116,7 +116,7 @@ export default function CourseDetailClient({ course }: { course: Course }) {
         </div>
         <p className="muted mt-3 text-sm leading-6">
           {previewPageCount
-            ? `Preview about 1/6 of the material free (the first ${previewPageCount} page${previewPageCount === 1 ? "" : "s"}). `
+            ? `Preview about the material free (the first ${previewPageCount} page${previewPageCount === 1 ? "" : "s"}). `
             : "Preview a few pages of the material free. "}
           The complete course unlocks after payment or verified Telegram
           membership.
