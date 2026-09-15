@@ -53,15 +53,19 @@ export async function GET(
     pages.forEach((page) => preview.addPage(page));
 
     const bytes = await preview.save();
-    return new NextResponse(new Blob([bytes], { type: "application/pdf" }), {
-      headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": `inline; filename="preview-${slug}.pdf"`,
-        "Cache-Control": "public, max-age=300",
-        "Content-Length": String(bytes.length),
-        "X-Preview-Pages": String(previewPageCount),
+    const pdfBytes = new Uint8Array(bytes);
+    return new NextResponse(
+      new Blob([pdfBytes], { type: "application/pdf" }),
+      {
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": `inline; filename="preview-${slug}.pdf"`,
+          "Cache-Control": "public, max-age=300",
+          "Content-Length": String(pdfBytes.byteLength),
+          "X-Preview-Pages": String(previewPageCount),
+        },
       },
-    });
+    );
   } catch {
     return NextResponse.json(
       { error: "Preview is temporarily unavailable." },
