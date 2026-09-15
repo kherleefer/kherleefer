@@ -28,13 +28,13 @@ export type ResumeItem = { title: string; details: string[] };
 export type TechIcon = { src: string; href: string; label: string };
 export type Course = {
   id: string;
+  slug: string;
   title: string;
   description: string;
   category: string;
   level: string;
   price: number;
   currency: string;
-  materialUrl: string;
 };
 
 // Data for Homepage Sections

@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     );
     const channel = getTelegramAnnouncementChat();
     if (channel) {
-      const courseUrl = `${getServerEnv("NEXT_PUBLIC_SITE_URL") || new URL(request.url).origin}/courses`;
+      const courseUrl = `${getServerEnv("NEXT_PUBLIC_SITE_URL") || new URL(request.url).origin}/courses/${slug}`;
       await sendTelegramMessage(
         channel,
         `<b>New course material available</b>\n\n<b>${escapeTelegramHtml(title)}</b>\n\n${escapeTelegramHtml(description)}\n\nCategory: ${escapeTelegramHtml(category)}\nLevel: ${escapeTelegramHtml(level)}\n\n<a href="${courseUrl}">View the course</a>`,

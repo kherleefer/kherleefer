@@ -91,3 +91,9 @@ https://api.telegram.org/botYOUR_BOT_TOKEN/setWebhook?url=https://your-domain.ex
 ```
 
 The webhook welcomes new members. New course announcements are sent automatically when a course is uploaded from `/admin/courses`, using `TELEGRAM_CHANNEL_USERNAME` as the announcement destination.
+
+### Course share links and previews
+
+Every course gets a public page at `/courses/{slug}` with its own Open Graph metadata (shared links show the course title and description on WhatsApp, Telegram, X, etc.). Course cards include a **Share** button that copies the course link.
+
+Each course page previews the first 2 pages of the material for free via `GET /api/courses/{slug}/preview`. Only the extracted 2-page PDF is served — the private bucket file is never exposed. Preview works for PDF materials; other formats show a fallback message. The full material still requires verified payment or Telegram membership (15-minute signed URL). The `pdf-lib` dependency performs the page extraction on the server.

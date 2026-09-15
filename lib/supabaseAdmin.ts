@@ -81,3 +81,16 @@ export async function createCourseMaterialUrl(path: string) {
   }
   return `${config().url}/storage/v1/${data.signedURL}`;
 }
+
+/** Reads a private course-material file with the service-role key (server only). */
+export async function readCourseMaterialFile(path: string) {
+  const { url, key } = config();
+  const encodedPath = path
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+  return fetch(`${url}/storage/v1/object/course-materials/${encodedPath}`, {
+    headers: { apikey: key, Authorization: `Bearer ${key}` },
+    cache: "no-store",
+  });
+}

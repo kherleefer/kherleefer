@@ -5,6 +5,7 @@ export type StoredCourse = {
   slug: string;
   title: string;
   description: string;
+  category: string;
   level: string;
   price: number;
   currency: string;
@@ -14,6 +15,13 @@ export type StoredCourse = {
 export async function getStoredCourse(id: string) {
   const rows = await supabaseRequest<StoredCourse[]>(
     `/rest/v1/courses?id=eq.${encodeURIComponent(id)}&select=*`,
+  );
+  return rows[0];
+}
+
+export async function getCourseBySlug(slug: string) {
+  const rows = await supabaseRequest<StoredCourse[]>(
+    `/rest/v1/courses?slug=eq.${encodeURIComponent(slug)}&select=*`,
   );
   return rows[0];
 }
