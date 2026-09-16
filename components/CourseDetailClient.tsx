@@ -1,54 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Check, Send, Share2 } from "lucide-react";
 import { type Course } from "@/lib/portfolioData";
 import { formatCoursePrice } from "@/lib/courseFormat";
 import { copyToClipboard, getCourseShareUrl } from "@/lib/courseShare";
 import CourseAccessDialog from "@components/CourseAccessDialog";
+import CoursePreview from "@components/CoursePreview";
+import CourseAiChat from "@components/CourseAiChat";
 
 export default function CourseDetailClient({ course }: { course: Course }) {
   const [accessOpen, setAccessOpen] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [previewPageCount, setPreviewPageCount] = useState<number | null>(null);
-  const [previewState, setPreviewState] = useState<
-    "loading" | "ready" | "error"
-  >("loading");
-
-  useEffect(() => {
-    let objectUrl: string | null = null;
-    let cancelled = false;
-    fetch(`/api/courses/${encodeURIComponent(course.slug)}/preview`)
-      .then(async (response) => {
-        const contentType = response.headers.get("content-type") || "";
-        if (!response.ok || !/application\/pdf/i.test(contentType)) {
-          throw new Error("Preview is not available for this material.");
-        }
-        const previewPages = response.headers.get("x-preview-pages");
-        if (previewPages) {
-          const parsed = Number(previewPages);
-          if (Number.isFinite(parsed) && parsed > 0) {
-            setPreviewPageCount(parsed);
-          }
-        }
-        objectUrl = URL.createObjectURL(await response.blob());
-        if (cancelled) {
-          URL.revokeObjectURL(objectUrl);
-          return;
-        }
-        setPreviewUrl(objectUrl);
-        setPreviewState("ready");
-      })
-      .catch(() => {
-        if (!cancelled) setPreviewState("error");
-      });
-    return () => {
-      cancelled = true;
-      if (objectUrl) URL.revokeObjectURL(objectUrl);
-    };
-  }, [course.slug]);
 
   async function copyLink() {
     const copied = await copyToClipboard(getCourseShareUrl(course.slug));
@@ -103,47 +67,10 @@ export default function CourseDetailClient({ course }: { course: Course }) {
       </div>
 
       <section className="mt-14" aria-label="Course preview">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-2xl font-black tracking-tight">Course preview</h2>
-          <a
-            href={`/api/courses/${encodeURIComponent(course.slug)}/preview`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="muted text-sm font-bold underline underline-offset-4"
-          >
-            Open preview
-          </a>
-        </div>
-        <p className="muted mt-3 text-sm leading-6">
-          {previewPageCount
-            ? `Preview about the material free (the first ${previewPageCount} page${previewPageCount === 1 ? "" : "s"}). `
-            : "Preview a few pages of the material free. "}
-          The complete course unlocks after payment or verified Telegram
-          membership.
-        </p>
-        {previewState === "loading" && (
-          <div className="mt-6 p-16 text-center">
-            <p className="muted text-sm">Loading preview&hellip;</p>
-          </div>
-        )}
-        {previewState === "ready" && previewUrl && (
-          <div className="surface mt-6 p-2 sm:p-4">
-            <iframe
-              src={previewUrl}
-              title={`Preview of ${course.title}`}
-              className="h-[560px] w-full sm:h-[680px]"
-            />
-          </div>
-        )}
-        {previewState === "error" && (
-          <div className="mt-6 border p-10">
-            <p className="muted text-sm leading-7">
-              A preview is only available for PDF materials. This course may use
-              another file format, or the preview could not be loaded.
-            </p>
-          </div>
-        )}
+        <CoursePreview course={course} />
       </section>
+
+      <CourseAiChat course={course} />
 
       <p className="muted mt-12 flex items-center gap-2 text-sm">
         <Send size={16} /> Telegram members can access the material for free.

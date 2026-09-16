@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, LockKeyhole, Send } from "lucide-react";
+import { ArrowUpRight, Check, FileText, LockKeyhole, Send } from "lucide-react";
 import { type Course } from "@/lib/portfolioData";
 import { formatCoursePrice } from "@/lib/courseFormat";
 import { readApiResponse } from "@/lib/api";
@@ -154,7 +154,7 @@ export default function CourseAccessDialog({
       aria-modal="true"
       aria-labelledby="course-dialog-title"
     >
-      <div className="surface w-full max-w-lg border p-6 shadow-2xl sm:p-8">
+      <div className="surface max-h-[90vh] w-full max-w-lg overflow-y-auto border p-6 shadow-2xl sm:p-8">
         <div className="flex items-start justify-between gap-5">
           <div>
             <p className="muted text-xs font-bold uppercase tracking-[0.16em]">
@@ -174,7 +174,20 @@ export default function CourseAccessDialog({
           </button>
         </div>
 
-        <div className="mt-8">
+        <button
+          type="button"
+          onClick={() => {
+            window.location.href = `/courses/${encodeURIComponent(course.slug)}`;
+          }}
+          className="mt-5 flex w-full items-center justify-between border px-4 py-3 text-left text-sm font-bold"
+        >
+          <span>
+            <FileText className="mr-2 inline" size={16} /> Preview course
+          </span>
+          <ArrowUpRight size={18} />
+        </button>
+
+        <div className="mt-6">
           <div
             className="grid grid-cols-2 border-b"
             role="tablist"

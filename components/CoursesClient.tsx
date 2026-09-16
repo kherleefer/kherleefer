@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, Send, Share2 } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Check, FileText, Send, Share2 } from "lucide-react";
 import { type Course } from "@/lib/portfolioData";
 import { readApiResponse } from "@/lib/api";
 import { formatCoursePrice } from "@/lib/courseFormat";
@@ -55,6 +56,10 @@ export default function CoursesClient() {
         ),
       2000,
     );
+  }
+
+  function openCourse(course: Course) {
+    setSelectedCourse(course);
   }
 
   return (
@@ -137,14 +142,24 @@ export default function CoursesClient() {
             <p className="muted mt-4 flex-1 text-sm leading-7">
               {course.description}
             </p>
-            <div className="mt-8 flex items-center justify-between border-t pt-4">
-              <button
-                type="button"
-                onClick={() => setSelectedCourse(course)}
-                className="flex items-center gap-1 text-left text-sm font-bold"
-              >
-                Choose course <ArrowUpRight size={18} />
-              </button>
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-2 border-t pt-4">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => openCourse(course)}
+                  className="flex items-center gap-1 text-left text-sm font-bold"
+                >
+                  Choose course <ArrowUpRight size={18} />
+                </button>
+                <Link
+                  href={`/courses/${encodeURIComponent(course.slug)}`}
+                  aria-label={`Preview ${course.title}`}
+                  title="Preview the course material"
+                  className="flex items-center gap-1 border px-2.5 py-2 text-xs font-bold"
+                >
+                  <FileText size={14} /> Preview
+                </Link>
+              </div>
               <button
                 type="button"
                 aria-label={`Copy link to ${course.title}`}

@@ -76,7 +76,34 @@ TELEGRAM_CHANNEL_USERNAME=@your_channel
 FLW_SECRET_KEY=your_flutterwave_secret_key
 ```
 
-Add the bot to the Telegram channel as an administrator so it can verify membership. Do not expose `FLW_SECRET_KEY`, `TELEGRAM_BOT_TOKEN`, or `SUPABASE_SERVICE_ROLE_KEY` as `NEXT_PUBLIC_` variables.
+### AI course assistant
+
+Course detail pages include an interactive **Ask about this course** assistant that helps learners understand the course and get started. It calls one of these providers (auto-detected, in this priority order). Set the API key for any single provider you use:
+
+```env
+# Gemini (first choice)
+GEMINI_API_KEY=your_gemini_api_key
+# OR Groq
+GROQ_API_KEY=your_groq_api_key
+# OR Cerebras
+CEREBRAS_API_KEY=your_cerebras_api_key
+# OR Cloudflare Workers AI
+CLOUDFLARE_API_TOKEN=your_api_token
+CLOUDFLARE_ACCOUNT_ID=your_account_id
+
+# Optional tuning (set any of these to pin exact models for your keys)
+AI_PROVIDER=gemini            # force the preferred provider (gemini | groq | cerebras | cloudflare)
+AI_MODEL=                     # override the model for the chosen provider
+AI_GEMINI_MODEL=gemini-3.6-flash
+AI_GROQ_MODEL=meta-llama/llama-3.3-70b-instruct
+AI_CEREBRAS_MODEL=llama3.3-70b
+AI_CLOUDFLARE_MODEL=@cf/meta/llama-3.1-8b-instruct
+AI_TIMEOUT_MS=45000           # how long a provider may take before falling back (default 45s)
+```
+
+Requests are rate-limited to **10 questions per 15 minutes per IP** (in-memory sliding window in `POST /api/courses/[slug]/ai`), which is a soft per-instance guard. The assistant **tries every configured provider in priority order** (Gemini → Groq → Cerebras → Cloudflare) with a 20s timeout each, so one provider being down or blocked falls back to the next available one. If every provider fails, the exact reason is logged server-side and shown in the chat. When no provider key is set, the chat shows a friendly "not configured yet" message instead of failing.
+
+Add the bot to the Telegram channel as an administrator so it can verify membership. Do not expose `FLW_SECRET_KEY`, `TELEGRAM_BOT_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY`, or any AI provider token as `NEXT_PUBLIC_` variables.
 
 ### Course admin setup
 
@@ -94,6 +121,6 @@ The webhook welcomes new members. New course announcements are sent automaticall
 
 ### Course share links and previews
 
-Every course gets a public page at `/courses/{slug}` with its own Open Graph metadata (shared links show the course title and description on WhatsApp, Telegram, X, etc.). Course cards include a **Share** button that copies the course link.
+Every course gets a public page at `/courses/{slug}` with its own Open Graph metadata (shared links show the course title and description on WhatsApp, Telegram, X, etc.). Course cards include a **Preview** button and a **Share** button; the course modal also has a **Preview course** button — both open `/courses/{slug}`, where the material preview lives.
 
 Each course page previews roughly **one sixth of the material** (`GET /api/courses/[slug]/preview`): the server measures the PDF's total pages and serves `ceil(total / 6)` first pages via a response header (`X-Preview-Pages`) so the UI can say exactly how many pages are being previewed. Only those extracted pages are served — the private bucket file is never exposed. Preview works for PDF materials; other formats show a fallback message. The full material still requires verified payment or Telegram membership (15-minute signed URL). The `pdf-lib` dependency performs the page extraction on the server.
