@@ -36,17 +36,16 @@ const PROVIDER_PRIORITY: Provider[] = [
 ];
 
 function resolveModelFor(provider: Provider, override: string): string {
-  if (override) return override;
   switch (provider) {
     case "gemini":
-      return getServerEnv("AI_GEMINI_MODEL") || "gemini-3.6-flash";
+      return getServerEnv("AI_GEMINI_MODEL")?.trim() || override || "gemini-3.6-flash";
     case "groq":
-      return getServerEnv("AI_GROQ_MODEL") || "meta-llama/llama-3.3-70b-instruct";
+      return getServerEnv("AI_GROQ_MODEL")?.trim() || override || "openai/gpt-oss-20b";
     case "cerebras":
-      return getServerEnv("AI_CEREBRAS_MODEL") || "llama3.3-70b";
+      return getServerEnv("AI_CEREBRAS_MODEL")?.trim() || override || "qwen-3.8-27b";
     case "cloudflare":
       return (
-        getServerEnv("AI_CLOUDFLARE_MODEL") ||
+        getServerEnv("AI_CLOUDFLARE_MODEL")?.trim() || override ||
         "@cf/meta/llama-3.1-8b-instruct"
       );
   }
@@ -77,7 +76,9 @@ export function getConfiguredAiProviders(): ProviderConfig[] {
 
     providers.push({
       provider,
-      model: resolveModelFor(provider, override),
+      // Legacy AI_MODEL applies only to an explicitly preferred provider.
+      // Never reuse one provider's model ID for the fallback providers.
+      model: resolveModelFor(provider, provider === preferred ? override : ""),
     });
   }
   return providers;
@@ -133,6 +134,10 @@ async function callOpenAiCompatible(
       messages: [{ role: "system", content: system }, ...messages],
       temperature: 0.6,
       max_tokens: 600,
+      // Keep the short course-answer budget for output rather than reasoning.
+      ...(baseUrl === "https://api.cerebras.ai" && model === "qwen-3.8-27b"
+        ? { reasoning_effort: "none" }
+        : {}),
     }),
   });
   const data = await response.json().catch(() => null);
@@ -189,8 +194,11 @@ async function callCloudflare(
   system: string,
   messages: AiChatMessage[],
 ) {
+  if (!/^@[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+$/.test(model)) {
+    throw new Error("Invalid Workers AI model ID. Use a catalog ID such as @cf/meta/llama-3.1-8b-instruct.");
+  }
   const response = await fetchWithTimeout(
-    `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(accountId)}/ai/run/${encodeURIComponent(model)}`,
+    `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(accountId.trim())}/ai/run/${model}`,
     {
       method: "POST",
       headers: {
@@ -257,19 +265,64 @@ async function callProvider(
   throw new Error("Unsupported AI provider.");
 }
 
+export type AiProviderOverride = {
+  provider?: string;
+  model?: string;
+};
+
+export type AiReply = {
+  text: string;
+  provider: Provider;
+  model: string;
+};
+
+function isProvider(value: unknown): value is Provider {
+  return (
+    value === "gemini" ||
+    value === "groq" ||
+    value === "cerebras" ||
+    value === "cloudflare"
+  );
+}
+
 export async function askCourseAi(
   system: string,
   messages: AiChatMessage[],
-) {
-  const providers = getConfiguredAiProviders();
+  override?: AiProviderOverride,
+): Promise<AiReply> {
+  let providers = getConfiguredAiProviders();
   if (providers.length === 0) throw new Error("No AI provider is configured.");
+
+  // When the client picks a provider (and optionally a model), try that one
+  // first. Fall back to the remaining configured providers if it fails.
+  const requestedProvider = isProvider(override?.provider)
+    ? override?.provider
+    : null;
+  if (requestedProvider) {
+    const requested = providers.find(
+      (config) => config.provider === requestedProvider,
+    );
+    if (requested) {
+      const model =
+        typeof override?.model === "string" && override.model.trim()
+          ? override.model.trim()
+          : requested.model;
+      providers = [
+        { provider: requested.provider, model },
+        ...providers.filter(
+          (config) => config.provider !== requestedProvider,
+        ),
+      ];
+    }
+  }
 
   // Try every configured provider in priority order so a single provider
   // outage or network timeout does not break the assistant.
   let lastError: unknown = null;
   for (const config of providers) {
     try {
-      return await callProvider(config, system, messages);
+      const text = await callProvider(config, system, messages);
+      return { text, provider: config.provider, model: config.model };
     } catch (error) {
       lastError = error;
       console.error(`AI provider "${config.provider}" failed`, error);

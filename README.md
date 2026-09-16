@@ -92,16 +92,22 @@ CLOUDFLARE_API_TOKEN=your_api_token
 CLOUDFLARE_ACCOUNT_ID=your_account_id
 
 # Optional tuning (set any of these to pin exact models for your keys)
-AI_PROVIDER=gemini            # force the preferred provider (gemini | groq | cerebras | cloudflare)
-AI_MODEL=                     # override the model for the chosen provider
+AI_PROVIDER=gemini            # prefer this provider; others remain fallbacks
+AI_MODEL=                    # legacy override for AI_PROVIDER only; prefer the settings below
 AI_GEMINI_MODEL=gemini-3.6-flash
-AI_GROQ_MODEL=meta-llama/llama-3.3-70b-instruct
-AI_CEREBRAS_MODEL=llama3.3-70b
+AI_GROQ_MODEL=llama-3.3-70b-versatile
+AI_CEREBRAS_MODEL=qwen-3.8-27b
 AI_CLOUDFLARE_MODEL=@cf/meta/llama-3.1-8b-instruct
 AI_TIMEOUT_MS=45000           # how long a provider may take before falling back (default 45s)
 ```
 
-Requests are rate-limited to **10 questions per 15 minutes per IP** (in-memory sliding window in `POST /api/courses/[slug]/ai`), which is a soft per-instance guard. The assistant **tries every configured provider in priority order** (Gemini → Groq → Cerebras → Cloudflare) with a 20s timeout each, so one provider being down or blocked falls back to the next available one. If every provider fails, the exact reason is logged server-side and shown in the chat. When no provider key is set, the chat shows a friendly "not configured yet" message instead of failing.
+Requests are rate-limited to **10 questions per 15 minutes per IP** (in-memory sliding window in `POST /api/courses/[slug]/ai`), which is a soft per-instance guard. The assistant **tries every configured provider in priority order** (Gemini → Groq → Cerebras → Cloudflare), with a configurable fetch timeout of 45s by default per attempt. Network connection timeouts can occur sooner. If every provider fails, errors are logged server-side; the final provider's error is returned to the chat. When no provider key is set, the chat shows a friendly "not configured yet" message instead of failing.
+
+The chat's provider selector changes the first provider attempted, without disabling fallback. Assistant replies render Markdown, and the status badge reports the provider/model that actually answered and the total request latency (including lookup and fallback attempts).
+
+Provider-specific model variables take precedence over the legacy `AI_MODEL`, which applies only to an explicitly selected `AI_PROVIDER`; it is ignored when no valid preference is set. Client model overrides apply only to the client-selected provider. Clear stale overrides when migrating: Groq's retired `llama-3.1-70b-versatile` should be replaced with `llama-3.3-70b-versatile`. The Cerebras default is `qwen-3.8-27b`, using `reasoning_effort=none` for short course answers. Model access still depends on your provider account.
+
+After changing environment variables, restart the development server or redeploy. A Gemini `UND_ERR_CONNECT_TIMEOUT` indicates a connectivity problem, not a model-name error; increasing `AI_TIMEOUT_MS` does not override Node's underlying connection timeout. Cloudflare requires an Account ID (not a Zone ID) and a token with Workers AI permissions. Remove credentials for providers you do not intend to use so fallback does not repeatedly attempt them.
 
 Add the bot to the Telegram channel as an administrator so it can verify membership. Do not expose `FLW_SECRET_KEY`, `TELEGRAM_BOT_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY`, or any AI provider token as `NEXT_PUBLIC_` variables.
 

@@ -14,9 +14,7 @@ const MAX_MESSAGE_LENGTH = 1200;
 const MAX_HISTORY = 6;
 const COURSE_LOOKUP_TIMEOUT_MS = 8000;
 
-// In-memory sliding-window rate limit, keyed by client IP. This is a soft
-// per-instance guard — bump it or swap it for a persisted store if you need
-// stricter enforcement across multiple serverless instances.
+
 const rateLimitStore = new Map<string, number[]>();
 
 function getClientIp(request: Request) {
@@ -189,13 +187,27 @@ export async function POST(
       })
       .slice(-MAX_HISTORY);
 
+    // Optional client-side provider preference. askCourseAi validates it and
+    // silently falls back to the default order when unknown.
+    const override =
+      typeof body?.provider === "string" || typeof body?.model === "string"
+        ? {
+            provider:
+              typeof body?.provider === "string" ? body.provider : undefined,
+            model: typeof body?.model === "string" ? body.model : undefined,
+          }
+        : undefined;
+
     const reply = await askCourseAi(
       buildCourseAiSystemPrompt(context),
       [...history, { role: "user", content: message }],
+      override,
     );
 
     return NextResponse.json({
-      reply,
+      reply: reply.text,
+      provider: reply.provider,
+      model: reply.model,
       remaining: limit.remaining,
       limit: MAX_REQUESTS_PER_WINDOW,
     });
