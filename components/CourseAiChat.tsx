@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LoaderCircle, MessageSquareText, Send, Sparkles } from "lucide-react";
+import {
+  LoaderCircle,
+  MessageSquareText,
+  Send,
+  Sparkles,
+  X,
+} from "lucide-react";
 import { type Course } from "@/lib/portfolioData";
 import Markdown from "@/components/Markdown";
 
@@ -21,6 +27,7 @@ type LastAnswer = { provider: string; model: string; ms: number };
 type Props = {
   course: Course;
   variant?: "inline" | "drawer";
+  onClose?: () => void;
 };
 
 const PROVIDER_CHOICES: { value: ProviderChoice; label: string }[] = [
@@ -39,7 +46,11 @@ const SUGGESTIONS = [
   "How do I get started?",
 ];
 
-export default function CourseAiChat({ course, variant = "inline" }: Props) {
+export default function CourseAiChat({
+  course,
+  variant = "inline",
+  onClose,
+}: Props) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
@@ -146,17 +157,36 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
     <section
       className={
         variant === "drawer"
-          ? "flex h-full flex-col bg-[var(--background)]"
+          ? "flex h-full flex-col bg-[var(--background)] px-4 pb-4 pt-3 mt-12"
           : "surface interactive-line flex flex-col rounded-xl p-6 sm:p-8"
       }
       aria-label="Ask the course assistant"
     >
       {/* ─── Header (always visible) ─────────────────────────── */}
-      <div className="flex shrink-0 items-center justify-between gap-4">
-        <h2 className="flex items-center gap-2 text-md font-black tracking-tight sm:text-2xl">
-          <Sparkles size={22} /> Ask AI assistant
-        </h2>
-      </div>
+      {variant === "inline" ? (
+        <div className="flex shrink-0 items-center justify-between gap-4">
+          <h2 className="flex items-center gap-2 text-lg font-black tracking-tight sm:text-2xl">
+            <Sparkles size={22} /> Ask AI assistant
+          </h2>
+        </div>
+      ) : (
+        <div className="-mx-4 mt-3 mb-3 flex shrink-0 items-center justify-between  px-4 py-3">
+          <span className="flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em]">
+            <Sparkles size={16} />
+            Ask AI assistant
+          </span>
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close"
+              className="muted shrink-0 p-1"
+            >
+              <X size={20} />
+            </button>
+          )}
+        </div>
+      )}
 
       {variant === "inline" && (
         <p className="muted mt-3 shrink-0 text-sm leading-6">
@@ -215,8 +245,8 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
       <div
         className={
           variant === "drawer"
-            ? "mt-4 min-h-0 flex-1 space-y-4 overflow-y-auto rounded-lg p-4"
-            : "mt-5 max-h-[60vh] space-y-4 overflow-y-auto rounded-lg p-4 lg:max-h-[520px]"
+            ? "mt-3 min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain rounded-lg p-2"
+            : "mt-5 max-h-[60vh] space-y-4 overflow-y-auto overscroll-contain rounded-lg p-4 lg:max-h-[520px]"
         }
       >
         {messages.map((message, index) => (
@@ -251,9 +281,11 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
       </div>
 
       {/* ─── Footer (always visible) ─────────────────────────── */}
-      <div className="shrink-0">
+      <div className="shrink-0 mb-6 pb-6">
         {messages.length === 1 && !error && (
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div
+            className={`flex flex-wrap gap-2 ${variant === "drawer" ? "mt-3" : "mt-4"}`}
+          >
             {SUGGESTIONS.map((suggestion) => (
               <button
                 key={suggestion}
@@ -275,7 +307,7 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
         )}
 
         <form
-          className="mt-5 flex items-end gap-2"
+          className={`flex items-end gap-2 ${variant === "drawer" ? "mt-3" : "mt-5"}`}
           onSubmit={(event) => {
             event.preventDefault();
             void ask(input);
@@ -298,13 +330,17 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
                 : "Ask about the course..."
             }
             aria-label="Ask about the course"
-            className="line max-h-40 min-h-[44px] flex-1 resize-none rounded-xl border bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--foreground)] disabled:opacity-50"
+            className={`line max-h-40 min-h-[44px] flex-1 resize-none ${
+              variant === "drawer" ? "rounded-full" : "rounded-xl"
+            } border bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--foreground)] disabled:opacity-50`}
           />
           <button
             type="submit"
             disabled={sending || exhausted || !input.trim()}
             aria-label="Send question"
-            className="flex h-11 shrink-0 items-center gap-2 rounded-xl bg-[var(--foreground)] px-5 text-sm font-bold text-[var(--background)] disabled:opacity-50"
+            className={`flex h-11 shrink-0 items-center gap-2 ${
+              variant === "drawer" ? "rounded-full" : "rounded-xl"
+            } bg-[var(--foreground)] px-5 text-sm font-bold text-[var(--background)] disabled:opacity-50`}
           >
             <Send size={16} />
             <span className="hidden sm:inline">Ask</span>
