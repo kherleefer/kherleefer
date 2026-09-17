@@ -10,7 +10,7 @@ type CoursePageProps = {
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://kherleefer.netlify.app";
-const OG_IMAGE_URL = `${SITE_URL}/img/courseOg.png`;
+const OG_IMAGE_URL = `${SITE_URL}/img/courseslugog.png`;
 
 async function findCourse(slug: string) {
   try {
