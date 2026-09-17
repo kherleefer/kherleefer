@@ -140,9 +140,9 @@ export default function CourseAiChat({ course }: { course: Course }) {
   const exhausted = remaining !== null && remaining <= 0;
 
   return (
-    <section
-      className="surface interactive-line mt-14 p-6 sm:p-8"
-      aria-label="Ask the course assistant"
+    <section 
+    className="surface interactive-line p-6 sm:p-8" 
+    aria-label="Ask the course assistant" 
     >
       <div className="flex items-center justify-between gap-4">
         <h2 className="flex items-center gap-2 text-2xl font-black tracking-tight">
@@ -193,7 +193,7 @@ export default function CourseAiChat({ course }: { course: Course }) {
         </span>
       </div>
 
-      <div className="mt-5 max-h-[420px] space-y-4 overflow-y-auto rounded-lg p-4">
+      <div className="mt-5 max-h-[60vh] space-y-4 overflow-y-auto rounded-lg p-4 lg:max-h-[520px]">
         {messages.map((message, index) => (
           <div
             key={index}

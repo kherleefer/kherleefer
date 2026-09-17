@@ -72,11 +72,11 @@ export default function CoursePreview({ course }: CoursePreviewProps) {
         </div>
       )}
       {state === "ready" && previewUrl && (
-        <div className="surface mt-4 border p-2">
+        <div className="surface mt-4 p-2">
           <iframe
             src={previewUrl}
             title={`Preview of ${course.title}`}
-            className="h-[560px] w-full sm:h-[680px]"
+            className="h-[560px] w-full sm:h-[680px] lg:h-[760px]"
           />
         </div>
       )}
