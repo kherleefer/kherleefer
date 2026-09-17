@@ -48,8 +48,17 @@ export default function CourseAiChatDock({ course, variant }: Props) {
             onClick={() => setOpen(false)}
             className="absolute inset-0 bg-black/50"
           />
-          <div className="relative z-10 h-full w-full max-w-md overflow-y-auto bg-[var(--background)] shadow-2xl">
-            <div className="flex items-center justify-between border-b px-4 py-3">
+
+          {/*
+            The drawer itself is a flex column with three regions:
+              1. fixed header
+              2. flexible body (the chat fills this and scrolls internally)
+              3. nothing — the chat form is inside the flexible body
+            We move overflow handling to the chat body itself, so the
+            header stays pinned and the input stays reachable.
+          */}
+          <div className="relative z-10 flex h-full w-full max-w-md flex-col bg-[var(--background)] shadow-2xl">
+            <div className="flex shrink-0 items-center justify-between border-b px-4 py-3">
               <span className="text-sm font-black uppercase tracking-[0.14em]">
                 Course assistant
               </span>
@@ -62,8 +71,14 @@ export default function CourseAiChatDock({ course, variant }: Props) {
                 <X size={20} />
               </button>
             </div>
-            <div className="p-4">
-              <CourseAiChat course={course} />
+
+            {/*
+              The wrapper is the only scroll container in the drawer.
+              It has `min-h-0` so flexbox will actually let it shrink,
+              and `overflow-y-auto` so its content (the chat) scrolls.
+            */}
+            <div className="min-h-0 flex-1 overflow-y-auto">
+              <CourseAiChat course={course} variant="drawer" />
             </div>
           </div>
         </div>
