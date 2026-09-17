@@ -153,12 +153,9 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
     >
       {/* ─── Header (always visible) ─────────────────────────── */}
       <div className="flex shrink-0 items-center justify-between gap-4">
-        <h2 className="flex items-center gap-2 text-xl font-black tracking-tight sm:text-2xl">
-          <Sparkles size={22} /> Ask about this course
+        <h2 className="flex items-center gap-2 text-md font-black tracking-tight sm:text-2xl">
+          <Sparkles size={22} /> Ask AI assistant
         </h2>
-        <span className="muted hidden text-xs font-bold uppercase tracking-[0.14em] sm:inline">
-          AI assistant
-        </span>
       </div>
 
       {variant === "inline" && (
@@ -168,8 +165,8 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
         </p>
       )}
 
-      <div className="mt-4 flex shrink-0 flex-wrap items-center gap-3">
-        <label className="muted flex items-center gap-2 text-xs font-bold">
+      <div className="mt-4 flex shrink-0 flex-nowrap items-center justify-between gap-3">
+        <label className="muted flex shrink-0 items-center gap-2 text-xs font-bold">
           Model
           <select
             value={provider}
@@ -191,16 +188,26 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
             ))}
           </select>
         </label>
+
         <span
-          className="muted inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs"
+          className="muted inline-flex min-w-0 items-center gap-1.5 rounded-md border px-2 py-1 text-xs"
           role="status"
         >
-          <Sparkles size={12} />
-          {sending
-            ? "Asking…"
-            : lastAnswer
-              ? `${lastAnswer.provider}${lastAnswer.model ? ` · ${lastAnswer.model}` : ""} · ${lastAnswer.ms}ms`
-              : "Ready"}
+          <Sparkles size={12} className="shrink-0" />
+          <span
+            className="truncate"
+            title={
+              lastAnswer
+                ? `${lastAnswer.provider}${lastAnswer.model ? ` · ${lastAnswer.model}` : ""} · ${lastAnswer.ms}ms`
+                : undefined
+            }
+          >
+            {sending
+              ? "Asking…"
+              : lastAnswer
+                ? `${lastAnswer.provider}${lastAnswer.model ? ` · ${lastAnswer.model}` : ""} · ${lastAnswer.ms}ms`
+                : "Ready"}
+          </span>
         </span>
       </div>
 
@@ -221,7 +228,7 @@ export default function CourseAiChat({ course, variant = "inline" }: Props) {
               className={`inline-block max-w-[85%] rounded-lg px-4 py-3 text-sm leading-6 ${
                 message.role === "user"
                   ? "bg-[var(--foreground)] text-[var(--background)]"
-                  : "surface border"
+                  : "surface border border-gray-600"
               }`}
             >
               {message.role === "assistant" ? (

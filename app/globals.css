@@ -87,12 +87,11 @@ a {
 
 .interactive-line {
   border-color: var(--line);
-  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  transition: border-color 180ms ease,  transform 180ms ease;
 }
 
 .interactive-line:hover {
-  border-color: var(--foreground);
-  background: color-mix(in srgb, var(--surface) 72%, var(--foreground));
+  border-color: color-mix(in srgb, var(--foreground) 50%, transparent);
   transform: translateY(-2px);
 }
 
