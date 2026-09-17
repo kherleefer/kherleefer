@@ -24,29 +24,62 @@ export function buildCourseAiSystemPrompt(course: CourseAiContext) {
   ].join("\n");
 }
 
-type Provider = "gemini" | "groq" | "cerebras" | "cloudflare";
+type Provider =
+  | "gemini"
+  | "groq"
+  | "mistral"
+  | "openrouter"
+  | "cloudflare"
+  | "huggingface";
 
 type ProviderConfig = { provider: Provider; model: string };
 
 const PROVIDER_PRIORITY: Provider[] = [
   "gemini",
   "groq",
-  "cerebras",
+  "mistral",
+  "openrouter",
   "cloudflare",
+  "huggingface",
 ];
 
 function resolveModelFor(provider: Provider, override: string): string {
   switch (provider) {
     case "gemini":
-      return getServerEnv("AI_GEMINI_MODEL")?.trim() || override || "gemini-3.6-flash";
+      return (
+        getServerEnv("AI_GEMINI_MODEL")?.trim() ||
+        override ||
+        "gemini-3.6-flash"
+      );
     case "groq":
-      return getServerEnv("AI_GROQ_MODEL")?.trim() || override || "openai/gpt-oss-20b";
-    case "cerebras":
-      return getServerEnv("AI_CEREBRAS_MODEL")?.trim() || override || "qwen-3.8-27b";
+      return (
+        getServerEnv("AI_GROQ_MODEL")?.trim() ||
+        override ||
+        "openai/gpt-oss-20b"
+      );
     case "cloudflare":
       return (
-        getServerEnv("AI_CLOUDFLARE_MODEL")?.trim() || override ||
+        getServerEnv("AI_CLOUDFLARE_MODEL")?.trim() ||
+        override ||
         "@cf/meta/llama-3.1-8b-instruct"
+      );
+    case "openrouter":
+      return (
+        getServerEnv("AI_OPENROUTER_MODEL")?.trim() ||
+        override ||
+        "google/gemma-4-31b-it:free"
+      );
+    case "mistral":
+      return (
+        getServerEnv("AI_MISTRAL_MODEL")?.trim() ||
+        override ||
+        "mistral-small-latest"
+      );
+    case "huggingface":
+      return (
+        getServerEnv("AI_HF_MODEL")?.trim() ||
+        override ||
+        "meta-llama/Llama-3.1-8B-Instruct"
       );
   }
 }
@@ -59,8 +92,7 @@ export function getConfiguredAiProviders(): ProviderConfig[] {
   const ordered: Provider[] = PROVIDER_PRIORITY.includes(preferred)
     ? [preferred, ...PROVIDER_PRIORITY.filter((item) => item !== preferred)]
     : [...PROVIDER_PRIORITY];
-  const has = (names: string[]) =>
-    names.every((name) => getServerEnv(name));
+  const has = (names: string[]) => names.every((name) => getServerEnv(name));
 
   const providers: ProviderConfig[] = [];
   for (const provider of ordered) {
@@ -69,9 +101,13 @@ export function getConfiguredAiProviders(): ProviderConfig[] {
         ? has(["GEMINI_API_KEY"])
         : provider === "groq"
           ? has(["GROQ_API_KEY"])
-          : provider === "cerebras"
-            ? has(["CEREBRAS_API_KEY"])
-            : has(["CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID"]);
+          : provider === "cloudflare"
+            ? has(["CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID"])
+            : provider === "openrouter"
+              ? has(["OPEN_ROUTER_KEY"])
+              : provider === "mistral"
+                ? has(["MISTRAL_KEY"])
+                : has(["HUGGING_FACE_KEY"]);
     if (!ready) continue;
 
     providers.push({
@@ -92,8 +128,7 @@ export function isAiConfigured() {
   return getConfiguredAiProviders().length > 0;
 }
 
-const PROVIDER_TIMEOUT_MS =
-  Number(getServerEnv("AI_TIMEOUT_MS")) || 45000;
+const PROVIDER_TIMEOUT_MS = Number(getServerEnv("AI_TIMEOUT_MS")) || 45000;
 
 async function fetchWithTimeout(
   url: string,
@@ -122,22 +157,20 @@ async function callOpenAiCompatible(
   model: string,
   system: string,
   messages: AiChatMessage[],
+  extraHeaders: Record<string, string> = {},
 ) {
   const response = await fetchWithTimeout(`${baseUrl}/v1/chat/completions`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
+      ...extraHeaders,
     },
     body: JSON.stringify({
       model,
       messages: [{ role: "system", content: system }, ...messages],
       temperature: 0.6,
       max_tokens: 600,
-      // Keep the short course-answer budget for output rather than reasoning.
-      ...(baseUrl === "https://api.cerebras.ai" && model === "qwen-3.8-27b"
-        ? { reasoning_effort: "none" }
-        : {}),
     }),
   });
   const data = await response.json().catch(() => null);
@@ -195,7 +228,9 @@ async function callCloudflare(
   messages: AiChatMessage[],
 ) {
   if (!/^@[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+$/.test(model)) {
-    throw new Error("Invalid Workers AI model ID. Use a catalog ID such as @cf/meta/llama-3.1-8b-instruct.");
+    throw new Error(
+      "Invalid Workers AI model ID. Use a catalog ID such as @cf/meta/llama-3.1-8b-instruct.",
+    );
   }
   const response = await fetchWithTimeout(
     `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(accountId.trim())}/ai/run/${model}`,
@@ -245,14 +280,6 @@ async function callProvider(
         system,
         messages,
       );
-    case "cerebras":
-      return callOpenAiCompatible(
-        "https://api.cerebras.ai",
-        getServerEnv("CEREBRAS_API_KEY")!,
-        config.model,
-        system,
-        messages,
-      );
     case "cloudflare":
       return callCloudflare(
         getServerEnv("CLOUDFLARE_API_TOKEN")!,
@@ -260,6 +287,32 @@ async function callProvider(
         config.model,
         system,
         messages,
+      );
+    case "openrouter":
+      return callOpenAiCompatible(
+        "https://openrouter.ai/api",
+        getServerEnv("OPEN_ROUTER_KEY")!,
+        config.model,
+        system,
+        messages,
+        
+      );
+    case "mistral":
+      return callOpenAiCompatible(
+        "https://api.mistral.ai",
+        getServerEnv("MISTRAL_KEY")!,
+        config.model,
+        system,
+        messages,
+      );
+    case "huggingface":
+      return callOpenAiCompatible(
+        "https://router.huggingface.co",
+        getServerEnv("HUGGING_FACE_KEY")!,
+        config.model,
+        system,
+        messages,
+        { "User-Agent": "Kherleefer/1.0" },
       );
   }
   throw new Error("Unsupported AI provider.");
@@ -280,8 +333,10 @@ function isProvider(value: unknown): value is Provider {
   return (
     value === "gemini" ||
     value === "groq" ||
-    value === "cerebras" ||
-    value === "cloudflare"
+    value === "cloudflare" ||
+    value === "openrouter" ||
+    value === "mistral" ||
+    value === "huggingface"
   );
 }
 
@@ -309,9 +364,7 @@ export async function askCourseAi(
           : requested.model;
       providers = [
         { provider: requested.provider, model },
-        ...providers.filter(
-          (config) => config.provider !== requestedProvider,
-        ),
+        ...providers.filter((config) => config.provider !== requestedProvider),
       ];
     }
   }

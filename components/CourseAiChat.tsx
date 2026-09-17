@@ -7,7 +7,14 @@ import Markdown from "@/components/Markdown";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
-type ProviderChoice = "auto" | "gemini" | "groq" | "cerebras" | "cloudflare";
+type ProviderChoice =
+  | "auto"
+  | "gemini"
+  | "groq"
+  | "mistral"
+  | "openrouter"
+  | "cloudflare"
+  | "huggingface";
 
 type LastAnswer = { provider: string; model: string; ms: number };
 
@@ -17,8 +24,10 @@ const PROVIDER_CHOICES: { value: ProviderChoice; label: string }[] = [
   { value: "auto", label: "Automatic (default)" },
   { value: "gemini", label: "Gemini" },
   { value: "groq", label: "Groq" },
-  { value: "cerebras", label: "Cerebras" },
+  { value: "mistral", label: "Mistral" },
+  { value: "openrouter", label: "Openrouter" },
   { value: "cloudflare", label: "Cloudflare Workers AI" },
+  { value: "huggingface", label: "Huggung-Face" },
 ];
 
 const SUGGESTIONS = [
