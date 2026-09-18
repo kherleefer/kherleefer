@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MessageSquareText } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { type Course } from "@/lib/portfolioData";
 import CourseAiChat from "@components/CourseAiChat";
 
@@ -34,7 +34,7 @@ export default function CourseAiChatDock({ course, variant }: Props) {
         aria-label="Ask about this course"
         className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--foreground)] text-[var(--background)] shadow-lg transition-transform active:scale-95"
       >
-        <MessageSquareText size={22} />
+        <Sparkles size={22} />
       </button>
 
       {open && (
