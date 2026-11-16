@@ -61,6 +61,12 @@ export const homePageSectionsData: SectionData[] = [
     title: "Projects",
     data: [
       {
+        title: "SmartSchools",
+        description:
+          "The Smartschools is a school management sysem design to assist in administrative tasks and assist Teachers in time consuming tasks like exam scores entry, lesson plan/notes and examination question setting. ",
+        link: "https://smartschools.site",
+      },
+      {
         title: "@glister/currency-utils",
         description:
           "Published npm package — lightweight, tree-shakable currency and number formatting utilities built on the native Intl API.",
@@ -78,12 +84,7 @@ export const homePageSectionsData: SectionData[] = [
           "A blockchain-powered web and mobile app built with Ionic Vue and Supabase by a full-stack software engineer.",
         link: "https://gloxx.netlify.app",
       },
-      {
-        title: "Gloxx Chain API",
-        description:
-          "An Express.js and Node.js API developed to power the crypto mining phase of Gloxx Chain.",
-        link: "#",
-      },
+
       {
         title: "ReactJet",
         description:
@@ -217,6 +218,14 @@ export const blogPosts: BlogPost[] = [
 // --- Project Page Data (general projects overview) ---
 export const generalProjects: Project[] = [
   {
+    title: "SmartSchools",
+    description:
+      "The Smartschools is a school management sysem design to assist in administrative tasks and assist Teachers in time consuming tasks like exam scores entry, lesson plan/notes and examination question setting. ",
+    tech: ["Next.js", "Typescript", "AWS Lambda", "PostgreSQL", "Prisma"],
+    image: "/smartschools.png",
+    link: "https://smartschools.site",
+  },
+  {
     title: "@glister/currency-utils",
     description:
       "Published npm package — a lightweight, zero-dependency currency and number formatting library built on the native Intl API with first-class TypeScript support.",
@@ -334,12 +343,12 @@ export const education: ResumeItem[] = [
     details: [],
   },
   {
-    title: "Self-taught JavaScript, React, Solidity, Rust, and Blockchain Fundamentals",
+    title:
+      "Self-taught JavaScript, React, Solidity, Rust, and Blockchain Fundamentals",
     details: [
-      "During My Student Industrial working Experience Scheme @ Telemax 2019, i  was introduce to python programming and web development and i explore to learm more via different channel includes youtube, w2schools and coursera."
+      "During My Student Industrial working Experience Scheme @ Telemax 2019, i  was introduce to python programming and web development and i explore to learm more via different channel includes youtube, w2schools and coursera.",
     ],
   },
-
 ];
 
 export type Certificate = {
